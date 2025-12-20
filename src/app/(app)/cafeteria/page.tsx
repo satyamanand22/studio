@@ -28,7 +28,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CheckCircle, Download, Loader2, Minus, Plus, PlusCircle } from "lucide-react";
 import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { useCounter } from "@/hooks/use-counter";
 import { GooglePayIcon } from "@/components/icons/google-pay";
 import jsPDF from "jspdf";
