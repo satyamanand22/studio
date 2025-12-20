@@ -54,10 +54,10 @@ export const mockLabs: Lab[] = [
 
 export const mockMenu: MenuItem[] = [
     { id: 'item-1', name: 'Campus Burger', price: 8.99, category: 'Main Course', inStock: true, imageId: 'burger' },
-    { id: 'item-2', name: 'Pepperoni Pizza', price: 10.50, category: 'Main Course', inStock: true, imageId: 'pizza' },
-    { id: 'item-3', name: 'Garden Salad', price: 6.50, category: 'Salads', inStock: false, imageId: 'salad' },
-    { id: 'item-4', name: 'Sushi Combo', price: 12.99, category: 'Specials', inStock: true, imageId: 'sushi' },
-    { id: 'item-5', name: 'Artisan Coffee', price: 3.50, category: 'Beverages', inStock: true, imageId: 'coffee' },
+    { id: 'item-2', name: 'Samosa', price: 8.00, category: 'Snacks', inStock: true, imageId: 'samosa' },
+    { id: 'item-3', name: 'Pastry', price: 6.50, category: 'Desserts', inStock: true, imageId: 'pastry' },
+    { id: 'item-4', name: 'Aloo Paratha', price: 12.99, category: 'Main Course', inStock: true, imageId: 'aloo-paratha' },
+    { id: 'item-5', name: 'Tea', price: 3.50, category: 'Beverages', inStock: true, imageId: 'tea' },
 ];
 
 export const swabhimanThali: MenuItem = { id: 'item-6', name: 'Swabhiman Thali', price: 10.00, category: 'Special', inStock: true, imageId: 'thali' };

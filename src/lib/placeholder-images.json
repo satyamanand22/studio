@@ -31,28 +31,28 @@
       "imageHint": "cheeseburger fries"
     },
     {
-      "id": "pizza",
-      "description": "A slice of pepperoni pizza.",
-      "imageUrl": "https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwaXp6YSUyMHNsaWNlfGVufDB8fHx8MTc2NjIwMDYwNnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "pizza slice"
+      "id": "samosa",
+      "description": "Two crispy samosas on a plate.",
+      "imageUrl": "https://images.unsplash.com/photo-1601050690597-01a2d1f8b1b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzYW1vc2F8ZW58MHx8fHwxNzY2MjE5MjY0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "samosa"
     },
     {
-      "id": "salad",
-      "description": "A fresh garden salad in a bowl.",
-      "imageUrl": "https://images.unsplash.com/photo-1605291535126-2d71fea483c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnYXJkZW4lMjBzYWxhZHxlbnwwfHx8fDE3NjYxNjYzNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "garden salad"
+      "id": "pastry",
+      "description": "A delicious chocolate pastry on a plate.",
+      "imageUrl": "https://images.unsplash.com/photo-1606313564200-e854b4be1949?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjaG9jb2xhdGUlMjBwYXN0cnl8ZW58MHx8fHwxNzY2MjE5Mjg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "chocolate pastry"
     },
     {
-      "id": "sushi",
-      "description": "A plate of assorted sushi rolls.",
-      "imageUrl": "https://images.unsplash.com/photo-1636425730695-febe95eda12e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzdXNoaSUyMHJvbGxzfGVufDB8fHx8MTc2NjE5NTcwM3ww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "sushi rolls"
+      "id": "aloo-paratha",
+      "description": "An aloo paratha with a side of yogurt.",
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1695021503332-5259020a5996?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzAwOHwwfDF8c2VhcmNofDE4fHxhbG9vJTIwcGFyYXRoYXxlbnwwfHx8fDE3MTk0MjU4MjJ8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "aloo paratha"
     },
     {
-      "id": "coffee",
-      "description": "A cup of latte with art.",
-      "imageUrl": "https://images.unsplash.com/photo-1497636577773-f1231844b336?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsYXR0ZSUyMGFydHxlbnwwfHx8fDE3NjYyMTkwODl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "latte art"
+      "id": "tea",
+      "description": "A cup of hot tea.",
+      "imageUrl": "https://images.unsplash.com/photo-1597318181409-cf62d9a78a94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjdXAlMjB0ZWF8ZW58MHx8fHwxNzY2MjE5NDQwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cup tea"
     },
     {
       "id": "thali",
