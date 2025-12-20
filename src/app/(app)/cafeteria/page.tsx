@@ -70,12 +70,12 @@ export default function CafeteriaPage() {
             : orderItem
         );
       } else {
+        toast({
+          title: "Added to order",
+          description: `${item.name} has been added to your order.`,
+        });
         return [...prevOrder, { ...item, quantity: 1 }];
       }
-    });
-    toast({
-      title: "Added to order",
-      description: `${item.name} has been added to your order.`,
     });
   };
 
@@ -286,9 +286,19 @@ export default function CafeteriaPage() {
               University Cafeteria
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-              {mockMenu.map((item) => (
-                <MenuCard key={item.id} item={item} onAddToCart={handleAddToCart} />
-              ))}
+              {mockMenu.map((item) => {
+                const orderItem = order.find(o => o.id === item.id);
+                const quantity = orderItem ? orderItem.quantity : 0;
+                return (
+                  <MenuCard 
+                    key={item.id} 
+                    item={item} 
+                    onAddToCart={handleAddToCart}
+                    onRemoveFromCart={handleRemoveFromCart}
+                    quantity={quantity}
+                  />
+                )
+              })}
             </div>
              <div className="mt-8 flex justify-center">
                 <Dialog open={isOrderSummaryOpen} onOpenChange={setIsOrderSummaryOpen}>
