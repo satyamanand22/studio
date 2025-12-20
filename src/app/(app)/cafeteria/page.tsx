@@ -26,11 +26,20 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CheckCircle, Loader2, Minus, Plus, PlusCircle } from "lucide-react";
+import { CheckCircle, Download, Loader2, Minus, Plus, PlusCircle } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useCounter } from "@/hooks/use-counter";
 import { GooglePayIcon } from "@/components/icons/google-pay";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
+declare module "jspdf" {
+  interface jsPDF {
+    autoTable: (options: any) => jsPDF;
+  }
+}
+
 
 export default function CafeteriaPage() {
   const thaliImage = PlaceHolderImages.find(
@@ -56,6 +65,39 @@ export default function CafeteriaPage() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setOrderStep("confirmed");
   };
+
+  const handleDownloadBill = () => {
+    const doc = new jsPDF();
+    const totalAmount = swabhimanThali.price * count;
+    const gst = totalAmount * 0.05; // 5% GST
+    const finalAmount = totalAmount + gst;
+
+    doc.setFontSize(20);
+    doc.text("GGV PULSE - Order Invoice", 14, 22);
+    doc.setFontSize(12);
+    doc.text(`Student Name: ${name}`, 14, 32);
+    doc.text(`Order Date: ${new Date().toLocaleDateString()}`, 14, 39);
+
+    doc.autoTable({
+      startY: 50,
+      head: [['Item', 'Quantity', 'Price']],
+      body: [
+        [swabhimanThali.name, count, `₹${swabhimanThali.price.toFixed(2)}`],
+      ],
+      theme: 'grid',
+    });
+
+    const finalY = (doc as any).lastAutoTable.finalY || 70;
+
+    doc.setFontSize(10);
+    doc.text(`Subtotal: ₹${totalAmount.toFixed(2)}`, 14, finalY + 10);
+    doc.text(`GST (5%): ₹${gst.toFixed(2)}`, 14, finalY + 15);
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text(`Total Payment: ₹${finalAmount.toFixed(2)}`, 14, finalY + 22);
+
+    doc.save(`invoice-${name.replace(" ", "-").toLowerCase()}-${Date.now()}.pdf`);
+  }
 
   const resetOrderProcess = () => {
     setName("");
@@ -159,9 +201,15 @@ export default function CafeteriaPage() {
                             <CheckCircle className="h-12 w-12 text-green-500" />
                             <h3 className="text-xl font-bold">Order Confirmed!</h3>
                             <p className="text-muted-foreground">Thank you, {name}.<br/>Your order for {count} thali(s) has been placed.</p>
-                            <Button onClick={resetOrderProcess} className="mt-4">
-                              Close
-                            </Button>
+                            <div className="flex gap-2 mt-4">
+                              <Button onClick={handleDownloadBill}>
+                                <Download className="mr-2 h-4 w-4" />
+                                Download Bill
+                              </Button>
+                              <Button onClick={resetOrderProcess} variant="secondary">
+                                Close
+                              </Button>
+                            </div>
                         </div>
                       )}
                     </DialogContent>
