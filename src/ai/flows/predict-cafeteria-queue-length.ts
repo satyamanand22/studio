@@ -38,14 +38,12 @@ Current Time: {{{currentTime}}}
 Historical Order Data: {{{historicalOrderData}}}
 Real-time Order Volume: {{{realTimeOrderVolume}}}
 
-Consider these factors when predicting queue length and waiting time:
-* Time of day: Predict how busy the cafeteria will be during rush hour.
-* Historical data: Take historical order data into account.
-* Real-time order volume: Use the current order volume to estimate the queue length.
+Your task is to:
+1.  Predict the number of people in the queue ('queueLength') based on the provided real-time and historical data.
+2.  Calculate the estimated waiting time ('waitingTime') based on your predicted queue length. **The estimated time is exactly 3 minutes per person in the queue.**
+3.  Provide a qualitative analysis of the queue length and waiting time (e.g., "very short," "short," "moderate," "long," "very long").
 
-Provide your prediction in terms of the predicted queue length, the predicted waiting time (in minutes), and an analysis to help students decide when to go and avoid long waits. Be specific and precise with your reasoning and prediction, and base it off of the data provided.
-
-Make sure the analysis explains whether the queue length and waiting time are (very short, short, moderate, long, very long).
+Provide your prediction in the specified output format. Be precise with your reasoning and base your predictions on the data provided.
 `,
 });
 
