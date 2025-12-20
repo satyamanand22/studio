@@ -1,4 +1,14 @@
-import type { Lab, MenuItem } from './types';
+import type { Lab, MenuItem, NavItem } from './types';
+import { Home, UtensilsCrossed, Map, Bell, Settings } from 'lucide-react';
+
+export const navItems: NavItem[] = [
+  { href: "/dashboard", icon: Home, label: "Dashboard" },
+  { href: "/cafeteria", icon: UtensilsCrossed, label: "Cafeteria" },
+  { href: "/map", icon: Map, label: "Map" },
+  { href: "/notifications", icon: Bell, label: "Notifications" },
+  { href: "/settings", icon: Settings, label: "Settings" },
+];
+
 
 export const mockLabs: Lab[] = [
   {

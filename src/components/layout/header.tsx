@@ -1,25 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { Building, Home, Map, Bell, Settings, UtensilsCrossed, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { UserNav } from "./user-nav";
-import { usePathname } from "next/navigation";
+import { navItems } from "@/lib/data";
 import { GgvLogo } from "../icons/ggv-logo";
 
-const navItems = [
-    { href: "/dashboard", icon: Home, label: "Dashboard" },
-    { href: "/cafeteria", icon: UtensilsCrossed, label: "Cafeteria" },
-    { href: "/map", icon: Map, label: "Map" },
-    { href: "/notifications", icon: Bell, label: "Notifications" },
-    { href: "/settings", icon: Settings, label: "Settings" },
-  ];
-
 export default function Header() {
-    const pathname = usePathname();
-    const currentPage = navItems.find(item => pathname.startsWith(item.href))?.label || 'Dashboard';
-
   return (
     <header className="flex h-16 items-center gap-4 border-b bg-card px-4 md:px-6 sticky top-0 z-10">
       <nav className="flex-1 flex items-center gap-4">
@@ -45,13 +33,7 @@ export default function Header() {
             </nav>
           </SheetContent>
         </Sheet>
-        <div className="hidden md:block">
-            <h1 className="text-xl font-semibold">{currentPage}</h1>
-        </div>
       </nav>
-      <div className="flex items-center gap-4">
-        <UserNav />
-      </div>
     </header>
   );
 }

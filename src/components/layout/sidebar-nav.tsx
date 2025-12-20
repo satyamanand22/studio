@@ -2,18 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bell, Building, Home, Map, Settings, UtensilsCrossed } from "lucide-react";
+import { navItems } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { GgvLogo } from "../icons/ggv-logo";
-
-const navItems = [
-  { href: "/dashboard", icon: Home, label: "Dashboard" },
-  { href: "/cafeteria", icon: UtensilsCrossed, label: "Cafeteria" },
-  { href: "/map", icon: Map, label: "Map" },
-  { href: "/notifications", icon: Bell, label: "Notifications" },
-  { href: "/settings", icon: Settings, label: "Settings" },
-];
 
 export default function SidebarNav() {
   const pathname = usePathname();

@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react";
+
 export interface User {
   uid: string;
   email: string | null;
@@ -29,4 +31,10 @@ export interface MenuItem {
   category: string;
   inStock: boolean;
   imageId: string;
+}
+
+export interface NavItem {
+  href: string;
+  icon: LucideIcon;
+  label: string;
 }
