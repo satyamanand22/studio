@@ -34,7 +34,7 @@ export function MenuCard({ item }: { item: MenuItem }) {
         <p className="text-sm text-muted-foreground">{item.category}</p>
       </CardContent>
       <CardFooter className="flex justify-between items-center">
-        <p className="font-semibold">${item.price.toFixed(2)}</p>
+        <p className="font-semibold">₹{item.price.toFixed(2)}</p>
         <Button size="sm" disabled={!item.inStock}>
             <PlusCircle className="mr-2 h-4 w-4" />
             Add

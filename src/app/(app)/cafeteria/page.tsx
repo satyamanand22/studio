@@ -29,7 +29,7 @@ export default function CafeteriaPage() {
                            </CardDescription>
                         </CardContent>
                         <CardFooter className="p-0 mt-6 flex justify-between items-center">
-                            <p className="text-2xl font-bold">${swabhimanThali.price.toFixed(2)}</p>
+                            <p className="text-2xl font-bold">₹{swabhimanThali.price.toFixed(2)}</p>
                             <Button>
                                 <PlusCircle className="mr-2 h-4 w-4" />
                                 Add to Order
