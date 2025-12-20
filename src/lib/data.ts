@@ -53,14 +53,14 @@ export const mockLabs: Lab[] = [
 ];
 
 export const mockMenu: MenuItem[] = [
-    { id: 'item-1', name: 'Campus Burger', price: 8.99, category: 'Main Course', inStock: true, imageId: 'burger' },
-    { id: 'item-2', name: 'Samosa', price: 8.00, category: 'Snacks', inStock: true, imageId: 'samosa' },
-    { id: 'item-3', name: 'Pastry', price: 6.50, category: 'Desserts', inStock: true, imageId: 'pastry' },
-    { id: 'item-4', name: 'Aloo Paratha', price: 12.99, category: 'Main Course', inStock: true, imageId: 'aloo-paratha' },
-    { id: 'item-5', name: 'Tea', price: 3.50, category: 'Beverages', inStock: true, imageId: 'tea' },
+    { id: 'item-1', name: 'Samosa', price: 8, category: 'Snacks', inStock: true, imageId: 'samosa' },
+    { id: 'item-2', name: 'Pastry', price: 7, category: 'Desserts', inStock: true, imageId: 'pastry' },
+    { id: 'item-3', name: 'Aloo Paratha', price: 13, category: 'Main Course', inStock: true, imageId: 'aloo-paratha' },
+    { id: 'item-4', name: 'Tea', price: 4, category: 'Beverages', inStock: true, imageId: 'tea' },
+    { id: 'item-5', name: 'Campus Burger', price: 9, category: 'Main Course', inStock: true, imageId: 'burger' },
 ];
 
-export const swabhimanThali: MenuItem = { id: 'item-6', name: 'Swabhiman Thali', price: 10.00, category: 'Special', inStock: true, imageId: 'thali' };
+export const swabhimanThali: MenuItem = { id: 'item-6', name: 'Swabhiman Thali', price: 10, category: 'Special', inStock: true, imageId: 'thali' };
 
 
 export const mockHistoricalCafeteriaData = JSON.stringify([
