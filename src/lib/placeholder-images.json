@@ -53,6 +53,12 @@
       "description": "A cup of latte with art.",
       "imageUrl": "https://images.unsplash.com/photo-1497636577773-f1231844b336?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsYXR0ZSUyMGFydHxlbnwwfHx8fDE3NjYyMTkwODl8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "latte art"
+    },
+    {
+      "id": "thali",
+      "description": "A traditional Indian thali with various dishes.",
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1695287662099-d82405543058?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "indian thali"
     }
   ]
 }

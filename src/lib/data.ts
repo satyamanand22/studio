@@ -50,6 +50,9 @@ export const mockMenu: MenuItem[] = [
     { id: 'item-5', name: 'Artisan Coffee', price: 3.50, category: 'Beverages', inStock: true, imageId: 'coffee' },
 ];
 
+export const swabhimanThali: MenuItem = { id: 'item-6', name: 'Swabhiman Thali', price: 10.00, category: 'Special', inStock: true, imageId: 'thali' };
+
+
 export const mockHistoricalCafeteriaData = JSON.stringify([
     {"time": "2023-10-26T12:05:00Z", "orders": 150},
     {"time": "2023-10-26T13:00:00Z", "orders": 250},
