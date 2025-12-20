@@ -22,7 +22,7 @@ export default function SidebarNav() {
       <div className="flex h-16 items-center border-b px-6">
         <Link href="/dashboard" className="flex items-center gap-2 font-semibold font-headline">
           <Building className="h-6 w-6 text-primary" />
-          <span>CampusPulse</span>
+          <span>GGV PULSE</span>
         </Link>
       </div>
       <nav className="flex-1 p-4">

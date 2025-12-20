@@ -16,7 +16,7 @@ const fontCode = Source_Code_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "CampusPulse",
+  title: "GGV PULSE",
   description: "Your Smart Campus Companion",
 };
 

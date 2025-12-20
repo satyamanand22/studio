@@ -33,7 +33,7 @@ export default function Header() {
             <nav className="grid gap-6 text-lg font-medium">
               <Link href="#" className="flex items-center gap-2 text-lg font-semibold mb-4">
                 <Building className="h-6 w-6 text-primary" />
-                <span className="sr-only">CampusPulse</span>
+                <span className="sr-only">GGV PULSE</span>
               </Link>
               {navItems.map(item => (
                  <Link key={item.href} href={item.href} className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">
