@@ -16,7 +16,7 @@ export const mockLabs: Lab[] = [
   },
   {
     id: 'lab-2',
-    name: 'Central Library',
+    name: 'Nalanda Central Library',
     type: 'Library',
     occupancy: 45,
     totalSeats: 300,
