@@ -1,3 +1,58 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "auth-image",
+      "description": "A modern university campus with students walking around.",
+      "imageUrl": "https://images.unsplash.com/photo-1592280771190-3e2e4d571952?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx1bml2ZXJzaXR5JTIwY2FtcHVzfGVufDB8fHx8MTc2NjE2MDYwN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "university campus"
+    },
+    {
+      "id": "lab-1",
+      "description": "A computer lab with rows of desktops.",
+      "imageUrl": "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb21wdXRlciUyMGxhYnxlbnwwfHx8fDE3NjYxMjYzMzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "computer lab"
+    },
+    {
+      "id": "lab-2",
+      "description": "A quiet library study area with empty chairs.",
+      "imageUrl": "https://images.unsplash.com/flagged/photo-1557699331-4ffdad25140e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxsaWJyYXJ5JTIwc3R1ZHl8ZW58MHx8fHwxNzY2MTQ3NjM0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "library study"
+    },
+    {
+      "id": "lab-3",
+      "description": "A collaborative study room with a whiteboard.",
+      "imageUrl": "https://images.unsplash.com/photo-1457276587196-a9d53d84c58b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdHVkeSUyMHJvb218ZW58MHx8fHwxNzY2MTYxMDgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "study room"
+    },
+    {
+      "id": "burger",
+      "description": "A delicious looking cheeseburger with fries.",
+      "imageUrl": "https://images.unsplash.com/photo-1676515725176-275bb09cc59b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaGVlc2VidXJnZXIlMjBmcmllc3xlbnwwfHx8fDE3NjYyMDYwMjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cheeseburger fries"
+    },
+    {
+      "id": "pizza",
+      "description": "A slice of pepperoni pizza.",
+      "imageUrl": "https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwaXp6YSUyMHNsaWNlfGVufDB8fHx8MTc2NjIwMDYwNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "pizza slice"
+    },
+    {
+      "id": "salad",
+      "description": "A fresh garden salad in a bowl.",
+      "imageUrl": "https://images.unsplash.com/photo-1605291535126-2d71fea483c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnYXJkZW4lMjBzYWxhZHxlbnwwfHx8fDE3NjYxNjYzNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "garden salad"
+    },
+    {
+      "id": "sushi",
+      "description": "A plate of assorted sushi rolls.",
+      "imageUrl": "https://images.unsplash.com/photo-1636425730695-febe95eda12e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzdXNoaSUyMHJvbGxzfGVufDB8fHx8MTc2NjE5NTcwM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sushi rolls"
+    },
+    {
+      "id": "coffee",
+      "description": "A cup of latte with art.",
+      "imageUrl": "https://images.unsplash.com/photo-1497636577773-f1231844b336?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsYXR0ZSUyMGFydHxlbnwwfHx8fDE3NjYyMTkwODl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "latte art"
+    }
+  ]
 }
