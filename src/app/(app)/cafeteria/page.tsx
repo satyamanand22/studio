@@ -36,6 +36,7 @@ import { GooglePayIcon } from "@/components/icons/google-pay";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import type { MenuItem } from "@/lib/types";
+import EstimatedDeliveryTime from "@/components/cafeteria/estimated-delivery-time";
 
 declare module "jspdf" {
   interface jsPDF {
@@ -103,6 +104,7 @@ export default function CafeteriaPage() {
   };
 
   const orderTotal = order.reduce((total, item) => total + item.price * item.quantity, 0);
+  const orderQuantity = order.reduce((total, item) => total + item.quantity, 0);
 
 
   const handleThaliOrder = async () => {
@@ -453,6 +455,12 @@ export default function CafeteriaPage() {
         </div>
         <div className="space-y-6">
           <QueuePrediction />
+          {orderQuantity > 0 && (
+            <>
+              <Separator />
+              <EstimatedDeliveryTime orderVolume={orderQuantity} />
+            </>
+          )}
           <Separator />
           <TimeRecommendation />
         </div>
