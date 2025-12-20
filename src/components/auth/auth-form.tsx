@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -32,6 +33,7 @@ const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }),
   password: z.string().min(6, { message: "Password must be at least 6 characters." }),
   role: z.enum(['student', 'admin']).optional(),
+  ggvEnrollmentNumber: z.string().optional(),
 });
 
 export function AuthForm() {
@@ -47,6 +49,7 @@ export function AuthForm() {
       email: "",
       password: "",
       role: "student",
+      ggvEnrollmentNumber: "",
     },
   });
 
@@ -134,27 +137,44 @@ export function AuthForm() {
             )}
           />
            {isSignUp && (
-            <FormField
-              control={form.control}
-              name="role"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Role</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your role" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="student">Student</SelectItem>
-                      <SelectItem value="admin">Admin</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
+            <>
+              <FormField
+                control={form.control}
+                name="role"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Role</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your role" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="student">Student</SelectItem>
+                        <SelectItem value="admin">Admin</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {form.watch('role') === 'student' && (
+                <FormField
+                  control={form.control}
+                  name="ggvEnrollmentNumber"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>GGV Enrollment Number</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your GGV Enrollment Number" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               )}
-            />
+            </>
           )}
           <Button type="submit" className="w-full" disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
