@@ -15,6 +15,7 @@ import type { Lab, OccupancyLevel } from "@/lib/types";
 import { Armchair, Computer, LocateFixed, Users } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 function getOccupancyLevel(percentage: number): OccupancyLevel {
   if (percentage < 40) return "low";
@@ -35,8 +36,16 @@ const levelText: Record<OccupancyLevel, string> = {
 };
 
 export function LabOccupancyCard({ lab }: { lab: Lab }) {
+  const { toast } = useToast();
   const level = getOccupancyLevel(lab.occupancy);
   const labImage = PlaceHolderImages.find((img) => img.id === lab.imageId);
+
+  const handleNotifyClick = () => {
+    toast({
+      title: "Notification Set",
+      description: "We will notify you shortly when space is available.",
+    });
+  };
 
   return (
     <Card className="flex flex-col">
@@ -92,7 +101,7 @@ export function LabOccupancyCard({ lab }: { lab: Lab }) {
         </div>
       </CardContent>
       <CardFooter className="flex gap-2">
-        <Button className="w-full">Notify Me</Button>
+        <Button className="w-full" onClick={handleNotifyClick}>Notify Me</Button>
         <Button variant="secondary" className="w-full">
             <LocateFixed className="mr-2 h-4 w-4" />
             Find on map
