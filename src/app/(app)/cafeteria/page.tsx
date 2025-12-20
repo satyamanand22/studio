@@ -28,7 +28,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CheckCircle, Download, Loader2, Minus, Plus, PlusCircle } from "lucide-react";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { useCounter } from "@/hooks/use-counter";
 import { GooglePayIcon } from "@/components/icons/google-pay";
 import jsPDF from "jspdf";
@@ -232,7 +232,7 @@ export default function CafeteriaPage() {
 
           <div>
             <h2 className="text-2xl font-bold tracking-tight mb-4 font-headline">
-              Today's Menu
+              University Cafeteria
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {mockMenu.map((item) => (
