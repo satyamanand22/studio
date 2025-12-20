@@ -7,6 +7,7 @@ import { AuthForm } from "@/components/auth/auth-form";
 import { useAuth } from "@/hooks/use-auth";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Loader2 } from "lucide-react";
+import { GgvLogo } from "@/components/icons/ggv-logo";
 
 export default function LoginPage() {
   const { user, loading } = useAuth();
@@ -32,7 +33,10 @@ export default function LoginPage() {
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold font-headline">GGV PULSE</h1>
+             <div className="flex items-center justify-center gap-2">
+                <GgvLogo className="h-10 w-10 text-primary" />
+                <h1 className="text-3xl font-bold font-headline">GGV PULSE</h1>
+             </div>
             <p className="text-balance text-muted-foreground">
               Your smart campus companion
             </p>

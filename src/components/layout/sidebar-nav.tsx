@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Bell, Building, Home, Map, Settings, UtensilsCrossed } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { GgvLogo } from "../icons/ggv-logo";
 
 const navItems = [
   { href: "/dashboard", icon: Home, label: "Dashboard" },
@@ -21,7 +22,7 @@ export default function SidebarNav() {
     <aside className="hidden border-r bg-card md:flex md:flex-col w-64">
       <div className="flex h-16 items-center border-b px-6">
         <Link href="/dashboard" className="flex items-center gap-2 font-semibold font-headline">
-          <Building className="h-6 w-6 text-primary" />
+          <GgvLogo className="h-8 w-8 text-primary" />
           <span>GGV PULSE</span>
         </Link>
       </div>
