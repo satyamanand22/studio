@@ -65,8 +65,16 @@ export default function CafeteriaPage() {
 
 
   const handleAddToCart = (item: MenuItem) => {
+    const existingItem = order.find((orderItem) => orderItem.id === item.id);
+    
+    if (!existingItem) {
+      toast({
+        title: "Added to order",
+        description: `${item.name} has been added to your order.`,
+      });
+    }
+
     setOrder((prevOrder) => {
-      const existingItem = prevOrder.find((orderItem) => orderItem.id === item.id);
       if (existingItem) {
         return prevOrder.map((orderItem) =>
           orderItem.id === item.id
@@ -74,10 +82,6 @@ export default function CafeteriaPage() {
             : orderItem
         );
       } else {
-        toast({
-          title: "Added to order",
-          description: `${item.name} has been added to your order.`,
-        });
         return [...prevOrder, { ...item, quantity: 1 }];
       }
     });
@@ -456,4 +460,3 @@ export default function CafeteriaPage() {
     </div>
   );
 }
-
