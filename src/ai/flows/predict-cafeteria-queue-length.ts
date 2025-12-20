@@ -35,13 +35,14 @@ const prompt = ai.definePrompt({
   prompt: `You are a cafeteria queue prediction expert. Based on the current time, historical order data, and real-time order volume, predict the queue length and waiting time.
 
 Current Time: {{{currentTime}}}
-Historical Order Data: {{{historicalOrderData}}}
+Historical Order Data (JSON String): {{{historicalOrderData}}}
 Real-time Order Volume: {{{realTimeOrderVolume}}}
 
 Your task is to:
-1.  Predict the number of people in the queue ('queueLength') based on the provided real-time and historical data.
-2.  Calculate the estimated waiting time ('waitingTime') based on your predicted queue length. **The estimated time is exactly 3 minutes per person in the queue.**
-3.  Provide a qualitative analysis of the queue length and waiting time (e.g., "very short," "short," "moderate," "long," "very long").
+1.  Parse and analyze the 'historicalOrderData' JSON string to understand past order volumes at different times.
+2.  Predict the number of people in the queue ('queueLength') based on the provided real-time and historical data.
+3.  Calculate the estimated waiting time ('waitingTime') based on your predicted queue length. **The estimated time is exactly 3 minutes per person in the queue.**
+4.  Provide a qualitative analysis of the queue length and waiting time (e.g., "very short," "short," "moderate," "long," "very long").
 
 Provide your prediction in the specified output format. Be precise with your reasoning and base your predictions on the data provided.
 `,
