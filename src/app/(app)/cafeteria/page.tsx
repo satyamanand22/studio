@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { mockMenu, swabhimanThali } from "@/lib/data";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { PlusCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 export default function CafeteriaPage() {
     const thaliImage = PlaceHolderImages.find(img => img.id === swabhimanThali.imageId);
