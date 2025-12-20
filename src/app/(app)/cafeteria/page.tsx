@@ -45,19 +45,23 @@ declare module "jspdf" {
 
 type OrderItem = MenuItem & { quantity: number };
 
+type GeneralOrderStep = "summary" | "payment" | "processing" | "confirmed";
+
 
 export default function CafeteriaPage() {
   const thaliImage = PlaceHolderImages.find(
     (img) => img.id === swabhimanThali.imageId
   );
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [name, setName] = useState("");
+  const [isThaliDialogOpen, setIsThaliDialogOpen] = useState(false);
+  const [studentName, setStudentName] = useState("");
   const { count, increment, decrement, setCount } = useCounter(1);
-  const [orderStep, setOrderStep] = useState<"form" | "processing" | "confirmed">("form");
+  const [thaliOrderStep, setThaliOrderStep] = useState<"form" | "processing" | "confirmed">("form");
   const { toast } = useToast();
 
   const [order, setOrder] = useState<OrderItem[]>([]);
   const [isOrderSummaryOpen, setIsOrderSummaryOpen] = useState(false);
+  const [generalOrderStep, setGeneralOrderStep] = useState<GeneralOrderStep>("summary");
+  const [transactionId, setTransactionId] = useState("");
 
 
   const handleAddToCart = (item: MenuItem) => {
@@ -97,8 +101,8 @@ export default function CafeteriaPage() {
   const orderTotal = order.reduce((total, item) => total + item.price * item.quantity, 0);
 
 
-  const handleOrder = async () => {
-    if (!name.trim()) {
+  const handleThaliOrder = async () => {
+    if (!studentName.trim()) {
       toast({
         variant: "destructive",
         title: "Name is required",
@@ -106,17 +110,30 @@ export default function CafeteriaPage() {
       });
       return;
     }
-    setOrderStep("processing");
-    // Simulate payment processing
+    setThaliOrderStep("processing");
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    setOrderStep("confirmed");
+    setThaliOrderStep("confirmed");
   };
 
-  const handleDownloadBill = () => {
+  const handleGeneralOrder = async () => {
+    if (!studentName.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Name is required",
+        description: "Please enter your name to proceed.",
+      });
+      return;
+    }
+    setGeneralOrderStep("processing");
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setTransactionId(`TXN${Date.now()}`);
+    setGeneralOrderStep("confirmed");
+  };
+
+  const generateAndDownloadBill = (orderItems: OrderItem[], name: string, total: number) => {
     const doc = new jsPDF();
-    const totalAmount = swabhimanThali.price * count;
-    const gst = totalAmount * 0.05; // 5% GST
-    const finalAmount = totalAmount + gst;
+    const gst = total * 0.05; // 5% GST
+    const finalAmount = total + gst;
 
     doc.setFontSize(20);
     doc.text("GGV PULSE - Order Invoice", 14, 22);
@@ -124,36 +141,47 @@ export default function CafeteriaPage() {
     doc.text(`Student Name: ${name}`, 14, 32);
     doc.text(`Order Date: ${new Date().toLocaleDateString()}`, 14, 39);
 
+    const tableBody = orderItems.map(item => [
+        item.name,
+        item.quantity,
+        `₹${item.price.toFixed(2)}`
+    ]);
+
     doc.autoTable({
       startY: 50,
-      head: [['Item', 'Quantity', 'Price']],
-      body: [
-        [swabhimanThali.name, count, `₹${swabhimanThali.price.toFixed(2)}`],
-      ],
+      head: [['Item', 'Quantity', 'Unit Price']],
+      body: tableBody,
       theme: 'grid',
     });
 
     const finalY = (doc as any).lastAutoTable.finalY || 70;
 
     doc.setFontSize(10);
-    doc.text(`Subtotal: ₹${totalAmount.toFixed(2)}`, 14, finalY + 10);
+    doc.text(`Subtotal: ₹${total.toFixed(2)}`, 14, finalY + 10);
     doc.text(`GST (5%): ₹${gst.toFixed(2)}`, 14, finalY + 15);
     doc.setFontSize(12);
     doc.setFont("helvetica", "bold");
     doc.text(`Total Payment: ₹${finalAmount.toFixed(2)}`, 14, finalY + 22);
+    
+    if(transactionId) {
+        doc.text(`Transaction ID: ${transactionId}`, 14, finalY + 29)
+    }
 
-    doc.save(`invoice-${name.replace(" ", "-").toLowerCase()}-${Date.now()}.pdf`);
+    doc.save(`invoice-${name.replace(/\s+/g, "-").toLowerCase()}-${Date.now()}.pdf`);
   }
 
-  const resetOrderProcess = () => {
-    setName("");
+  const resetThaliOrderProcess = () => {
+    setStudentName("");
     setCount(1);
-    setOrderStep("form");
-    setIsDialogOpen(false);
+    setThaliOrderStep("form");
+    setIsThaliDialogOpen(false);
   }
 
   const resetGeneralOrder = () => {
     setOrder([]);
+    setStudentName("");
+    setTransactionId("");
+    setGeneralOrderStep("summary");
     setIsOrderSummaryOpen(false);
   }
 
@@ -182,11 +210,10 @@ export default function CafeteriaPage() {
                   <p className="text-2xl font-bold">
                     ₹{swabhimanThali.price.toFixed(2)}
                   </p>
-                  <Dialog open={isDialogOpen} onOpenChange={(open) => {
-                    setIsDialogOpen(open);
+                  <Dialog open={isThaliDialogOpen} onOpenChange={(open) => {
+                    setIsThaliDialogOpen(open);
                     if (!open) {
-                      // Reset state when dialog is closed at any step
-                      resetOrderProcess();
+                      resetThaliOrderProcess();
                     }
                   }}>
                     <DialogTrigger asChild>
@@ -199,7 +226,7 @@ export default function CafeteriaPage() {
                       <DialogHeader>
                         <DialogTitle>Order Swabhiman Thali</DialogTitle>
                       </DialogHeader>
-                      {orderStep === 'form' && (
+                      {thaliOrderStep === 'form' && (
                          <div className="grid gap-6 py-4">
                            <div className="space-y-2">
                             <h3 className="font-medium">{swabhimanThali.name}</h3>
@@ -207,13 +234,13 @@ export default function CafeteriaPage() {
                            </div>
 
                           <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="name" className="text-right">
+                            <Label htmlFor="name-thali" className="text-right">
                               Name
                             </Label>
                             <Input
-                              id="name"
-                              value={name}
-                              onChange={(e) => setName(e.target.value)}
+                              id="name-thali"
+                              value={studentName}
+                              onChange={(e) => setStudentName(e.target.value)}
                               className="col-span-3"
                               placeholder="Enter your name"
                             />
@@ -235,29 +262,29 @@ export default function CafeteriaPage() {
                           <div className="text-right font-bold text-xl">
                             Total: ₹{(swabhimanThali.price * count).toFixed(2)}
                           </div>
-                          <Button onClick={handleOrder} className="w-full" disabled={!swabhimanThali.inStock}>
+                          <Button onClick={handleThaliOrder} className="w-full" disabled={!swabhimanThali.inStock}>
                             <GooglePayIcon className="mr-2 h-6 w-6" />
                             Pay with Google Pay
                           </Button>
                         </div>
                       )}
-                      {orderStep === 'processing' && (
+                      {thaliOrderStep === 'processing' && (
                         <div className="flex flex-col items-center justify-center gap-4 py-10">
                             <Loader2 className="h-10 w-10 animate-spin text-primary" />
                             <p className="text-muted-foreground">Processing payment...</p>
                         </div>
                       )}
-                       {orderStep === 'confirmed' && (
+                       {thaliOrderStep === 'confirmed' && (
                         <div className="flex flex-col items-center justify-center gap-4 py-10 text-center">
                             <CheckCircle className="h-12 w-12 text-green-500" />
                             <h3 className="text-xl font-bold">Order Confirmed!</h3>
-                            <p className="text-muted-foreground">Thank you, {name}.<br/>Your order for {count} thali(s) has been placed.</p>
+                            <p className="text-muted-foreground">Thank you, {studentName}.<br/>Your order for {count} thali(s) has been placed.</p>
                             <div className="flex gap-2 mt-4">
-                              <Button onClick={handleDownloadBill}>
+                              <Button onClick={() => generateAndDownloadBill([{...swabhimanThali, quantity: count}], studentName, swabhimanThali.price * count)}>
                                 <Download className="mr-2 h-4 w-4" />
                                 Download Bill
                               </Button>
-                              <Button onClick={resetOrderProcess} variant="secondary">
+                              <Button onClick={resetThaliOrderProcess} variant="secondary">
                                 Close
                               </Button>
                             </div>
@@ -301,62 +328,120 @@ export default function CafeteriaPage() {
               })}
             </div>
              <div className="mt-8 flex justify-center">
-                <Dialog open={isOrderSummaryOpen} onOpenChange={setIsOrderSummaryOpen}>
+                <Dialog open={isOrderSummaryOpen} onOpenChange={(open) => {
+                    setIsOrderSummaryOpen(open);
+                    if (!open) {
+                      resetGeneralOrder();
+                    }
+                  }}>
                     <DialogTrigger asChild>
                          <Button size="lg" disabled={order.length === 0}>
                             <ShoppingCart className="mr-2 h-5 w-5" />
                             Submit Order ({order.reduce((acc, item) => acc + item.quantity, 0)})
                         </Button>
                     </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>Your Order</DialogTitle>
-                            <DialogDescription>
-                                Review your items before submitting your order.
-                            </DialogDescription>
-                        </DialogHeader>
-                        <div className="max-h-[300px] overflow-y-auto pr-4">
-                            {order.length > 0 ? (
-                                <div className="space-y-4">
-                                    {order.map(item => (
-                                        <div key={item.id} className="flex justify-between items-center">
-                                            <div>
-                                                <p className="font-semibold">{item.name}</p>
-                                                <p className="text-sm text-muted-foreground">₹{item.price.toFixed(2)}</p>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                 <Button variant="outline" size="icon" className="h-7 w-7" onClick={() => handleRemoveFromCart(item.id)}>
-                                                    <Minus className="h-4 w-4" />
-                                                </Button>
-                                                <span className="font-bold text-md w-6 text-center">{item.quantity}</span>
-                                                <Button variant="outline" size="icon" className="h-7 w-7" onClick={() => handleAddToCart(item)}>
-                                                    <Plus className="h-4 w-4" />
-                                                </Button>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <p className="text-muted-foreground text-center py-8">Your cart is empty.</p>
-                            )}
-                        </div>
-                        {order.length > 0 && (
-                             <div className="mt-4 pt-4 border-t">
-                                <div className="flex justify-between font-bold text-lg">
-                                    <p>Total</p>
-                                    <p>₹{orderTotal.toFixed(2)}</p>
-                                </div>
+                    <DialogContent className="sm:max-w-[425px]">
+                      {generalOrderStep === 'summary' && (
+                        <>
+                          <DialogHeader>
+                              <DialogTitle>Your Order</DialogTitle>
+                              <DialogDescription>
+                                  Review your items before proceeding to payment.
+                              </DialogDescription>
+                          </DialogHeader>
+                          <div className="max-h-[300px] overflow-y-auto pr-4 my-4">
+                              {order.length > 0 ? (
+                                  <div className="space-y-4">
+                                      {order.map(item => (
+                                          <div key={item.id} className="flex justify-between items-center">
+                                              <div>
+                                                  <p className="font-semibold">{item.name}</p>
+                                                  <p className="text-sm text-muted-foreground">₹{item.price.toFixed(2)} x {item.quantity}</p>
+                                              </div>
+                                              <div className="flex items-center gap-2">
+                                                   <Button variant="outline" size="icon" className="h-7 w-7" onClick={() => handleRemoveFromCart(item.id)}>
+                                                      <Minus className="h-4 w-4" />
+                                                  </Button>
+                                                  <span className="font-bold text-md w-6 text-center">{item.quantity}</span>
+                                                  <Button variant="outline" size="icon" className="h-7 w-7" onClick={() => handleAddToCart(item)}>
+                                                      <Plus className="h-4 w-4" />
+                                                  </Button>
+                                              </div>
+                                          </div>
+                                      ))}
+                                  </div>
+                              ) : (
+                                  <p className="text-muted-foreground text-center py-8">Your cart is empty.</p>
+                              )}
+                          </div>
+                          {order.length > 0 && (
+                               <div className="mt-4 pt-4 border-t">
+                                  <div className="flex justify-between font-bold text-lg">
+                                      <p>Total</p>
+                                      <p>₹{orderTotal.toFixed(2)}</p>
+                                  </div>
+                              </div>
+                          )}
+                          <DialogFooter className="mt-4">
+                              <Button variant="secondary" onClick={() => setIsOrderSummaryOpen(false)}>Cancel</Button>
+                              <Button onClick={() => setGeneralOrderStep("payment")} disabled={order.length === 0}>
+                                  Proceed to Payment
+                              </Button>
+                          </DialogFooter>
+                        </>
+                      )}
+                      {generalOrderStep === 'payment' && (
+                        <div className="grid gap-6 py-4">
+                            <DialogHeader>
+                                <DialogTitle>Complete Your Order</DialogTitle>
+                            </DialogHeader>
+                            <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="name-general" className="text-right">
+                                Name
+                                </Label>
+                                <Input
+                                id="name-general"
+                                value={studentName}
+                                onChange={(e) => setStudentName(e.target.value)}
+                                className="col-span-3"
+                                placeholder="Enter your name"
+                                />
                             </div>
-                        )}
-                        <DialogFooter>
-                            <Button variant="secondary" onClick={() => setIsOrderSummaryOpen(false)}>Cancel</Button>
-                            <Button onClick={() => {
-                                toast({ title: "Order Submitted!", description: "Your order has been sent to the cafeteria." });
-                                resetGeneralOrder();
-                            }} disabled={order.length === 0}>
-                                Confirm Order
+                            <div className="text-right font-bold text-xl">
+                                Total: ₹{orderTotal.toFixed(2)}
+                            </div>
+                            <Button onClick={handleGeneralOrder} className="w-full">
+                                <GooglePayIcon className="mr-2 h-6 w-6" />
+                                Pay with Google Pay
                             </Button>
-                        </DialogFooter>
+                             <Button variant="link" size="sm" className="text-muted-foreground" onClick={() => setGeneralOrderStep("summary")}>
+                                Go back to summary
+                            </Button>
+                        </div>
+                      )}
+                       {generalOrderStep === 'processing' && (
+                        <div className="flex flex-col items-center justify-center gap-4 py-10">
+                            <Loader2 className="h-10 w-10 animate-spin text-primary" />
+                            <p className="text-muted-foreground">Processing payment...</p>
+                        </div>
+                      )}
+                       {generalOrderStep === 'confirmed' && (
+                        <div className="flex flex-col items-center justify-center gap-4 py-10 text-center">
+                            <CheckCircle className="h-12 w-12 text-green-500" />
+                            <h3 className="text-xl font-bold">Order Confirmed!</h3>
+                            <p className="text-muted-foreground">Thank you, {studentName}.<br/>Your order has been placed.</p>
+                            <p className="text-xs text-muted-foreground mt-2">Transaction ID: {transactionId}</p>
+                            <div className="flex gap-2 mt-4">
+                              <Button onClick={() => generateAndDownloadBill(order, studentName, orderTotal)}>
+                                <Download className="mr-2 h-4 w-4" />
+                                Download Bill
+                              </Button>
+                              <Button onClick={resetGeneralOrder} variant="secondary">
+                                Close
+                              </Button>
+                            </div>
+                        </div>
+                      )}
                     </DialogContent>
                 </Dialog>
             </div>
@@ -371,3 +456,4 @@ export default function CafeteriaPage() {
     </div>
   );
 }
+
