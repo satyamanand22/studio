@@ -9,13 +9,13 @@
     {
       "id": "lab-1",
       "description": "A computer lab with rows of desktops.",
-      "imageUrl": "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb21wdXRlciUyMGxhYnxlbnwwfHx8fDE3NjYxMjYzMzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1581090700227-1e37b190418e",
       "imageHint": "computer lab"
     },
     {
       "id": "lab-2",
       "description": "Nalanda Central Library building entrance.",
-      "imageUrl": "https://storage.googleapis.com/studioprompt-helper-images/1719512130386_nalanda-new.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Library_building.jpg",
       "imageHint": "library building"
     },
     {
