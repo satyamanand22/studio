@@ -61,7 +61,7 @@ export function AuthForm() {
         await signIn(values.email, values.password);
       }
       toast({
-        title: isSignUp ? "Account created" : "Signed in successfully",
+        title: isSignUp ? "Account created" : "Logged in successfully",
         description: "Redirecting to your dashboard...",
       });
       router.push("/dashboard");
@@ -78,14 +78,14 @@ export function AuthForm() {
     try {
       await signInWithGoogle();
       toast({
-        title: "Signed in with Google",
+        title: "Logged in with Google",
         description: "Redirecting to your dashboard...",
       });
       router.push("/dashboard");
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Google Sign-In failed",
+        title: "Google Login failed",
         description: (error as Error).message || "An unexpected error occurred.",
       });
     }
@@ -178,17 +178,17 @@ export function AuthForm() {
           )}
           <Button type="submit" className="w-full" disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isSignUp ? "Sign Up" : "Sign In"}
+            {isSignUp ? "Sign Up" : "Login"}
           </Button>
           <Button variant="outline" type="button" className="w-full" onClick={handleGoogleSignIn} disabled={loading}>
-            Sign in with Google
+            Login with Google
           </Button>
         </form>
       </Form>
       <div className="mt-4 text-center text-sm">
         {isSignUp ? "Already have an account?" : "Don't have an account?"}
         <button onClick={() => setIsSignUp(!isSignUp)} className="underline ml-1">
-          {isSignUp ? "Sign in" : "Sign up"}
+          {isSignUp ? "Login" : "Sign up"}
         </button>
       </div>
     </div>
