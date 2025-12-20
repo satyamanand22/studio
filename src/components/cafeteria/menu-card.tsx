@@ -7,7 +7,12 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
 import { PlusCircle } from "lucide-react";
 
-export function MenuCard({ item }: { item: MenuItem }) {
+interface MenuCardProps {
+    item: MenuItem;
+    onAddToCart: (item: MenuItem) => void;
+}
+
+export function MenuCard({ item, onAddToCart }: MenuCardProps) {
   const itemImage = PlaceHolderImages.find(img => img.id === item.imageId);
 
   return (
@@ -34,8 +39,8 @@ export function MenuCard({ item }: { item: MenuItem }) {
         <p className="text-sm text-muted-foreground">{item.category}</p>
       </CardContent>
       <CardFooter className="flex justify-between items-center">
-        <p className="font-semibold">₹{item.price.toFixed(2)}</p>
-        <Button size="sm" disabled={!item.inStock}>
+        <p className="font-semibold">₹{item.price.toFixed(0)}</p>
+        <Button size="sm" disabled={!item.inStock} onClick={() => onAddToCart(item)}>
             <PlusCircle className="mr-2 h-4 w-4" />
             Add
         </Button>

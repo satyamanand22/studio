@@ -19,6 +19,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { mockMenu, swabhimanThali } from "@/lib/data";
@@ -26,19 +28,22 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CheckCircle, Download, Loader2, Minus, Plus, PlusCircle } from "lucide-react";
+import { CheckCircle, Download, Loader2, Minus, Plus, PlusCircle, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useCounter } from "@/hooks/use-counter";
 import { GooglePayIcon } from "@/components/icons/google-pay";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import type { MenuItem } from "@/lib/types";
 
 declare module "jspdf" {
   interface jsPDF {
     autoTable: (options: any) => jsPDF;
   }
 }
+
+type OrderItem = MenuItem & { quantity: number };
 
 
 export default function CafeteriaPage() {
@@ -50,6 +55,47 @@ export default function CafeteriaPage() {
   const { count, increment, decrement, setCount } = useCounter(1);
   const [orderStep, setOrderStep] = useState<"form" | "processing" | "confirmed">("form");
   const { toast } = useToast();
+
+  const [order, setOrder] = useState<OrderItem[]>([]);
+  const [isOrderSummaryOpen, setIsOrderSummaryOpen] = useState(false);
+
+
+  const handleAddToCart = (item: MenuItem) => {
+    setOrder((prevOrder) => {
+      const existingItem = prevOrder.find((orderItem) => orderItem.id === item.id);
+      if (existingItem) {
+        return prevOrder.map((orderItem) =>
+          orderItem.id === item.id
+            ? { ...orderItem, quantity: orderItem.quantity + 1 }
+            : orderItem
+        );
+      } else {
+        return [...prevOrder, { ...item, quantity: 1 }];
+      }
+    });
+    toast({
+      title: "Added to order",
+      description: `${item.name} has been added to your order.`,
+    });
+  };
+
+  const handleRemoveFromCart = (itemId: string) => {
+    setOrder((prevOrder) => {
+      const existingItem = prevOrder.find((orderItem) => orderItem.id === itemId);
+      if (existingItem && existingItem.quantity > 1) {
+        return prevOrder.map((orderItem) =>
+          orderItem.id === itemId
+            ? { ...orderItem, quantity: orderItem.quantity - 1 }
+            : orderItem
+        );
+      } else {
+        return prevOrder.filter((orderItem) => orderItem.id !== itemId);
+      }
+    });
+  };
+
+  const orderTotal = order.reduce((total, item) => total + item.price * item.quantity, 0);
+
 
   const handleOrder = async () => {
     if (!name.trim()) {
@@ -104,6 +150,11 @@ export default function CafeteriaPage() {
     setCount(1);
     setOrderStep("form");
     setIsDialogOpen(false);
+  }
+
+  const resetGeneralOrder = () => {
+    setOrder([]);
+    setIsOrderSummaryOpen(false);
   }
 
   return (
@@ -236,8 +287,68 @@ export default function CafeteriaPage() {
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {mockMenu.map((item) => (
-                <MenuCard key={item.id} item={item} />
+                <MenuCard key={item.id} item={item} onAddToCart={handleAddToCart} />
               ))}
+            </div>
+             <div className="mt-8 flex justify-center">
+                <Dialog open={isOrderSummaryOpen} onOpenChange={setIsOrderSummaryOpen}>
+                    <DialogTrigger asChild>
+                         <Button size="lg" disabled={order.length === 0}>
+                            <ShoppingCart className="mr-2 h-5 w-5" />
+                            Submit Order ({order.reduce((acc, item) => acc + item.quantity, 0)})
+                        </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Your Order</DialogTitle>
+                            <DialogDescription>
+                                Review your items before submitting your order.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="max-h-[300px] overflow-y-auto pr-4">
+                            {order.length > 0 ? (
+                                <div className="space-y-4">
+                                    {order.map(item => (
+                                        <div key={item.id} className="flex justify-between items-center">
+                                            <div>
+                                                <p className="font-semibold">{item.name}</p>
+                                                <p className="text-sm text-muted-foreground">₹{item.price.toFixed(2)}</p>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                 <Button variant="outline" size="icon" className="h-7 w-7" onClick={() => handleRemoveFromCart(item.id)}>
+                                                    <Minus className="h-4 w-4" />
+                                                </Button>
+                                                <span className="font-bold text-md w-6 text-center">{item.quantity}</span>
+                                                <Button variant="outline" size="icon" className="h-7 w-7" onClick={() => handleAddToCart(item)}>
+                                                    <Plus className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-muted-foreground text-center py-8">Your cart is empty.</p>
+                            )}
+                        </div>
+                        {order.length > 0 && (
+                             <div className="mt-4 pt-4 border-t">
+                                <div className="flex justify-between font-bold text-lg">
+                                    <p>Total</p>
+                                    <p>₹{orderTotal.toFixed(2)}</p>
+                                </div>
+                            </div>
+                        )}
+                        <DialogFooter>
+                            <Button variant="secondary" onClick={() => setIsOrderSummaryOpen(false)}>Cancel</Button>
+                            <Button onClick={() => {
+                                toast({ title: "Order Submitted!", description: "Your order has been sent to the cafeteria." });
+                                resetGeneralOrder();
+                            }} disabled={order.length === 0}>
+                                Confirm Order
+                            </Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </div>
           </div>
         </div>
