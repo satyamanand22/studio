@@ -35,6 +35,7 @@ import { useCounter } from "@/hooks/use-counter";
 import { GooglePayIcon } from "@/components/icons/google-pay";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import QRCode from "qrcode";
 import type { MenuItem } from "@/lib/types";
 
 declare module "jspdf" {
@@ -134,7 +135,7 @@ export default function CafeteriaPage() {
     setGeneralOrderStep("confirmed");
   };
 
-  const generateAndDownloadBill = (orderItems: OrderItem[], name: string, total: number) => {
+  const generateAndDownloadBill = async (orderItems: OrderItem[], name: string, total: number, currentTransactionId?: string) => {
     const doc = new jsPDF();
     const gst = total * 0.05; // 5% GST
     const finalAmount = total + gst;
@@ -169,8 +170,23 @@ export default function CafeteriaPage() {
     doc.setFont("helvetica", "bold");
     doc.text(`Total Payment: ₹${finalAmount.toFixed(2)}`, 14, finalY + 22);
     
-    if(transactionId) {
-        doc.text(`Transaction ID: ${transactionId}`, 14, finalY + 29)
+    if(currentTransactionId) {
+        doc.text(`Transaction ID: ${currentTransactionId}`, 14, finalY + 29)
+    }
+
+    try {
+        const qrData = JSON.stringify({
+            orderId: `#${orderId}`,
+            studentName: name,
+            totalAmount: `₹${finalAmount.toFixed(2)}`,
+            transactionId: currentTransactionId || "N/A"
+        });
+        const qrCodeDataURL = await QRCode.toDataURL(qrData, { width: 200, margin: 2 });
+        doc.addImage(qrCodeDataURL, 'PNG', 150, finalY + 8, 45, 45);
+        doc.setFontSize(8)
+        doc.text("Scan for details", 160, finalY + 56);
+    } catch (err) {
+        console.error("Failed to generate QR code", err);
     }
 
     doc.save(`invoice-${name.replace(/\s+/g, "-").toLowerCase()}-${Date.now()}.pdf`);
@@ -440,7 +456,7 @@ export default function CafeteriaPage() {
                             <p className="text-muted-foreground">Thank you, {studentName}.<br/>Your order has been placed.</p>
                             <p className="text-xs text-muted-foreground mt-2">Transaction ID: {transactionId}</p>
                             <div className="flex gap-2 mt-4">
-                              <Button onClick={() => generateAndDownloadBill(order, studentName, orderTotal)}>
+                              <Button onClick={() => generateAndDownloadBill(order, studentName, orderTotal, transactionId)}>
                                 <Download className="mr-2 h-4 w-4" />
                                 Download Bill
                               </Button>
