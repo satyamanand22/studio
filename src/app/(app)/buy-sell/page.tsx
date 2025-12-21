@@ -82,9 +82,27 @@ export default function BuyAndSellPage() {
                                             <Input id="image" name="image" type="file" accept="image/*" />
                                         </div>
                                     </div>
-                                     <div className="space-y-2">
-                                        <Label htmlFor="contact">Contact Details</Label>
-                                        <Input id="contact" name="contact" placeholder="Your name and phone number or email" required />
+                                     <div className="grid grid-cols-2 gap-4">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="sellerName">Seller Name</Label>
+                                            <Input id="sellerName" name="sellerName" placeholder="e.g., Alex Doe" required />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="sellerContact">Contact Number</Label>
+                                            <Input 
+                                                id="sellerContact" 
+                                                name="sellerContact" 
+                                                type="tel"
+                                                pattern="[0-9]{10}"
+                                                maxLength={10}
+                                                placeholder="e.g., 9876543210" 
+                                                required 
+                                                onInput={(e) => {
+                                                    const target = e.target as HTMLInputElement;
+                                                    target.value = target.value.replace(/[^0-9]/g, '');
+                                                }}
+                                            />
+                                        </div>
                                     </div>
                                     <Button type="submit" className="w-full">
                                         <PlusCircle className="mr-2 h-4 w-4" />
