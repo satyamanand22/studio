@@ -18,6 +18,7 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 function getOccupancyLevel(percentage: number): OccupancyLevel {
   if (percentage < 40) return "low";
@@ -43,6 +44,7 @@ interface LabOccupancyCardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function LabOccupancyCard({ lab, className, ...props }: LabOccupancyCardProps) {
   const { toast } = useToast();
+  const router = useRouter();
   const level = getOccupancyLevel(lab.occupancy);
   const labImage = PlaceHolderImages.find((img) => img.id === lab.imageId);
 
@@ -52,6 +54,14 @@ export function LabOccupancyCard({ lab, className, ...props }: LabOccupancyCardP
       description: "We will notify you shortly when space is available.",
     });
   };
+
+  const handleSecondaryAction = () => {
+    if (isNalandaLibrary) {
+      router.push("/nalanda-library");
+    } else {
+      router.push("/map");
+    }
+  }
 
   const isNalandaLibrary = lab.name === 'Nalanda Central Library';
 
@@ -110,7 +120,7 @@ export function LabOccupancyCard({ lab, className, ...props }: LabOccupancyCardP
       </CardContent>
       <CardFooter className="flex gap-2">
         <Button className="w-full" onClick={handleNotifyClick}>Notify Me</Button>
-        <Button variant="secondary" className="w-full">
+        <Button variant="secondary" className="w-full" onClick={handleSecondaryAction}>
             {isNalandaLibrary ? (
               <>
                 More
