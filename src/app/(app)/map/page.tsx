@@ -107,7 +107,19 @@ export default function MapPage() {
                                     <Label htmlFor="contactNo" className="text-right">
                                         Contact No.
                                     </Label>
-                                    <Input id="contactNo" name="contactNo" type="number" min="0" className="col-span-3" required />
+                                    <Input 
+                                      id="contactNo" 
+                                      name="contactNo" 
+                                      type="tel"
+                                      pattern="[0-9]{10}"
+                                      maxLength={10}
+                                      className="col-span-3" 
+                                      required
+                                      onInput={(e) => {
+                                        const target = e.target as HTMLInputElement;
+                                        target.value = target.value.replace(/[^0-9]/g, '');
+                                      }}
+                                    />
                                 </div>
                                 <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="contactPlace" className="text-right">
