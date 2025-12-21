@@ -28,12 +28,6 @@ const statusDotStyles = {
 export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
     const { user } = useAuth();
     
-    const handleOccupy = () => {
-        if (user) {
-            onUpdate({ ...computer, status: 'Occupied', user: user.displayName || 'Unnamed User' });
-        }
-    };
-
     const handleRelease = () => {
         onUpdate({ ...computer, status: 'Available', user: undefined });
     };
@@ -77,7 +71,7 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
                         </div>
                     )}
                     {computer.status === 'Occupied' && !isCurrentUser && (
-                        <p className="text-xs text-center text-muted-foreground">Occupied by another user</p>
+                        <p className="text-xs text-center text-muted-foreground">MARK AS AWAY</p>
                     )}
                 </div>
             </CardFooter>
