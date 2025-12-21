@@ -6,13 +6,19 @@ import { ComputerAvailabilityGrid } from '@/components/nalanda/computer-availabi
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { BookCheck, BookX, Copy, Library, Search } from 'lucide-react';
+import { BookCheck, BookX, Copy, Library, Search, ChevronDown } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
 
 export default function OccuFindPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState<{ available: boolean; rack?: number; floor?: number, copies?: number } | null>(null);
   const { toast } = useToast();
+  const [isComputerGridOpen, setIsComputerGridOpen] = useState(false);
 
   const handleBookSearch = () => {
     if (!searchTerm.trim()) {
@@ -41,13 +47,28 @@ export default function OccuFindPage() {
   return (
     <div className="container mx-auto space-y-8">
        <Card>
-          <CardHeader>
-            <CardTitle>Computer Room</CardTitle>
-            <CardDescription>Ground Floor Availability</CardDescription>
+        <Collapsible
+            open={isComputerGridOpen}
+            onOpenChange={setIsComputerGridOpen}
+          >
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>Computer Room</CardTitle>
+              <CardDescription>Ground Floor Availability (Section A - 21 PCs)</CardDescription>
+            </div>
+            <CollapsibleTrigger asChild>
+                <Button variant="ghost" size="sm" className="w-9 p-0">
+                  <ChevronDown className="h-4 w-4 transition-transform data-[state=open]:rotate-180" />
+                  <span className="sr-only">Toggle</span>
+                </Button>
+            </CollapsibleTrigger>
           </CardHeader>
-          <CardContent>
-            <ComputerAvailabilityGrid floor={1} />
-          </CardContent>
+          <CollapsibleContent>
+            <CardContent>
+              <ComputerAvailabilityGrid floor={1} />
+            </CardContent>
+          </CollapsibleContent>
+        </Collapsible>
        </Card>
 
         <Card>
