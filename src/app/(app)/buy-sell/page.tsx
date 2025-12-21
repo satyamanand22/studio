@@ -8,10 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { DollarSign, List, PlusCircle, Search, ShoppingBag } from 'lucide-react';
-import Image from 'next/image';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from '@/components/ui/dialog';
-
+import { List, PlusCircle, Search, ShoppingBag, Package } from 'lucide-react';
 
 export default function BuyAndSellPage() {
     const [availableItems, setAvailableItems] = useState<any[]>([]);
@@ -36,7 +33,7 @@ export default function BuyAndSellPage() {
                             Available Items
                         </TabsTrigger>
                         <TabsTrigger value="sell">
-                            <span className="mr-2">product</span>
+                            <Package className="mr-2 h-4 w-4" />
                             Sell Items
                         </TabsTrigger>
                     </TabsList>
