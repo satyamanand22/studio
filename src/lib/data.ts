@@ -1,8 +1,8 @@
 import type { Lab, MenuItem, NavItem, ComputerSection } from './types';
-import { BookOpen, UtensilsCrossed, Map, Bell, Settings } from 'lucide-react';
+import { Book, UtensilsCrossed, Map, Bell, Settings } from 'lucide-react';
 
 export const navItems: NavItem[] = [
-  { href: "/occufind", icon: BookOpen, label: "OccuFind" },
+  { href: "/occufind", icon: Book, label: "OccuFind" },
   { href: "/cafeteria", icon: UtensilsCrossed, label: "Cafeteria" },
   { href: "/map", icon: Map, label: "Map" },
   { href: "/notifications", icon: Bell, label: "Notifications" },
@@ -44,26 +44,26 @@ export const mockComputerSections: ComputerSection[] = [
         floor: 1,
         computers: [
             { id: 'pc-01', name: 'PC-01', status: 'Available' },
-            { id: 'pc-02', name: 'PC-02', status: 'Occupied', user: 'Jane Doe' },
+            { id: 'pc-02', name: 'PC-02', status: 'Occupied' },
             { id: 'pc-03', name: 'PC-03', status: 'Available' },
             { id: 'pc-04', name: 'PC-04', status: 'Available' },
             { id: 'pc-05', name: 'PC-05', status: 'Available' },
             { id: 'pc-06', name: 'PC-06', status: 'Available' },
-            { id: 'pc-07', name: 'PC-07', status: 'Occupied', user: 'Sam Wilson' },
+            { id: 'pc-07', name: 'PC-07', status: 'Occupied' },
             { id: 'pc-08', name: 'PC-08', status: 'Available' },
             { id: 'pc-09', name: 'PC-09', status: 'Available' },
             { id: 'pc-10', name: 'PC-10', status: 'Available' },
             { id: 'pc-11', name: 'PC-11', status: 'Available' },
-            { id: 'pc-12', name: 'PC-12', status: 'Occupied', user: 'Chris Evans' },
+            { id: 'pc-12', name: 'PC-12', status: 'Occupied' },
             { id: 'pc-13', name: 'PC-13', status: 'Available' },
             { id: 'pc-14', name: 'PC-14', status: 'Available' },
-            { id: 'pc-15', name: 'PC-15', status: 'Occupied', user: 'Tony Stark' },
+            { id: 'pc-15', name: 'PC-15', status: 'Occupied' },
             { id: 'pc-16', name: 'PC-16', status: 'Available' },
             { id: 'pc-17', name: 'PC-17', status: 'Available' },
             { id: 'pc-18', name: 'PC-18', status: 'Available' },
             { id: 'pc-19', name: 'PC-19', status: 'Available' },
             { id: 'pc-20', name: 'PC-20', status: 'Available' },
-            { id: 'pc-21', name: 'PC-21', status: 'Occupied', user: 'Bruce Banner' },
+            { id: 'pc-21', name: 'PC-21', status: 'Occupied' },
         ],
     },
     {
@@ -71,10 +71,10 @@ export const mockComputerSections: ComputerSection[] = [
         name: 'Section B',
         floor: 1,
         computers: [
-            { id: 'pc-22', name: 'PC-22', status: 'Occupied', user: 'Alice' },
+            { id: 'pc-22', name: 'PC-22', status: 'Occupied' },
             { id: 'pc-23', name: 'PC-23', status: 'Available' },
             { id: 'pc-24', name: 'PC-24', status: 'Available' },
-            { id: 'pc-25', name: 'PC-25', status: 'Occupied', user: 'Bob' },
+            { id: 'pc-25', name: 'PC-25', status: 'Occupied' },
             { id: 'pc-26', name: 'PC-26', status: 'Available' },
         ],
     }

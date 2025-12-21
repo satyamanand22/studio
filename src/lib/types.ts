@@ -45,7 +45,6 @@ export interface Computer {
   id: string;
   name: string;
   status: ComputerStatus;
-  user?: string;
   awayUntil?: number; // Timestamp
 }
 
