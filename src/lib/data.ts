@@ -1,10 +1,11 @@
+
 import type { Lab, MenuItem, NavItem, ComputerSection } from './types';
 import { Book, UtensilsCrossed, Map, Bell, Settings } from 'lucide-react';
 
 export const navItems: NavItem[] = [
   { href: "/occufind", icon: Book, label: "OccuFind" },
   { href: "/cafeteria", icon: UtensilsCrossed, label: "Cafeteria" },
-  { href: "/map", icon: Map, label: "Map" },
+  { href: "/map", icon: Map, label: "Lost and Found" },
   { href: "/notifications", icon: Bell, label: "Notifications" },
   { href: "/settings", icon: Settings, label: "Settings" },
 ];
