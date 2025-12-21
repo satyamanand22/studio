@@ -62,10 +62,32 @@ export const mockHistoricalCafeteriaData = JSON.stringify([
 export const mockUserHistoricalData = JSON.stringify([
     {"visitTime": "2023-10-26T13:30:00Z", "duration": 25},
     {"visitTime": "2023-10-27T13:45:00Z", "duration": 30},
-    {"visitTime": "20Lg:p-8 overflow-auto">
-          {children}
-        </main>
-      </div>
-    </div>
-  );
-}
+    {"visitTime": "2023-10-28T13:00:00Z", "duration": 20}
+]);
+
+export const mockComputerSections: ComputerSection[] = [
+    {
+        id: 'section-a',
+        name: 'Section A',
+        floor: 1,
+        computers: [
+            { id: 'pc-01', name: 'PC-01', status: 'Available' },
+            { id: 'pc-02', name: 'PC-02', status: 'Occupied', user: 'Jane Doe' },
+            { id: 'pc-03', name: 'PC-03', status: 'Available' },
+            { id: 'pc-04', name: 'PC-04', status: 'Away', user: 'John Smith', awayUntil: Date.now() + 10 * 60 * 1000 },
+            { id: 'pc-05', name: 'PC-05', status: 'Available' },
+        ],
+    },
+    {
+        id: 'section-b',
+        name: 'Section B',
+        floor: 1,
+        computers: [
+            { id: 'pc-06', name: 'PC-06', status: 'Occupied', user: 'Alice' },
+            { id: 'pc-07', name: 'PC-07', status: 'Available' },
+            { id: 'pc-08', name: 'PC-08', status: 'Available' },
+            { id: 'pc-09', name: 'PC-09', status: 'Occupied', user: 'Bob' },
+            { id: 'pc-10', name: 'PC-10', status: 'Available' },
+        ],
+    }
+]
