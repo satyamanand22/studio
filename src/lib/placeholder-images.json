@@ -19,12 +19,6 @@
       "imageHint": "library building"
     },
     {
-      "id": "lab-3",
-      "description": "A collaborative study room with a whiteboard.",
-      "imageUrl": "https://images.unsplash.com/photo-1457276587196-a9d53d84c58b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdHVkeSUyMHJvb218ZW58MHx8fHwxNzY2MTYxMDgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "study room"
-    },
-    {
       "id": "burger",
       "description": "A delicious looking cheeseburger with fries.",
       "imageUrl": "https://images.unsplash.com/photo-1676515725176-275bb09cc59b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaGVlc2VidXJnZXIlMjBmcmllc3xlbnwwfHx8fDE3NjYyMDYwMjd8MA&ixlib=rb-4.1.0&q=80&w=1080",

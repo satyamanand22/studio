@@ -38,19 +38,6 @@ export const mockLabs: Lab[] = [
     availableRooms: 9,
     imageId: 'lab-2'
   },
-  {
-    id: 'lab-3',
-    name: 'Engineering Study Hub',
-    type: 'Lab',
-    occupancy: 20,
-    totalSeats: 50,
-    availableSeats: 40,
-    totalComputers: 20,
-    availableComputers: 18,
-    totalRooms: 5,
-    availableRooms: 4,
-    imageId: 'lab-3'
-  },
 ];
 
 export const mockMenu: MenuItem[] = [
