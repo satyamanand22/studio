@@ -15,7 +15,7 @@ interface ComputerCardProps {
 }
 
 const statusStyles = {
-    Available: 'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/50 dark:text-yellow-300 dark:border-yellow-700',
+    Available: 'bg-yellow-300 text-yellow-800 border-yellow-400 dark:bg-yellow-700 dark:text-yellow-100 dark:border-yellow-600',
     Occupied: 'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/50 dark:text-red-300 dark:border-red-700',
     Away: 'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/50 dark:text-yellow-300 dark:border-yellow-700',
 };
@@ -72,4 +72,3 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
         </Card>
     );
 }
-
