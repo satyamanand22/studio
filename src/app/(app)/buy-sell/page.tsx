@@ -88,21 +88,25 @@ export default function BuyAndSellPage() {
                                             <Input id="sellerName" name="sellerName" placeholder="e.g., Alex Doe" required />
                                         </div>
                                         <div className="space-y-2">
-                                            <Label htmlFor="sellerContact">Contact Number</Label>
-                                            <Input 
-                                                id="sellerContact" 
-                                                name="sellerContact" 
-                                                type="tel"
-                                                pattern="[0-9]{10}"
-                                                maxLength={10}
-                                                placeholder="e.g., 9876543210" 
-                                                required 
-                                                onInput={(e) => {
-                                                    const target = e.target as HTMLInputElement;
-                                                    target.value = target.value.replace(/[^0-9]/g, '');
-                                                }}
-                                            />
+                                            <Label htmlFor="department">Department and Branch</Label>
+                                            <Input id="department" name="department" placeholder="e.g., CSE" required />
                                         </div>
+                                    </div>
+                                     <div className="space-y-2">
+                                        <Label htmlFor="sellerContact">Contact Number</Label>
+                                        <Input 
+                                            id="sellerContact" 
+                                            name="sellerContact" 
+                                            type="tel"
+                                            pattern="[0-9]{10}"
+                                            maxLength={10}
+                                            placeholder="e.g., 9876543210" 
+                                            required 
+                                            onInput={(e) => {
+                                                const target = e.target as HTMLInputElement;
+                                                target.value = target.value.replace(/[^0-9]/g, '');
+                                            }}
+                                        />
                                     </div>
                                     <Button type="submit" className="w-full">
                                         <PlusCircle className="mr-2 h-4 w-4" />
