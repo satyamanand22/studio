@@ -68,17 +68,5 @@ export const mockComputerSections: ComputerSection[] = [
             { id: 'pc-20', name: 'PC-20', status: 'Available' },
             { id: 'pc-21', name: 'PC-21', status: 'Occupied' },
         ],
-    },
-    {
-        id: 'section-b',
-        name: 'Section B',
-        floor: 1,
-        computers: [
-            { id: 'pc-22', name: 'PC-22', status: 'Occupied' },
-            { id: 'pc-23', name: 'PC-23', status: 'Available' },
-            { id: 'pc-24', name: 'PC-24', status: 'Available' },
-            { id: 'pc-25', name: 'PC-25', status: 'Occupied' },
-            { id: 'pc-26', name: 'PC-26', status: 'Available' },
-        ],
     }
 ]
