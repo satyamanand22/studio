@@ -17,7 +17,7 @@ interface ComputerCardProps {
 const statusStyles = {
     Available: 'bg-yellow-300 text-yellow-800 border-yellow-400 dark:bg-yellow-700 dark:text-yellow-100 dark:border-yellow-600',
     Occupied: 'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/50 dark:text-red-300 dark:border-red-700',
-    Away: 'bg-purple-400 text-purple-900 border-purple-500 dark:bg-purple-700 dark:text-purple-100 dark:border-purple-600',
+    Away: 'bg-purple-500 text-purple-100 border-purple-600 dark:bg-purple-800 dark:text-purple-100 dark:border-purple-700',
 };
 
 const statusDotStyles = {
