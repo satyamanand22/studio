@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 import { mockLabs } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { OccupancyLevel } from '@/lib/types';
+import type { OccupancyLevel } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 
@@ -31,12 +31,6 @@ function getOccupancyLevel(percentage: number): OccupancyLevel {
   if (percentage < 75) return 'medium';
   return 'high';
 }
-
-const levelColors: Record<OccupancyLevel, string> = {
-  low: 'bg-green-500',
-  medium: 'bg-yellow-500',
-  high: 'bg-red-500',
-};
 
 const levelText: Record<OccupancyLevel, string> = {
   low: 'text-green-700 dark:text-green-300',
