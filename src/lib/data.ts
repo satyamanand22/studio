@@ -13,7 +13,7 @@ export const navItems: NavItem[] = [
 export const mockLabs: Lab[] = [
   {
     id: 'lab-1',
-    name: 'Main Computer Lab',
+    name: 'COMPUTER LAB',
     type: 'Lab',
     occupancy: 78,
     totalSeats: 100,
