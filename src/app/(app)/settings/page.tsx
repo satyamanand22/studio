@@ -30,23 +30,6 @@ export default function SettingsPage() {
 
             <Card>
                 <CardHeader>
-                    <CardTitle>API Keys</CardTitle>
-                    <CardDescription>Manage your API keys for third-party services.</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="gemini-api-key">Gemini API Key</Label>
-                        <Input id="gemini-api-key" type="password" placeholder="Enter your Google AI API Key" />
-                        <p className="text-xs text-muted-foreground">
-                            Your API key is stored securely and used for AI-powered features.
-                        </p>
-                    </div>
-                    <Button>Save API Key</Button>
-                </CardContent>
-            </Card>
-
-            <Card>
-                <CardHeader>
                     <CardTitle>Notifications</CardTitle>
                     <CardDescription>Choose what you want to be notified about.</CardDescription>
                 </CardHeader>
