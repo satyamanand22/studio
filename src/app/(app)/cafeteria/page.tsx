@@ -138,12 +138,14 @@ export default function CafeteriaPage() {
     const doc = new jsPDF();
     const gst = total * 0.05; // 5% GST
     const finalAmount = total + gst;
+    const orderId = Math.floor(10000 + Math.random() * 90000);
 
     doc.setFontSize(20);
     doc.text("GGV PULSE - Order Invoice", 14, 22);
     doc.setFontSize(12);
     doc.text(`Student Name: ${name}`, 14, 32);
     doc.text(`Order Date: ${new Date().toLocaleDateString()}`, 14, 39);
+    doc.text(`Order ID: #${orderId}`, 14, 46);
 
     const tableBody = orderItems.map(item => [
         item.name,
@@ -152,7 +154,7 @@ export default function CafeteriaPage() {
     ]);
 
     doc.autoTable({
-      startY: 50,
+      startY: 55,
       head: [['Item', 'Quantity', 'Unit Price']],
       body: tableBody,
       theme: 'grid',
