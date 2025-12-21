@@ -57,14 +57,19 @@ export function AuthForm() {
     try {
       if (isSignUp) {
         await signUp(values.name!, values.email, values.password, values.role!);
+        toast({
+          title: "Account created successfully",
+          description: "Please check your email to verify your account.",
+        });
+        // The signUp function will handle redirection
       } else {
         await signIn(values.email, values.password);
+        toast({
+          title: "Logged in successfully",
+          description: "Redirecting to your dashboard...",
+        });
+        router.push("/dashboard");
       }
-      toast({
-        title: isSignUp ? "Account created" : "Logged in successfully",
-        description: "Redirecting to your dashboard...",
-      });
-      router.push("/dashboard");
     } catch (error) {
       toast({
         variant: "destructive",

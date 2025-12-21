@@ -12,6 +12,7 @@ interface AuthContextType {
   signUp: (name: string, email: string, pass: string, role: 'student' | 'admin') => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
+  verifyAndLogin: (email: string) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -43,6 +44,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     setLoading(false);
     if (foundUser) {
+      if (!foundUser.isVerified) {
+        throw new Error('Account not verified. Please check your email for the OTP.');
+      }
       localStorage.setItem(LOGGED_IN_USER_KEY, JSON.stringify(foundUser));
       setUser(foundUser);
     } else {
@@ -62,23 +66,45 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       throw new Error('An account with this email already exists.');
     }
 
-    const newUser: User & { password?: string } = {
+    const newUser: User & { password?: string; isVerified?: boolean; } = {
       uid: `mock-uid-${Math.random()}`,
       email,
       displayName: name,
       photoURL: `https://i.pravatar.cc/150?u=${email}`,
       role,
       password: pass,
+      isVerified: false,
     };
     
     users.push(newUser);
     localStorage.setItem(USERS_DB_KEY, JSON.stringify(users));
     
-    // Automatically sign in the user after successful sign up
-    const { password, ...userToStore } = newUser;
-    localStorage.setItem(LOGGED_IN_USER_KEY, JSON.stringify(userToStore));
-    setUser(userToStore);
     setLoading(false);
+    // Don't log in, redirect to OTP page
+    router.push(`/verify-otp?email=${encodeURIComponent(email)}`);
+  };
+
+  const verifyAndLogin = async (email: string) => {
+    const usersStr = localStorage.getItem(USERS_DB_KEY);
+    const users = usersStr ? JSON.parse(usersStr) : [];
+    
+    let foundUser: (User & { password?: string; isVerified?: boolean; }) | undefined;
+    const updatedUsers = users.map((u: any) => {
+      if (u.email === email) {
+        foundUser = { ...u, isVerified: true };
+        return foundUser;
+      }
+      return u;
+    });
+
+    if (foundUser) {
+      localStorage.setItem(USERS_DB_KEY, JSON.stringify(updatedUsers));
+      const { password, ...userToStore } = foundUser;
+      localStorage.setItem(LOGGED_IN_USER_KEY, JSON.stringify(userToStore));
+      setUser(userToStore);
+    } else {
+      throw new Error("User not found during verification.");
+    }
   };
 
   const signInWithGoogle = async () => {
@@ -106,7 +132,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signUp, signInWithGoogle, signOut }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signUp, signInWithGoogle, signOut, verifyAndLogin }}>
       {children}
     </AuthContext.Provider>
   );
