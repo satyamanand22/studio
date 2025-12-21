@@ -3,9 +3,10 @@
 
 import { useState, useEffect } from 'react';
 import type { Computer as ComputerType } from '@/lib/types';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Computer as ComputerIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Computer as ComputerIcon, User, LogOut, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
 
@@ -35,7 +36,7 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
             const updateTimer = () => {
                 const now = Date.now();
                 const remaining = Math.max(0, computer.awayUntil! - now);
-                setTimeLeft(Math.ceil(remaining / 1000 / 60));
+                setTimeLeft(remaining);
                 if (remaining === 0) {
                     onUpdate({ ...computer, status: 'Available', user: undefined, awayUntil: undefined });
                 }
@@ -49,10 +50,34 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
         }
     }, [computer, onUpdate]);
 
+    const handleOccupy = () => {
+        if (user) {
+            onUpdate({ ...computer, status: 'Occupied', user: user.displayName || 'Unnamed User' });
+        }
+    };
+
+    const handleRelease = () => {
+        onUpdate({ ...computer, status: 'Available', user: undefined });
+    };
+
+    const handleMarkAway = () => {
+        const awayDuration = 10 * 60 * 1000; // 10 minutes
+        onUpdate({ ...computer, status: 'Away', awayUntil: Date.now() + awayDuration });
+    };
+
+    const formatTime = (ms: number | null) => {
+        if (ms === null) return '00:00';
+        const totalSeconds = Math.ceil(ms / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    };
+
+    const isCurrentUser = user && user.displayName === computer.user;
 
     return (
-        <Card>
-            <CardContent className="p-4">
+        <Card className="flex flex-col">
+            <CardContent className="p-4 flex-1">
                 <div className="flex justify-between items-center mb-2">
                     <p className="font-semibold text-sm">{computer.name}</p>
                     <ComputerIcon className="h-5 w-5 text-muted-foreground" />
@@ -66,13 +91,51 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
                          )}></span>
                         {computer.status}
                     </Badge>
-                    {computer.user && (
-                         <p className="truncate">
-                           User: {computer.user}
+                     {computer.user && (
+                         <p className="truncate flex items-center gap-1">
+                           <User className="h-3 w-3" /> {computer.user}
                         </p>
+                    )}
+                    {computer.status === 'Away' && timeLeft !== null && (
+                         <p className="truncate font-medium flex items-center gap-1">
+                            <Clock className="h-3 w-3" /> Back in: {formatTime(timeLeft)}
+                         </p>
                     )}
                 </div>
             </CardContent>
+            <CardFooter className="p-2 border-t">
+                <div className="w-full">
+                    {computer.status === 'Available' && (
+                        <Button size="sm" className="w-full" onClick={handleOccupy}>
+                            <User className="mr-2 h-4 w-4" />
+                            Occupy
+                        </Button>
+                    )}
+                    {computer.status === 'Occupied' && isCurrentUser && (
+                        <div className="flex gap-2">
+                            <Button size="sm" variant="outline" className="w-full" onClick={handleMarkAway}>
+                                <Clock className="mr-2 h-4 w-4" />
+                                Mark Away
+                            </Button>
+                            <Button size="sm" variant="destructive" className="w-full" onClick={handleRelease}>
+                                <LogOut className="mr-2 h-4 w-4" />
+                                Release
+                            </Button>
+                        </div>
+                    )}
+                    {computer.status === 'Occupied' && !isCurrentUser && (
+                        <p className="text-xs text-center text-muted-foreground">Occupied by another user</p>
+                    )}
+                     {computer.status === 'Away' && isCurrentUser && (
+                        <Button size="sm" className="w-full" onClick={handleRelease}>
+                            I'm Back
+                        </Button>
+                    )}
+                     {computer.status === 'Away' && !isCurrentUser && (
+                        <p className="text-xs text-center text-muted-foreground">Temporarily away</p>
+                    )}
+                </div>
+            </CardFooter>
         </Card>
     );
 }
