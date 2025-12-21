@@ -105,22 +105,25 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
             </CardContent>
             <CardFooter className="p-2 border-t h-[44px]">
                 <div className="w-full">
-                    {computer.status === 'Occupied' && isCurrentUser && (
+                    {computer.status === 'Occupied' && (
                         <div className="flex gap-2">
-                            <Button size="sm" variant="outline" className="w-full" onClick={handleMarkAway}>
-                                <Clock className="mr-2 h-4 w-4" />
-                                Mark Away
-                            </Button>
-                             <Button size="sm" variant="destructive" className="w-full" onClick={handleRelease}>
-                                <LogOut className="mr-2 h-4 w-4" />
-                                Release
-                            </Button>
+                            {isCurrentUser ? (
+                                <>
+                                    <Button size="sm" variant="outline" className="w-full" onClick={handleMarkAway}>
+                                        <Clock className="mr-2 h-4 w-4" />
+                                        Mark Away
+                                    </Button>
+                                    <Button size="sm" variant="destructive" className="w-full" onClick={handleRelease}>
+                                        <LogOut className="mr-2 h-4 w-4" />
+                                        Release
+                                    </Button>
+                                </>
+                            ) : (
+                                <Button variant="ghost" size="sm" className="w-full text-xs text-center text-muted-foreground" onClick={handleMarkAway}>
+                                   MARK AS AWAY
+                                </Button>
+                            )}
                         </div>
-                    )}
-                    {computer.status === 'Occupied' && !isCurrentUser && (
-                        <Button variant="ghost" size="sm" className="w-full text-xs text-center text-muted-foreground" onClick={handleMarkAway}>
-                           MARK AS AWAY
-                        </Button>
                     )}
                     {computer.status === 'Away' && (
                          <p className="text-xs text-center text-muted-foreground">User is temporarily away.</p>
