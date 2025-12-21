@@ -19,18 +19,18 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   if (loading || !user) {
     return (
-      <div className="flex h-screen items-center justify-center">
+      <div className="flex h-screen items-center justify-center bg-background">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen w-full flex">
+    <div className="min-h-screen w-full flex bg-background">
       <SidebarNav />
       <div className="flex flex-col w-full">
         <Header />
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 bg-background overflow-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-auto">
           {children}
         </main>
       </div>

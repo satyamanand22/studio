@@ -20,7 +20,7 @@ const config = {
     extend: {
       fontFamily: {
         body: ["var(--font-body)", "sans-serif"],
-        headline: ["var(--font-body)", "sans-serif"],
+        headline: ["var(--font-headline)", "sans-serif"],
         code: ["var(--font-code)", "monospace"],
       },
       colors: {
@@ -77,6 +77,12 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      boxShadow: {
+        'soft-sm': '0 2px 4px hsl(var(--foreground) / 0.02), 0 1px 2px hsl(var(--foreground) / 0.04)',
+        'soft': '0 4px 8px hsl(var(--foreground) / 0.02), 0 2px 4px hsl(var(--foreground) / 0.04)',
+        'soft-md': '0 8px 16px hsl(var(--foreground) / 0.02), 0 4px 8px hsl(var(--foreground) / 0.04)',
+        'soft-lg': '0 16px 32px hsl(var(--foreground) / 0.02), 0 8px 16px hsl(var(--foreground) / 0.04)',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

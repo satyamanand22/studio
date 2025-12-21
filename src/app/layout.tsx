@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Source_Code_Pro } from "next/font/google";
+import { Inter, Lexend } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-provider";
 import { Toaster } from "@/components/ui/toaster";
@@ -10,9 +10,10 @@ const fontBody = Inter({
   variable: "--font-body",
 });
 
-const fontCode = Source_Code_Pro({
+const fontHeadline = Lexend({
   subsets: ["latin"],
-  variable: "--font-code",
+  variable: "--font-headline",
+  weight: "700"
 });
 
 export const metadata: Metadata = {
@@ -27,13 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
+       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lexend:wght@700&display=swap" rel="stylesheet" />
       </head>
-      <body className={cn("font-body antialiased", fontBody.variable, fontCode.variable)}>
+      <body className={cn("font-body antialiased", fontBody.variable, fontHeadline.variable)}>
             <AuthProvider>
             {children}
             <Toaster />
