@@ -193,7 +193,7 @@ export default function CafeteriaPage() {
     <div className="container mx-auto">
       <div className="grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-8">
-          <Card className="overflow-hidden">
+          <Card className="overflow-hidden animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             <div className="grid md:grid-cols-2">
               <div className="p-6 flex flex-col">
                 <CardHeader className="p-0 mb-4">
@@ -312,12 +312,12 @@ export default function CafeteriaPage() {
             </div>
           </Card>
 
-          <div>
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <h2 className="text-2xl font-bold tracking-tight mb-4 font-headline">
               University Cafeteria
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-              {mockMenu.map((item) => {
+              {mockMenu.map((item, index) => {
                 const orderItem = order.find(o => o.id === item.id);
                 const quantity = orderItem ? orderItem.quantity : 0;
                 return (
@@ -327,6 +327,8 @@ export default function CafeteriaPage() {
                     onAddToCart={handleAddToCart}
                     onRemoveFromCart={handleRemoveFromCart}
                     quantity={quantity}
+                    style={{ animationDelay: `${0.3 + index * 0.05}s` }}
+                    className="animate-fade-in-up"
                   />
                 )
               })}
@@ -452,9 +454,9 @@ export default function CafeteriaPage() {
           </div>
         </div>
         <div className="space-y-6">
-          <QueuePrediction />
+          <QueuePrediction className="animate-fade-in-up" style={{ animationDelay: '0.2s' }} />
           <Separator />
-          <TimeRecommendation />
+          <TimeRecommendation className="animate-fade-in-up" style={{ animationDelay: '0.3s' }} />
         </div>
       </div>
     </div>

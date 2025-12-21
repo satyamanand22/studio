@@ -16,6 +16,7 @@ import { Armchair, Computer, LocateFixed, Users } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import React from "react";
 
 function getOccupancyLevel(percentage: number): OccupancyLevel {
   if (percentage < 40) return "low";
@@ -35,7 +36,11 @@ const levelText: Record<OccupancyLevel, string> = {
   high: "text-red-700 dark:text-red-300",
 };
 
-export function LabOccupancyCard({ lab }: { lab: Lab }) {
+interface LabOccupancyCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  lab: Lab;
+}
+
+export function LabOccupancyCard({ lab, className, ...props }: LabOccupancyCardProps) {
   const { toast } = useToast();
   const level = getOccupancyLevel(lab.occupancy);
   const labImage = PlaceHolderImages.find((img) => img.id === lab.imageId);
@@ -48,7 +53,7 @@ export function LabOccupancyCard({ lab }: { lab: Lab }) {
   };
 
   return (
-    <Card className="flex flex-col">
+    <Card className={cn("flex flex-col", className)} {...props}>
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
             {labImage && (

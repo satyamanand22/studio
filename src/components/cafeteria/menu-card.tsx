@@ -6,19 +6,20 @@ import type { MenuItem } from "@/lib/types";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
 import { Minus, Plus, PlusCircle } from "lucide-react";
+import React from "react";
 
-interface MenuCardProps {
+interface MenuCardProps extends React.HTMLAttributes<HTMLDivElement> {
     item: MenuItem;
     onAddToCart: (item: MenuItem) => void;
     onRemoveFromCart: (itemId: string) => void;
     quantity: number;
 }
 
-export function MenuCard({ item, onAddToCart, onRemoveFromCart, quantity }: MenuCardProps) {
+export function MenuCard({ item, onAddToCart, onRemoveFromCart, quantity, className, ...props }: MenuCardProps) {
   const itemImage = PlaceHolderImages.find(img => img.id === item.imageId);
 
   return (
-    <Card className="flex flex-col">
+    <Card className={cn("flex flex-col", className)} {...props}>
       <CardHeader className="p-0 relative">
         {itemImage && (
             <Image

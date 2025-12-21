@@ -14,8 +14,10 @@ import { recommendCafeteriaTimes, RecommendCafeteriaTimesOutput } from "@/ai/flo
 import { mockUserHistoricalData } from "@/lib/data";
 import { Loader2, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import React from "react";
+import { cn } from "@/lib/utils";
 
-export default function TimeRecommendation() {
+export default function TimeRecommendation({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const [recommendation, setRecommendation] = useState<RecommendCafeteriaTimesOutput | null>(null);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
@@ -40,7 +42,7 @@ export default function TimeRecommendation() {
   };
 
   return (
-    <Card>
+    <Card className={cn(className)} {...props}>
       <CardHeader>
         <CardTitle>Personalized Recommendations</CardTitle>
         <CardDescription>

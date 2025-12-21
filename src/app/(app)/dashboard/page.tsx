@@ -5,8 +5,13 @@ export default function DashboardPage() {
   return (
     <div className="container mx-auto">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {mockLabs.map((lab) => (
-          <LabOccupancyCard key={lab.id} lab={lab} />
+        {mockLabs.map((lab, index) => (
+          <LabOccupancyCard 
+            key={lab.id} 
+            lab={lab} 
+            className="animate-fade-in-up"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          />
         ))}
       </div>
     </div>

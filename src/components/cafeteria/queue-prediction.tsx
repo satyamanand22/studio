@@ -16,8 +16,10 @@ import { Loader2, Timer, Users } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import React from "react";
+import { cn } from "@/lib/utils";
 
-export default function QueuePrediction() {
+export default function QueuePrediction({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const [prediction, setPrediction] = useState<PredictCafeteriaQueueLengthOutput | null>(null);
   const [loading, setLoading] = useState(false);
   const [orderVolume, setOrderVolume] = useState([50]);
@@ -44,7 +46,7 @@ export default function QueuePrediction() {
   };
 
   return (
-    <Card>
+    <Card className={cn(className)} {...props}>
       <CardHeader>
         <CardTitle>Cafeteria Queue Prediction</CardTitle>
         <CardDescription>
