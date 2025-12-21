@@ -8,8 +8,15 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { navItems } from "@/lib/data";
 import { GgvLogo } from "../icons/ggv-logo";
 import { UserNav } from "./user-nav";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
+  const currentNavItem = navItems.find(item => pathname.startsWith(item.href));
+  const pageTitle = currentNavItem ? currentNavItem.label : "Dashboard";
+  const pageSubtitle = currentNavItem ? `Manage your ${currentNavItem.label.toLowerCase()}` : "Welcome back";
+
+
   return (
     <header className="flex h-16 items-center gap-4 border-b bg-background/95 backdrop-blur-sm px-4 md:px-6 sticky top-0 z-30">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -66,8 +73,8 @@ export default function Header() {
         </Sheet>
         <div className="flex w-full items-center justify-between">
             <div className="flex flex-col">
-                <h1 className="text-lg font-semibold md:text-xl font-headline">OCCUFIND</h1>
-                <p className="text-xs text-muted-foreground hidden md:block">(A simple way to access library)</p>
+                <h1 className="text-lg font-semibold md:text-xl font-headline uppercase">{pageTitle}</h1>
+                <p className="text-xs text-muted-foreground hidden md:block">{pageSubtitle}</p>
             </div>
             <UserNav />
         </div>
