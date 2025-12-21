@@ -6,7 +6,7 @@ import type { Computer as ComputerType } from '@/lib/types';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Monitor, Clock } from 'lucide-react';
+import { Monitor, Clock, Undo2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ComputerCardProps {
@@ -59,6 +59,10 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
         const awayUntil = Date.now() + 10 * 60 * 1000;
         onUpdate({ ...computer, status: 'Away', awayUntil });
     };
+
+    const handleImBack = () => {
+        onUpdate({ ...computer, status: 'Occupied', awayUntil: undefined });
+    };
     
     const formatTime = (seconds: number) => {
         const mins = Math.floor(seconds / 60);
@@ -97,7 +101,10 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
                         </Button>
                     )}
                     {computer.status === 'Away' && (
-                         <p className="text-xs text-center text-muted-foreground">User is temporarily away.</p>
+                        <Button variant="outline" size="sm" className="w-full text-xs" onClick={handleImBack}>
+                            <Undo2 className="mr-2 h-3 w-3" />
+                            I'm Back
+                        </Button>
                     )}
                 </div>
             </CardFooter>
