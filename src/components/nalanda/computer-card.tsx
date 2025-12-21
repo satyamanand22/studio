@@ -17,13 +17,13 @@ interface ComputerCardProps {
 const statusStyles = {
     Available: 'bg-yellow-300 text-yellow-800 border-yellow-400 dark:bg-yellow-700 dark:text-yellow-100 dark:border-yellow-600',
     Occupied: 'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/50 dark:text-red-300 dark:border-red-700',
-    Away: 'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/50 dark:text-yellow-300 dark:border-yellow-700',
+    Away: 'bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900/50 dark:text-purple-300 dark:border-purple-700',
 };
 
 const statusDotStyles = {
     Available: 'bg-green-500',
     Occupied: 'bg-red-500',
-    Away: 'bg-yellow-500',
+    Away: 'bg-purple-500',
 }
 
 export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
@@ -62,7 +62,7 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
                          <span className={cn(
                             "h-2 w-2 rounded-full mr-2", 
                             statusDotStyles[computer.status],
-                            computer.status === 'Available' && 'animate-pulse'
+                            (computer.status === 'Available' || computer.status === 'Occupied') && 'animate-pulse'
                          )}></span>
                         {computer.status}
                     </Badge>
@@ -76,4 +76,3 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
         </Card>
     );
 }
-
