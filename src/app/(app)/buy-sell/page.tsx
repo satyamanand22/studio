@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { DollarSign, List, PlusCircle, ShoppingBag } from 'lucide-react';
+import { DollarSign, List, PlusCircle, Search, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 
@@ -41,6 +41,13 @@ export default function BuyAndSellPage() {
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value="available" className="mt-4">
+                        <div className="relative mb-4">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                            <Input
+                                placeholder="Search for items..."
+                                className="pl-10 w-full"
+                            />
+                        </div>
                         {availableItems.length === 0 ? (
                              <div className="h-[60vh] border-2 border-dashed border-border rounded-lg flex items-center justify-center flex-col gap-4">
                                 <ShoppingBag className="h-12 w-12 text-muted-foreground" />
