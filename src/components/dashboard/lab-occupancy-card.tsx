@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -12,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import type { Lab, OccupancyLevel } from "@/lib/types";
-import { Armchair, Computer, LocateFixed, Users } from "lucide-react";
+import { Armchair, Computer, LocateFixed, Users, ArrowRight } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
@@ -51,6 +52,8 @@ export function LabOccupancyCard({ lab, className, ...props }: LabOccupancyCardP
       description: "We will notify you shortly when space is available.",
     });
   };
+
+  const isNalandaLibrary = lab.name === 'Nalanda Central Library';
 
   return (
     <Card className={cn("flex flex-col", className)} {...props}>
@@ -108,8 +111,17 @@ export function LabOccupancyCard({ lab, className, ...props }: LabOccupancyCardP
       <CardFooter className="flex gap-2">
         <Button className="w-full" onClick={handleNotifyClick}>Notify Me</Button>
         <Button variant="secondary" className="w-full">
-            <LocateFixed className="mr-2 h-4 w-4" />
-            Find on map
+            {isNalandaLibrary ? (
+              <>
+                More
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </>
+            ) : (
+              <>
+                <LocateFixed className="mr-2 h-4 w-4" />
+                Find on map
+              </>
+            )}
         </Button>
       </CardFooter>
     </Card>
