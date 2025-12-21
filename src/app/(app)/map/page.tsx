@@ -19,6 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export default function MapPage() {
     const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
@@ -29,11 +30,11 @@ export default function MapPage() {
         const formData = new FormData(event.currentTarget);
         const data = Object.fromEntries(formData.entries());
         
-        console.log("Lost Item Report:", data);
+        console.log("Item Report:", data);
 
         toast({
             title: "Report Submitted",
-            description: "Thank you for reporting the lost item.",
+            description: "Thank you for submitting your report.",
         });
         
         setIsReportDialogOpen(false);
@@ -65,6 +66,19 @@ export default function MapPage() {
                                 </DialogDescription>
                             </DialogHeader>
                             <div className="grid gap-4 py-4 max-h-[70vh] overflow-y-auto pr-6">
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label className="text-right">Type</Label>
+                                    <RadioGroup name="reportType" defaultValue="lost" className="col-span-3 flex gap-4">
+                                        <div className="flex items-center space-x-2">
+                                            <RadioGroupItem value="lost" id="r1" />
+                                            <Label htmlFor="r1">Lost</Label>
+                                        </div>
+                                        <div className="flex items-center space-x-2">
+                                            <RadioGroupItem value="found" id="r2" />
+                                            <Label htmlFor="r2">Found</Label>
+                                        </div>
+                                    </RadioGroup>
+                                </div>
                                 <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="name" className="text-right">
                                         Name
