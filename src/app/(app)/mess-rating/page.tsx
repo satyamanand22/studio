@@ -40,7 +40,7 @@ export default function MessRatingPage() {
                                 <SelectItem value="dr-br-ambedkar">Dr. B. R. Ambedkar (Boys')</SelectItem>
                                 <SelectItem value="veer-savarkar">Veer Savarkar (Boys')</SelectItem>
                                 <SelectItem value="raj-mohini-devi">Raj Mohini Devi (Girls')</SelectItem>
-                                <SelectItem value="minimata">Minimata (Girls')</Bilikmata>
+                                <SelectItem value="minimata">Minimata (Girls')</SelectItem>
                                 <SelectItem value="bilasa-devi">Bilasa Devi (Girls')</SelectItem>
                             </SelectContent>
                         </Select>
