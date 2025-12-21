@@ -36,7 +36,7 @@ export default function BuyAndSellPage() {
                             Available Items
                         </TabsTrigger>
                         <TabsTrigger value="sell">
-                            <DollarSign className="mr-2 h-4 w-4" />
+                            <span className="mr-2">product</span>
                             Sell Items
                         </TabsTrigger>
                     </TabsList>
