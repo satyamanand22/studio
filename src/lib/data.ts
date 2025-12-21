@@ -11,34 +11,7 @@ export const navItems: NavItem[] = [
 ];
 
 
-export const mockLabs: Lab[] = [
-  {
-    id: 'lab-1',
-    name: 'Main Computer Lab',
-    type: 'Lab',
-    occupancy: 78,
-    totalSeats: 60,
-    availableSeats: 13,
-    totalComputers: 60,
-    availableComputers: 13,
-    totalRooms: 0,
-    availableRooms: 0,
-    imageId: 'lab-1'
-  },
-  {
-    id: 'lab-2',
-    name: 'Nalanda Central Library',
-    type: 'Library',
-    occupancy: 45,
-    totalSeats: 300,
-    availableSeats: 165,
-    totalComputers: 50,
-    availableComputers: 25,
-    totalRooms: 20,
-    availableRooms: 9,
-    imageId: 'lab-2'
-  },
-];
+export const mockLabs: Lab[] = [];
 
 export const mockMenu: MenuItem[] = [
     { id: 'item-1', name: 'Samosa', price: 8, category: 'Snacks', inStock: true, imageId: 'samosa' },
