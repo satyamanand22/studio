@@ -59,7 +59,11 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
                 </div>
                  <div className="text-xs text-muted-foreground space-y-1">
                     <Badge variant="outline" className={cn('w-full justify-center', statusStyles[computer.status])}>
-                         <span className={cn("h-2 w-2 rounded-full mr-2", statusDotStyles[computer.status])}></span>
+                         <span className={cn(
+                            "h-2 w-2 rounded-full mr-2", 
+                            statusDotStyles[computer.status],
+                            computer.status === 'Available' && 'animate-pulse'
+                         )}></span>
                         {computer.status}
                     </Badge>
                     {computer.user && (
@@ -72,3 +76,4 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
         </Card>
     );
 }
+
