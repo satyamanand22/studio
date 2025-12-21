@@ -25,6 +25,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import type { OccupancyLevel } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
+import { ComputerAvailabilityGrid } from '@/components/nalanda/computer-availability-grid';
 
 function getOccupancyLevel(percentage: number): OccupancyLevel {
   if (percentage < 40) return 'low';
@@ -46,10 +47,7 @@ export default function NalandaLibraryPage() {
   const libraryImage = PlaceHolderImages.find(
     (img) => img.id === libraryData?.imageId
   );
-  const floorPlanImage = PlaceHolderImages.find(
-    (img) => img.id === 'library-floor-plan'
-  );
-
+  
   if (!libraryData || !libraryImage) {
     return (
       <div className="container mx-auto text-center py-10">
@@ -144,27 +142,16 @@ export default function NalandaLibraryPage() {
                   <TabsTrigger value="floor3">3rd Floor</TabsTrigger>
                 </TabsList>
                 <TabsContent value="floor1" className="mt-4">
-                  <p className="text-muted-foreground mb-4">
-                    Circulation desk, new arrivals, and general reading area.
-                  </p>
-                  {floorPlanImage && (
-                    <Image
-                      src={floorPlanImage.imageUrl}
-                      alt="Floor plan for 1st floor"
-                      width={800}
-                      height={600}
-                      className="rounded-lg border"
-                    />
-                  )}
+                  <ComputerAvailabilityGrid floor={1} />
                 </TabsContent>
                 <TabsContent value="floor2" className="mt-4">
-                  <p className="text-muted-foreground">
-                    Reference section, journals, and quiet study zones.
+                   <p className="text-muted-foreground text-center py-8">
+                    Floor plan for 2nd floor coming soon.
                   </p>
                 </TabsContent>
                 <TabsContent value="floor3" className="mt-4">
-                  <p className="text-muted-foreground">
-                    Digital library, computer labs, and group study rooms.
+                  <p className="text-muted-foreground text-center py-8">
+                    Floor plan for 3rd floor coming soon.
                   </p>
                 </TabsContent>
               </Tabs>

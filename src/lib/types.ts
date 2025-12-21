@@ -38,3 +38,20 @@ export interface NavItem {
   icon: LucideIcon;
   label: string;
 }
+
+export type ComputerStatus = 'Available' | 'Occupied' | 'Away';
+
+export interface Computer {
+  id: string;
+  name: string;
+  status: ComputerStatus;
+  user?: string;
+  awayUntil?: number; // Timestamp
+}
+
+export interface ComputerSection {
+    id: string;
+    name: string;
+    floor: number;
+    computers: Computer[];
+}

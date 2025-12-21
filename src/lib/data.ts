@@ -1,4 +1,5 @@
-import type { Lab, MenuItem, NavItem } from './types';
+
+import type { Lab, MenuItem, NavItem, ComputerSection } from './types';
 import { Home, UtensilsCrossed, Map, Bell, Settings } from 'lucide-react';
 
 export const navItems: NavItem[] = [
@@ -76,3 +77,28 @@ export const mockUserHistoricalData = JSON.stringify([
     {"visitTime": "2023-10-27T13:45:00Z", "duration": 30},
     {"visitTime": "2023-10-28T12:00:00Z", "duration": 15},
 ]);
+
+export const mockComputerSections: ComputerSection[] = [
+    {
+        id: 'section-a',
+        name: 'Section A: Computer Lab',
+        floor: 1,
+        computers: [
+            { id: 'c-1-1', name: 'Computer 1', status: 'Occupied', user: 'Alex Doe' },
+            { id: 'c-1-2', name: 'Computer 2', status: 'Occupied', user: 'Jane Smith' },
+            { id: 'c-1-3', name: 'Computer 3', status: 'Available' },
+            { id: 'c-1-4', name: 'Computer 4', status: 'Occupied', user: 'John Doe' },
+            { id: 'c-1-5', name: 'Computer 5', status: 'Occupied', user: 'Emily White' },
+            { id: 'c-1-6', name: 'Computer 6', status: 'Occupied', user: 'Michael Brown' },
+            { id: 'c-1-7', name: 'Computer 7', status: 'Occupied', user: 'Sarah Green' },
+            { id: 'c-1-8', name: 'Computer 8', status: 'Available' },
+            { id: 'c-1-9', name: 'Computer 9', status: 'Occupied', user: 'David Black' },
+            { id: 'c-1-10', name: 'Computer 10', status: 'Available' },
+            { id: 'c-1-11', name: 'Computer 11', status: 'Available' },
+            { id: 'c-1-12', name: 'Computer 12', status: 'Available' },
+            { id: 'c-1-13', name: 'Computer 13', status: 'Occupied', user: 'Laura Blue' },
+            { id: 'c-1-14', name: 'Computer 14', status: 'Available' },
+            { id: 'c-1-15', name: 'Computer 15', status: 'Available' },
+        ]
+    }
+]
