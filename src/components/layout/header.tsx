@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -63,8 +64,12 @@ export default function Header() {
             </nav>
           </SheetContent>
         </Sheet>
-        <div className="flex w-full items-center justify-end gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <UserNav />
+        <div className="flex w-full items-center justify-between">
+            <div className="flex flex-col">
+                <h1 className="text-lg font-semibold md:text-xl font-headline">OCCUFIND</h1>
+                <p className="text-xs text-muted-foreground hidden md:block">(A simple way to access library)</p>
+            </div>
+            <UserNav />
         </div>
     </header>
   );
