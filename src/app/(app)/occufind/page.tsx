@@ -6,12 +6,12 @@ import { ComputerAvailabilityGrid } from '@/components/nalanda/computer-availabi
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { BookCheck, Library, Search } from 'lucide-react';
+import { BookCheck, BookX, Copy, Library, Search } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 export default function OccuFindPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResult, setSearchResult] = useState<{ rack: number; floor: number } | null>(null);
+  const [searchResult, setSearchResult] = useState<{ available: boolean; rack?: number; floor?: number, copies?: number } | null>(null);
   const { toast } = useToast();
 
   const handleBookSearch = () => {
@@ -24,10 +24,17 @@ export default function OccuFindPage() {
       setSearchResult(null);
       return;
     }
+    
     // Simulate finding a book
-    const randomRack = Math.floor(Math.random() * 50) + 1; // Racks 1-50
-    const randomFloor = Math.floor(Math.random() * 2) + 1; // Floor 1 or 2
-    setSearchResult({ rack: randomRack, floor: randomFloor });
+    const isAvailable = Math.random() < 0.7; // 70% chance of being available
+    if (isAvailable) {
+        const randomRack = Math.floor(Math.random() * 50) + 1; // Racks 1-50
+        const randomFloor = Math.floor(Math.random() * 2) + 1; // Floor 1 or 2
+        const randomCopies = Math.floor(Math.random() * 5) + 1; // 1-5 copies
+        setSearchResult({ available: true, rack: randomRack, floor: randomFloor, copies: randomCopies });
+    } else {
+        setSearchResult({ available: false });
+    }
   };
 
 
@@ -62,7 +69,7 @@ export default function OccuFindPage() {
                     <Button onClick={handleBookSearch}>Search</Button>
                 </div>
 
-                {searchResult && (
+                {searchResult && searchResult.available && (
                     <Card className="bg-secondary animate-fade-in-up">
                         <CardHeader>
                             <CardTitle className="text-xl flex items-center gap-2">
@@ -71,7 +78,7 @@ export default function OccuFindPage() {
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
-                           <div className="grid grid-cols-2 gap-4 text-center">
+                           <div className="grid grid-cols-3 gap-4 text-center">
                                 <div>
                                     <p className="text-3xl font-bold">{searchResult.floor}</p>
                                     <p className="text-sm text-muted-foreground">Floor No.</p>
@@ -80,7 +87,27 @@ export default function OccuFindPage() {
                                     <p className="text-3xl font-bold">{searchResult.rack}</p>
                                     <p className="text-sm text-muted-foreground">Rack No.</p>
                                 </div>
+                                <div>
+                                    <p className="text-3xl font-bold">{searchResult.copies}</p>
+                                    <p className="text-sm text-muted-foreground">Available Copies</p>
+                                </div>
                            </div>
+                        </CardContent>
+                    </Card>
+                )}
+                 {searchResult && !searchResult.available && (
+                     <Card className="bg-destructive/10 border-destructive/50 animate-fade-in-up">
+                        <CardHeader>
+                            <CardTitle className="text-xl flex items-center gap-2 text-destructive">
+                                <BookX className="h-6 w-6" />
+                                Book Unavailable
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent className="text-center">
+                            <p className="text-destructive-foreground">This book is currently unavailable.</p>
+                            <Button variant="link" className="mt-2 text-destructive-foreground" onClick={() => toast({ title: "Notification set!", description: "We'll notify you when the book is available."})}>
+                                Notify me when it is available
+                            </Button>
                         </CardContent>
                     </Card>
                 )}
