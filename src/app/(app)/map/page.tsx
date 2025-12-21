@@ -18,6 +18,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function MapPage() {
     const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
@@ -42,29 +43,25 @@ export default function MapPage() {
     <div className="container mx-auto space-y-8">
         <Card>
             <CardHeader>
-                <CardTitle>Lost and Found</CardTitle>
+                <CardTitle>Report an Item</CardTitle>
                 <CardDescription>
                     Lost something? Or found something that belongs to someone else? Report it here.
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col sm:flex-row gap-4">
-                <Button className="w-full">
-                    <Search className="mr-2 h-4 w-4" />
-                    Browse Found Items
-                </Button>
                 <Dialog open={isReportDialogOpen} onOpenChange={setIsReportDialogOpen}>
                     <DialogTrigger asChild>
-                        <Button variant="secondary" className="w-full">
+                        <Button className="w-full">
                             <PlusCircle className="mr-2 h-4 w-4" />
-                            Report a Lost Item
+                            Report a Lost or Found Item
                         </Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[480px]">
                          <form onSubmit={handleReportSubmit}>
                             <DialogHeader>
-                                <DialogTitle>Report a Lost Item</DialogTitle>
+                                <DialogTitle>Report an Item</DialogTitle>
                                 <DialogDescription>
-                                    Please provide as much detail as possible about the item you lost.
+                                    Please provide as much detail as possible about the item.
                                 </DialogDescription>
                             </DialogHeader>
                             <div className="grid gap-4 py-4 max-h-[70vh] overflow-y-auto pr-6">
@@ -117,6 +114,39 @@ export default function MapPage() {
                         </form>
                     </DialogContent>
                 </Dialog>
+            </CardContent>
+        </Card>
+
+        <Card>
+            <CardHeader>
+                <CardTitle>Browse Items</CardTitle>
+                <CardDescription>
+                    Check the lists below for lost and found items across campus.
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                 <Tabs defaultValue="lost">
+                    <TabsList className="grid w-full grid-cols-2">
+                        <TabsTrigger value="lost">
+                            <Search className="mr-2 h-4 w-4" />
+                            Lost Items
+                        </TabsTrigger>
+                        <TabsTrigger value="found">
+                            <PlusCircle className="mr-2 h-4 w-4" />
+                            Found Items
+                        </TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="lost" className="mt-4">
+                        <div className="border-2 border-dashed border-border rounded-lg p-8 text-center">
+                            <p className="text-muted-foreground">No lost items have been reported recently.</p>
+                        </div>
+                    </TabsContent>
+                    <TabsContent value="found" className="mt-4">
+                        <div className="border-2 border-dashed border-border rounded-lg p-8 text-center">
+                             <p className="text-muted-foreground">No found items have been reported recently.</p>
+                        </div>
+                    </TabsContent>
+                </Tabs>
             </CardContent>
         </Card>
     </div>
