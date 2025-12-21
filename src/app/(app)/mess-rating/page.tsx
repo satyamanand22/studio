@@ -35,10 +35,13 @@ export default function MessRatingPage() {
                                 <SelectValue placeholder="Select your hostel" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="boys-hostel-a">Boys Hostel - A</SelectItem>
-                                <SelectItem value="boys-hostel-b">Boys Hostel - B</SelectItem>
-                                <SelectItem value="girls-hostel-a">Girls Hostel - A</SelectItem>
-                                <SelectItem value="girls-hostel-b">Girls Hostel - B</SelectItem>
+                                <SelectItem value="swami-vivekanand">Swami Vivekanand (Boys')</SelectItem>
+                                <SelectItem value="shaheed-veer-narayan-singh">Shaheed Veer Narayan Singh (Boys')</SelectItem>
+                                <SelectItem value="dr-br-ambedkar">Dr. B. R. Ambedkar (Boys')</SelectItem>
+                                <SelectItem value="veer-savarkar">Veer Savarkar (Boys')</SelectItem>
+                                <SelectItem value="raj-mohini-devi">Raj Mohini Devi (Girls')</SelectItem>
+                                <SelectItem value="minimata">Minimata (Girls')</Bilikmata>
+                                <SelectItem value="bilasa-devi">Bilasa Devi (Girls')</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
