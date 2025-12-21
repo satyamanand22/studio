@@ -6,9 +6,8 @@ import type { Computer as ComputerType } from '@/lib/types';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Computer as ComputerIcon, Clock, User } from 'lucide-react';
+import { Monitor, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useAuth } from '@/hooks/use-auth';
 
 interface ComputerCardProps {
     computer: ComputerType;
@@ -18,7 +17,7 @@ interface ComputerCardProps {
 const statusStyles = {
     Available: 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900/50 dark:text-green-300 dark:border-green-700',
     Occupied: 'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/50 dark:text-red-300 dark:border-red-700',
-    Away: 'bg-purple-500 text-white border-purple-600 dark:bg-purple-700 dark:text-purple-100 dark:border-purple-600'
+    Away: 'bg-purple-600 text-white border-purple-700 dark:bg-purple-800 dark:text-purple-100 dark:border-purple-600'
 };
 
 const statusDotStyles = {
@@ -28,7 +27,6 @@ const statusDotStyles = {
 }
 
 export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
-    const { user } = useAuth();
     const [timer, setTimer] = useState<number | null>(null);
 
     useEffect(() => {
@@ -42,7 +40,7 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
                     setTimer(timeLeft);
                 } else {
                     setTimer(null);
-                    onUpdate({ ...computer, status: 'Available', awayUntil: undefined, occupiedBy: undefined });
+                    onUpdate({ ...computer, status: 'Available', awayUntil: undefined });
                     clearInterval(interval);
                 }
             };
@@ -58,13 +56,8 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
 
     
     const handleMarkAway = () => {
-        // Sets a 10-minute timer
         const awayUntil = Date.now() + 10 * 60 * 1000;
         onUpdate({ ...computer, status: 'Away', awayUntil });
-    };
-
-    const handleRelease = () => {
-        onUpdate({ ...computer, status: 'Available', occupiedBy: undefined });
     };
     
     const formatTime = (seconds: number) => {
@@ -73,14 +66,12 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
         return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     };
 
-    const isOccupiedByCurrentUser = computer.status === 'Occupied' && computer.occupiedBy === user?.uid;
-
     return (
         <Card className="flex flex-col">
             <CardContent className="p-4 flex-1">
                 <div className="flex justify-between items-center mb-2">
                     <p className="font-semibold text-sm">{computer.name}</p>
-                    <ComputerIcon className="h-5 w-5 text-muted-foreground" />
+                    <Monitor className="h-5 w-5 text-muted-foreground" />
                 </div>
                  <div className="text-xs text-muted-foreground space-y-1">
                     <Badge variant="outline" className={cn('w-full justify-center', statusStyles[computer.status])}>
