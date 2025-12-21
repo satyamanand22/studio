@@ -2,20 +2,69 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import Image from 'next/image';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { List, PlusCircle, Search, ShoppingBag, Package } from 'lucide-react';
+import { List, PlusCircle, Search, ShoppingBag, Package, Phone, User, Building } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+
+interface SellItem {
+    id: string;
+    itemName: string;
+    description: string;
+    price: string;
+    image?: string;
+    sellerName: string;
+    department: string;
+    sellerContact: string;
+}
 
 export default function BuyAndSellPage() {
-    const [availableItems, setAvailableItems] = useState<any[]>([]);
+    const [availableItems, setAvailableItems] = useState<SellItem[]>([]);
+    const [activeTab, setActiveTab] = useState('available');
+    const { toast } = useToast();
 
-    const handleSellItem = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSellItem = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // Handle item submission logic here
+        const form = event.currentTarget;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        const imageFile = data.image as File;
+        let imageUrl: string | undefined = undefined;
+
+        if (imageFile && imageFile.size > 0) {
+            imageUrl = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result as string);
+                reader.readAsDataURL(imageFile);
+            });
+        }
+
+        const newItem: SellItem = {
+            id: `item-${Date.now()}`,
+            itemName: data.itemName as string,
+            description: data.description as string,
+            price: data.price as string,
+            image: imageUrl,
+            sellerName: data.sellerName as string,
+            department: data.department as string,
+            sellerContact: data.sellerContact as string,
+        };
+
+        setAvailableItems(prev => [newItem, ...prev]);
+        
+        toast({
+            title: "Item Listed!",
+            description: `${newItem.itemName} is now available for sale.`,
+        });
+
+        form.reset();
+        setActiveTab('available');
     };
 
   return (
@@ -26,7 +75,7 @@ export default function BuyAndSellPage() {
                 <CardDescription>A marketplace for students to buy and sell items.</CardDescription>
             </CardHeader>
             <CardContent>
-                <Tabs defaultValue="available">
+                <Tabs value={activeTab} onValueChange={setActiveTab}>
                     <TabsList className="grid w-full grid-cols-2">
                         <TabsTrigger value="available">
                             <List className="mr-2 h-4 w-4" />
@@ -34,7 +83,7 @@ export default function BuyAndSellPage() {
                         </TabsTrigger>
                         <TabsTrigger value="sell">
                             <Package className="mr-2 h-4 w-4" />
-                            Sell Items
+                            Sell Item
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value="available" className="mt-4">
@@ -52,7 +101,40 @@ export default function BuyAndSellPage() {
                             </div>
                         ) : (
                             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                                {/* Items will be mapped here */}
+                                {availableItems.map(item => (
+                                    <Card key={item.id} className="flex flex-col">
+                                        {item.image && (
+                                            <div className="relative h-48 w-full">
+                                                <Image src={item.image} alt={item.itemName} layout="fill" objectFit="cover" className="rounded-t-lg" />
+                                            </div>
+                                        )}
+                                        <CardHeader>
+                                            <CardTitle>{item.itemName}</CardTitle>
+                                            <CardDescription className="line-clamp-2">{item.description}</CardDescription>
+                                        </CardHeader>
+                                        <CardContent className="flex-1 space-y-4">
+                                            <div>
+                                                <p className="text-2xl font-bold">₹{item.price}</p>
+                                            </div>
+                                            <div className="text-sm text-muted-foreground space-y-2">
+                                                <div className="flex items-center gap-2">
+                                                    <User className="h-4 w-4" />
+                                                    <span>{item.sellerName}</span>
+                                                </div>
+                                                <div className="flex items-center gap-2">
+                                                    <Building className="h-4 w-4" />
+                                                    <span>{item.department}</span>
+                                                </div>
+                                            </div>
+                                        </CardContent>
+                                        <CardFooter>
+                                            <Button className="w-full">
+                                                <Phone className="mr-2 h-4 w-4" />
+                                                Contact Seller ({item.sellerContact})
+                                            </Button>
+                                        </CardFooter>
+                                    </Card>
+                                ))}
                             </div>
                         )}
                     </TabsContent>
@@ -121,4 +203,5 @@ export default function BuyAndSellPage() {
         </Card>
     </div>
   );
-}
+
+    
