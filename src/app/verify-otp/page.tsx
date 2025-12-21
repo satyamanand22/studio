@@ -46,7 +46,7 @@ export default function VerifyOtpPage() {
           title: "Verification Successful",
           description: "You are now logged in.",
         });
-        router.push("/dashboard");
+        router.push("/occufind");
       } catch (error) {
         setLoading(false);
         toast({
