@@ -1,7 +1,7 @@
 
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, PlusCircle, Search } from "lucide-react";
 import {
@@ -289,5 +289,7 @@ export default function MapPage() {
     </div>
   );
 }
+
+    
 
     
