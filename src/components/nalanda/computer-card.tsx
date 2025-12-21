@@ -103,13 +103,10 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
                     )}
                 </div>
             </CardContent>
-            <CardFooter className="p-2 border-t">
+            <CardFooter className="p-2 border-t h-[44px]">
                 <div className="w-full">
                     {computer.status === 'Available' && (
-                        <Button size="sm" className="w-full" onClick={handleOccupy}>
-                            <User className="mr-2 h-4 w-4" />
-                            Occupy
-                        </Button>
+                        null
                     )}
                     {computer.status === 'Occupied' && isCurrentUser && (
                         <div className="flex gap-2">
