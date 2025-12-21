@@ -7,16 +7,6 @@ export default function MapPage() {
     <div className="container mx-auto space-y-8">
         <Card>
             <CardHeader>
-                <CardTitle>Campus Map</CardTitle>
-            </CardHeader>
-            <CardContent className="h-[50vh] bg-muted rounded-lg flex items-center justify-center flex-col gap-4">
-                <p className="text-muted-foreground">Map integration coming soon.</p>
-                <Button>Find Nearest Free Lab</Button>
-            </CardContent>
-        </Card>
-
-        <Card>
-            <CardHeader>
                 <CardTitle>Lost and Found</CardTitle>
                 <CardDescription>
                     Lost something? Or found something that belongs to someone else? Report it here.
