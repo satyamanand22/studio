@@ -1,4 +1,3 @@
-
 import type { Lab, MenuItem, NavItem, ComputerSection } from './types';
 import { Home, UtensilsCrossed, Map, Bell, Settings } from 'lucide-react';
 
@@ -47,7 +46,7 @@ export const mockComputerSections: ComputerSection[] = [
             { id: 'pc-01', name: 'PC-01', status: 'Available' },
             { id: 'pc-02', name: 'PC-02', status: 'Occupied', user: 'Jane Doe' },
             { id: 'pc-03', name: 'PC-03', status: 'Available' },
-            { id: 'pc-04', name: 'PC-04', status: 'Away', user: 'John Smith', awayUntil: Date.now() + 10 * 60 * 1000 },
+            { id: 'pc-04', name: 'PC-04', status: 'Available' },
             { id: 'pc-05', name: 'PC-05', status: 'Available' },
             { id: 'pc-06', name: 'PC-06', status: 'Available' },
             { id: 'pc-07', name: 'PC-07', status: 'Occupied', user: 'Sam Wilson' },
@@ -59,7 +58,7 @@ export const mockComputerSections: ComputerSection[] = [
             { id: 'pc-13', name: 'PC-13', status: 'Available' },
             { id: 'pc-14', name: 'PC-14', status: 'Available' },
             { id: 'pc-15', name: 'PC-15', status: 'Occupied', user: 'Tony Stark' },
-            { id: 'pc-16', name: 'PC-16', status: 'Away', user: 'Peter Parker', awayUntil: Date.now() + 5 * 60 * 1000 },
+            { id: 'pc-16', name: 'PC-16', status: 'Available' },
             { id: 'pc-17', name: 'PC-17', status: 'Available' },
             { id: 'pc-18', name: 'PC-18', status: 'Available' },
             { id: 'pc-19', name: 'PC-19', status: 'Available' },

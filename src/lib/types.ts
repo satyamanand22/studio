@@ -39,14 +39,13 @@ export interface NavItem {
   label: string;
 }
 
-export type ComputerStatus = 'Available' | 'Occupied' | 'Away';
+export type ComputerStatus = 'Available' | 'Occupied';
 
 export interface Computer {
   id: string;
   name: string;
   status: ComputerStatus;
   user?: string;
-  awayUntil?: number; // Timestamp
 }
 
 export interface ComputerSection {
