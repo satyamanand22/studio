@@ -16,7 +16,10 @@ export default function SidebarNav() {
       <div className="flex h-16 items-center border-b px-6">
         <Link href="/occufind" className="flex items-center gap-2 font-semibold font-headline">
           <GgvLogo className="h-8 w-8 text-primary" />
-          <span>GGV PULSE</span>
+          <div>
+            <span>GGV PULSE</span>
+            <p className="text-xs font-normal text-muted-foreground">Your Campus Helper</p>
+          </div>
         </Link>
       </div>
       <nav className="flex-1 p-4">
