@@ -33,7 +33,7 @@
     {
       "id": "pastry",
       "description": "A delicious chocolate pastry on a plate.",
-      "imageUrl": "https://images.unsplash.com/photo-1603532648955-039310d9ed75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwYXN0cnl8ZW58MHx8fHwxNzY2MzM0MzYxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1603532648955-039310d9ed75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwYXN0cnl8ZW58MHx8fHwxNzY2MzM0MzYxfDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "chocolate pastry"
     },
     {
@@ -62,9 +62,9 @@
     },
     {
       "id": "used-textbook",
-      "description": "A stack of used textbooks on a wooden table.",
-      "imageUrl": "https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxib29rc3xlbnwwfHx8fDE3NjY1NzE0OTF8MA&ixlib-rb-4.1.0&q=80&w=1080",
-      "imageHint": "used books"
+      "description": "A physics textbook on a desk.",
+      "imageUrl": "https://images.unsplash.com/photo-1631254145145-6ce996e72f5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwaHlzaWNzJTIwYm9va3xlbnwwfHx8fDE3NjY0MjY2MTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "physics book"
     },
     {
       "id": "drafter-set",
@@ -87,13 +87,13 @@
     {
       "id": "wallet",
       "description": "A brown leather wallet on a wooden surface.",
-      "imageUrl": "https://images.unsplash.com/photo-1627123424574-724758594e93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsZWF0aGVyJTIwd2FsbGV0fGVufDB8fHx8MTc2NjQyNDE5MXww&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1627123424574-724758594e93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsZWF0aGVyJTIwd2FsbGV0fGVufDB8fHx8MTc2NjQyNDE5MXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "leather wallet"
     },
     {
       "id": "keys",
       "description": "A set of keys on a wooden table.",
-      "imageUrl": "https://images.unsplash.com/photo-1604445415362-2a9840bd5ff6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxOHx8a2V5c3xlbnwwfHx8fDE3NjY0MjQ3Mzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1604445415362-2a9840bd5ff6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxOHx8a2V5c3xlbnwwfHx8fDE3NjY0MjQ3Mzl8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "keys"
     }
   ]
