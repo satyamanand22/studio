@@ -206,6 +206,10 @@ export default function CafeteriaPage() {
     setIsOrderSummaryOpen(false);
   }
 
+  const thaliSubtotal = swabhimanThali.price * count;
+  const thaliGst = thaliSubtotal * 0.05;
+  const thaliTotal = thaliSubtotal + thaliGst;
+
   return (
     <div className="container mx-auto">
       <div className="grid gap-8 lg:grid-cols-3">
@@ -280,8 +284,20 @@ export default function CafeteriaPage() {
                                </Button>
                             </div>
                           </div>
-                          <div className="text-right font-bold text-xl">
-                            Total: ₹{(swabhimanThali.price * count).toFixed(2)}
+                          <div className="space-y-2 rounded-md bg-secondary p-4">
+                            <div className="flex justify-between text-sm">
+                                <span className="text-muted-foreground">Subtotal</span>
+                                <span>₹{thaliSubtotal.toFixed(2)}</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                                <span className="text-muted-foreground">GST (5%)</span>
+                                <span>₹{thaliGst.toFixed(2)}</span>
+                            </div>
+                            <Separator />
+                            <div className="flex justify-between font-bold text-lg">
+                                <span>Total</span>
+                                <span>₹{thaliTotal.toFixed(2)}</span>
+                            </div>
                           </div>
                           <Button onClick={handleThaliOrder} className="w-full" disabled={!swabhimanThali.inStock}>
                             <GooglePayIcon className="mr-2 h-6 w-6" />
