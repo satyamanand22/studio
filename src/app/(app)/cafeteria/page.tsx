@@ -3,7 +3,6 @@
 
 import Image from "next/image";
 import { MenuCard } from "@/components/cafeteria/menu-card";
-import QueuePrediction from "@/components/cafeteria/queue-prediction";
 import TimeRecommendation from "@/components/cafeteria/time-recommendation";
 import { Button } from "@/components/ui/button";
 import {
@@ -472,8 +471,6 @@ export default function CafeteriaPage() {
           </div>
         </div>
         <div className="space-y-6">
-          <QueuePrediction className="animate-fade-in-up" style={{ animationDelay: '0.2s' }} />
-          <Separator />
           <TimeRecommendation className="animate-fade-in-up" style={{ animationDelay: '0.3s' }} />
         </div>
       </div>
