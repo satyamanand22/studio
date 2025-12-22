@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -10,14 +11,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { predictCafeteriaQueueLength, PredictCafeteriaQueueLengthOutput } from "@/ai/flows/predict-cafeteria-queue-length";
-import { mockHistoricalCafeteriaData } from "@/lib/data";
+import { PredictCafeteriaQueueLengthOutput } from "@/ai/flows/predict-cafeteria-queue-length";
 import { Loader2, Timer, Users } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import React from "react";
 import { cn } from "@/lib/utils";
+
+const analysisLevels = ["very short", "short", "moderate", "long", "very long"];
 
 export default function QueuePrediction({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const [prediction, setPrediction] = useState<PredictCafeteriaQueueLengthOutput | null>(null);
@@ -28,12 +30,21 @@ export default function QueuePrediction({ className, ...props }: React.HTMLAttri
   const getPrediction = async () => {
     setLoading(true);
     setPrediction(null);
+    
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     try {
-        const result = await predictCafeteriaQueueLength({
-            currentTime: new Date().toISOString(),
-            historicalOrderData: mockHistoricalCafeteriaData,
-            realTimeOrderVolume: orderVolume[0],
-        });
+        const queueLength = Math.floor(orderVolume[0] / 5) + Math.floor(Math.random() * 5);
+        const waitingTime = queueLength * 3;
+        const analysisIndex = Math.min(Math.floor(queueLength / 5), analysisLevels.length - 1);
+        
+        const result = {
+            queueLength,
+            waitingTime,
+            analysis: analysisLevels[analysisIndex],
+        };
+
         setPrediction(result);
     } catch(e) {
         toast({
