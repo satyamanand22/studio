@@ -13,7 +13,7 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const pathname = usePathname();
   const currentNavItem = navItems.find(item => pathname.startsWith(item.href));
-  const pageTitle = currentNavItem ? currentNavItem.label : "Dashboard";
+  const pageTitle = currentNavItem ? currentNavItem.label : "LIBEASY";
   const pageSubtitle = currentNavItem ? `Manage your ${currentNavItem.label.toLowerCase()}` : "Welcome back";
 
 
