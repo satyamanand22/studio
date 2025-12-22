@@ -17,7 +17,7 @@ import { LibraryChampionsLeagueDialog } from '@/components/occufind/library-cham
 import { LibraryChampionsLeagueResultsDialog } from '@/components/occufind/library-champions-league-results-dialog';
 
 
-export default function OccuFindPage() {
+export default function LibEasyPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState<{ available: boolean; rack?: number; floor?: number, copies?: number } | null>(null);
   const { toast } = useToast();

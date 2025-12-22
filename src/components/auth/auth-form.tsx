@@ -68,7 +68,7 @@ export function AuthForm() {
           title: "Logged in successfully",
           description: "Redirecting to your dashboard...",
         });
-        router.push("/occufind");
+        router.push("/libeasy");
       }
     } catch (error) {
       toast({
@@ -86,7 +86,7 @@ export function AuthForm() {
         title: "Logged in with Google",
         description: "Redirecting to your dashboard...",
       });
-      router.push("/occufind");
+      router.push("/libeasy");
     } catch (error) {
       toast({
         variant: "destructive",

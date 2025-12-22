@@ -3,7 +3,7 @@ import type { Lab, MenuItem, NavItem, ComputerSection } from './types';
 import { Book, UtensilsCrossed, Map, Bell, Settings, ShoppingBag, Star } from 'lucide-react';
 
 export const navItems: NavItem[] = [
-  { href: "/occufind", icon: Book, label: "OccuFind" },
+  { href: "/libeasy", icon: Book, label: "LIBEASY" },
   { href: "/cafeteria", icon: UtensilsCrossed, label: "Cafeteria" },
   { href: "/map", icon: Map, label: "Lost and Found" },
   { href: "/buy-sell", icon: ShoppingBag, label: "Buy and Sell" },

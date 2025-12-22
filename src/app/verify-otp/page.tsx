@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState }from "react";
@@ -46,7 +47,7 @@ export default function VerifyOtpPage() {
           title: "Verification Successful",
           description: "You are now logged in.",
         });
-        router.push("/occufind");
+        router.push("/libeasy");
       } catch (error) {
         setLoading(false);
         toast({
