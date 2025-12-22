@@ -18,6 +18,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Check, Trophy, Play } from 'lucide-react';
 import Image from 'next/image';
 import QRCode from 'qrcode';
+import { Card } from '@/components/ui/card';
 
 interface RegistrationData {
     name: string;
