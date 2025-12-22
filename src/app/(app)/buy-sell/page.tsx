@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { List, PlusCircle, Search, ShoppingBag, Package, Phone, User, Building } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 interface SellItem {
     id: string;
@@ -61,6 +62,8 @@ const mockSellItems: SellItem[] = [
 export default function BuyAndSellPage() {
     const [availableItems, setAvailableItems] = useState<SellItem[]>(mockSellItems);
     const [activeTab, setActiveTab] = useState('available');
+    const [selectedSeller, setSelectedSeller] = useState<SellItem | null>(null);
+    const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
     const { toast } = useToast();
 
     const handleSellItem = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -101,6 +104,11 @@ export default function BuyAndSellPage() {
 
         form.reset();
         setActiveTab('available');
+    };
+
+    const handleContactSeller = (item: SellItem) => {
+        setSelectedSeller(item);
+        setIsContactDialogOpen(true);
     };
 
   return (
@@ -169,7 +177,7 @@ export default function BuyAndSellPage() {
                                                 </div>
                                             </CardContent>
                                             <CardFooter>
-                                                <Button className="w-full">
+                                                <Button className="w-full" onClick={() => handleContactSeller(item)}>
                                                     <Phone className="mr-2 h-4 w-4" />
                                                     Contact Seller
                                                 </Button>
@@ -243,12 +251,37 @@ export default function BuyAndSellPage() {
                 </Tabs>
             </CardContent>
         </Card>
+
+        {selectedSeller && (
+            <Dialog open={isContactDialogOpen} onOpenChange={setIsContactDialogOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Contact Seller</DialogTitle>
+                        <DialogDescription>
+                            Contact details for {selectedSeller.sellerName}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="py-4 space-y-4">
+                         <div className="flex items-center gap-4">
+                            <User className="h-5 w-5 text-muted-foreground" />
+                            <p className="font-semibold">{selectedSeller.sellerName}</p>
+                         </div>
+                         <div className="flex items-center gap-4">
+                            <Phone className="h-5 w-5 text-muted-foreground" />
+                            <p className="font-semibold">{selectedSeller.sellerContact}</p>
+                         </div>
+                         <Button asChild className="w-full mt-4">
+                            <a href={`tel:${selectedSeller.sellerContact}`}>
+                                <Phone className="mr-2 h-4 w-4" />
+                                Call Now
+                            </a>
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
+        )}
     </div>
   );
-
-    
-
-    
 }
     
 
