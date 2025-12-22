@@ -113,7 +113,7 @@ export default function MessRatingPage() {
                 <CardDescription>
                     {view === 'form' 
                         ? 'Rate your daily mess food and see what others think.'
-                        : 'Overall mess ratings based on student feedback.'
+                        : "Overall mess ratings based on student feedback. The result announced monthly on the last working day of every month."
                     }
                 </CardDescription>
             </CardHeader>
