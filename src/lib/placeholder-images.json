@@ -9,7 +9,7 @@
     {
       "id": "lab-1",
       "description": "A computer lab with rows of desktops.",
-      "imageUrl": "https://images.unsplash.com/photo-1581090700227-1e37b190418e",
+      "imageUrl": "https://images.unsplash.com/photo-1581090700227-1e3fth-b190418e",
       "imageHint": "computer lab"
     },
     {
@@ -83,6 +83,12 @@
       "description": "A wooden study table.",
       "imageUrl": "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzdHVkeSUyMHRhYmxlfGVufDB8fHx8MTc2NjQwNjQ3N3ww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "study table"
+    },
+    {
+      "id": "wallet",
+      "description": "A brown leather wallet on a wooden surface.",
+      "imageUrl": "https://images.unsplash.com/photo-1621330396445-560233c43553?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3YWxsZXR8ZW58MHx8fHwxNzY2NzM5MDQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "leather wallet"
     }
   ]
 }

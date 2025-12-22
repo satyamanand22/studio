@@ -21,6 +21,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import Image from 'next/image';
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 interface ReportItem {
     id: string;
@@ -28,15 +29,30 @@ interface ReportItem {
     name: string;
     branch: string;
     itemName: string;
-    image?: string; // Data URL for the image
+    image?: string; // Data URL for the image or placeholder URL
+    imageId?: string;
     contactNo: string;
     contactPlace: string;
     remarks?: string;
 }
 
+const mockLostItems: ReportItem[] = [
+    {
+        id: 'lost-item-1',
+        reportType: 'lost',
+        name: 'Sameer Verma',
+        branch: 'IT',
+        itemName: 'Leather Wallet',
+        imageId: 'wallet',
+        contactNo: '9876543210',
+        contactPlace: 'Cafeteria',
+        remarks: 'Lost it near the counter. It has my ID card inside.'
+    }
+]
+
 export default function MapPage() {
     const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
-    const [lostItems, setLostItems] = useState<ReportItem[]>([]);
+    const [lostItems, setLostItems] = useState<ReportItem[]>(mockLostItems);
     const [foundItems, setFoundItems] = useState<ReportItem[]>([]);
     const [formSubmitted, setFormSubmitted] = useState(false);
     const { toast } = useToast();
@@ -226,28 +242,34 @@ export default function MapPage() {
                             </div>
                         ) : (
                             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                                {lostItems.map(item => (
-                                    <Card key={item.id}>
-                                        {item.image && (
-                                            <div className="relative h-40 w-full">
-                                                <Image src={item.image} alt={item.itemName} layout="fill" objectFit="cover" className="rounded-t-lg" />
-                                            </div>
-                                        )}
-                                        <CardHeader>
-                                            <CardTitle>{item.itemName}</CardTitle>
-                                        </CardHeader>
-                                        <CardContent className="text-sm space-y-2">
-                                            <p><span className="font-semibold">Reported by:</span> {item.name}</p>
-                                            <p><span className="font-semibold">Branch:</span> {item.branch}</p>
-                                            {item.remarks && <p><span className="font-semibold">Remarks:</span> {item.remarks}</p>}
-                                        </CardContent>
-                                        <CardFooter className="flex-col items-start text-sm">
-                                            <p className="font-semibold">Contact Details:</p>
-                                            <p>Number: {item.contactNo}</p>
-                                            <p>Place: {item.contactPlace}</p>
-                                        </CardFooter>
-                                    </Card>
-                                ))}
+                                {lostItems.map(item => {
+                                    const itemImage = PlaceHolderImages.find(img => img.id === item.imageId);
+                                    const imageUrl = item.image || itemImage?.imageUrl;
+                                    const imageHint = itemImage?.imageHint || 'item';
+                                    
+                                    return (
+                                        <Card key={item.id}>
+                                            {imageUrl && (
+                                                <div className="relative h-40 w-full">
+                                                    <Image src={imageUrl} alt={item.itemName} layout="fill" objectFit="cover" className="rounded-t-lg" data-ai-hint={imageHint}/>
+                                                </div>
+                                            )}
+                                            <CardHeader>
+                                                <CardTitle>{item.itemName}</CardTitle>
+                                            </CardHeader>
+                                            <CardContent className="text-sm space-y-2">
+                                                <p><span className="font-semibold">Reported by:</span> {item.name}</p>
+                                                <p><span className="font-semibold">Branch:</span> {item.branch}</p>
+                                                {item.remarks && <p><span className="font-semibold">Remarks:</span> {item.remarks}</p>}
+                                            </CardContent>
+                                            <CardFooter className="flex-col items-start text-sm">
+                                                <p className="font-semibold">Contact Details:</p>
+                                                <p>Number: {item.contactNo}</p>
+                                                <p>Place: {item.contactPlace}</p>
+                                            </CardFooter>
+                                        </Card>
+                                    )
+                                })}
                             </div>
                         )}
                     </TabsContent>
@@ -289,7 +311,5 @@ export default function MapPage() {
     </div>
   );
 }
-
-    
 
     
