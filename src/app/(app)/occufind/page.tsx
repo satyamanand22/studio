@@ -14,6 +14,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import { LibraryChampionsLeagueDialog } from '@/components/occufind/library-champions-league-dialog';
+import { LibraryChampionsLeagueResultsDialog } from '@/components/occufind/library-champions-league-results-dialog';
 
 
 export default function OccuFindPage() {
@@ -154,10 +155,7 @@ export default function OccuFindPage() {
             </CardHeader>
             <CardContent className="flex flex-col sm:flex-row gap-4">
                  <LibraryChampionsLeagueDialog />
-                <Button variant="secondary" className="w-full" onClick={() => toast({ title: "Results Soon!", description: "Results for the previous league will be announced shortly."})}>
-                    <BarChart className="mr-2" />
-                    Check Results
-                </Button>
+                 <LibraryChampionsLeagueResultsDialog />
             </CardContent>
         </Card>
 

@@ -70,3 +70,26 @@ export const mockComputerSections: ComputerSection[] = [
         ],
     }
 ]
+
+export const mockLeagueParticipants = [
+    { name: "Aarav Sharma", department: "Engineering", branch: "CSE" },
+    { name: "Vivaan Singh", department: "Engineering", branch: "Mechanical" },
+    { name: "Aditya Kumar", department: "Science", branch: "Physics" },
+    { name: "Vihaan Gupta", department: "Engineering", branch: "Civil" },
+    { name: "Arjun Reddy", department: "Engineering", branch: "Electrical" },
+    { name: "Sai Patel", department: "Arts", branch: "History" },
+    { name: "Reyansh Joshi", department: "Commerce", branch: "Accounts" },
+    { name: "Ayaan Khan", department: "Engineering", branch: "IT" },
+    { name: "Krishna Nair", department: "Science", branch: "Chemistry" },
+    { name: "Ishaan Iyer", department: "Engineering", branch: "Chemical" },
+    { name: "Aanya Sharma", department: "Engineering", branch: "CSE" },
+    { name: "Myra Singh", department: "Engineering", branch: "Mechanical" },
+    { name: "Saanvi Kumar", department: "Science", branch: "Biology" },
+    { name: "Ananya Gupta", department: "Engineering", branch: "Civil" },
+    { name: "Diya Reddy", department: "Engineering", branch: "Electrical" },
+    { name: "Pari Patel", department: "Arts", branch: "Sociology" },
+    { name: "Kiara Joshi", department: "Commerce", branch: "Economics" },
+    { name: "Aaradhya Khan", department: "Engineering", branch: "IT" },
+    { name: "Anika Nair", department: "Science", branch: "Mathematics" },
+    { name: "Navya Iyer", department: "Engineering", branch: "Chemical" },
+];
