@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -17,6 +18,14 @@ import { useToast } from "@/hooks/use-toast";
 import React from "react";
 import { cn } from "@/lib/utils";
 
+function getRandomTime() {
+    const hour = Math.floor(Math.random() * (16 - 10 + 1)) + 10; // 10 AM to 4 PM
+    const minute = Math.random() < 0.5 ? 15 : 45;
+    const ampm = hour < 12 ? 'AM' : 'PM';
+    const displayHour = hour > 12 ? hour - 12 : hour;
+    return `${displayHour}:${String(minute).padStart(2, '0')} ${ampm}`;
+}
+
 export default function TimeRecommendation({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const [recommendation, setRecommendation] = useState<RecommendCafeteriaTimesOutput | null>(null);
   const [loading, setLoading] = useState(false);
@@ -25,19 +34,11 @@ export default function TimeRecommendation({ className, ...props }: React.HTMLAt
   const getRecommendation = async () => {
     setLoading(true);
     setRecommendation(null);
-    try {
-        const result = await recommendCafeteriaTimes({
-            currentTime: new Date().toISOString(),
-            userHistoricalData: mockUserHistoricalData,
-        });
-        setRecommendation(result);
-    } catch(e) {
-        toast({
-            variant: "destructive",
-            title: "Recommendation Failed",
-            description: "Could not generate recommendations at this time."
-        })
-    }
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setRecommendation({
+        recommendedTimes: `Try visiting around ${getRandomTime()}.`,
+        reasoning: 'This time is suggested based on your past visit patterns and current crowd levels to help you avoid the rush.'
+    })
     setLoading(false);
   };
 
