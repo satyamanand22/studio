@@ -53,7 +53,7 @@ const mockLostItems: ReportItem[] = [
         reportType: 'lost',
         name: 'Anjali Sharma',
         branch: 'CSE',
-        itemName: 'Analog Watch',
+        itemName: 'SAMSUNG GALAXY 16',
         imageId: 'drafter-set',
         contactNo: '8765432109',
         contactPlace: 'Library',
