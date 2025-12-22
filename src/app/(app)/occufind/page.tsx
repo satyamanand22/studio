@@ -6,7 +6,7 @@ import { ComputerAvailabilityGrid } from '@/components/nalanda/computer-availabi
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { BookCheck, BookX, Copy, Library, Search, ChevronDown } from 'lucide-react';
+import { BookCheck, BookX, Copy, Library, Search, ChevronDown, Trophy, Play, BarChart } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import {
   Collapsible,
@@ -137,6 +137,28 @@ export default function OccuFindPage() {
                         </CardContent>
                     </Card>
                 )}
+            </CardContent>
+        </Card>
+
+        <Card>
+            <CardHeader>
+                <div className="flex items-center gap-4">
+                    <Trophy className="h-8 w-8 text-primary" />
+                    <div>
+                        <CardTitle>Library Champions League</CardTitle>
+                        <CardDescription>Compete with fellow students and win exciting prizes!</CardDescription>
+                    </div>
+                </div>
+            </CardHeader>
+            <CardContent className="flex flex-col sm:flex-row gap-4">
+                <Button className="w-full" onClick={() => toast({ title: "Registration Open!", description: "You can now register for the Library Champions League."})}>
+                    <Play className="mr-2" />
+                    Participate Now
+                </Button>
+                <Button variant="secondary" className="w-full" onClick={() => toast({ title: "Results Soon!", description: "Results for the previous league will be announced shortly."})}>
+                    <BarChart className="mr-2" />
+                    Check Results
+                </Button>
             </CardContent>
         </Card>
 
