@@ -64,11 +64,11 @@ const mockLostItems: ReportItem[] = [
         reportType: 'lost',
         name: 'Rahul Kumar',
         branch: 'Mechanical',
-        itemName: 'Physics Textbook',
-        imageId: 'used-textbook',
+        itemName: 'Keys',
+        imageId: 'keys',
         contactNo: '7654321098',
         contactPlace: 'Admin Block',
-        remarks: 'Book name is "Concepts of Physics" by H.C. Verma.'
+        remarks: 'Bunch of keys with a blue keychain.'
     }
 ]
 
@@ -337,3 +337,4 @@ export default function MapPage() {
     
 
     
+

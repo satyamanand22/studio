@@ -89,6 +89,12 @@
       "description": "A brown leather wallet on a wooden surface.",
       "imageUrl": "https://images.unsplash.com/photo-1627123424574-724758594e93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsZWF0aGVyJTIwd2FsbGV0fGVufDB8fHx8MTc2NjQyNDE5MXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "leather wallet"
+    },
+    {
+      "id": "keys",
+      "description": "A set of keys on a wooden table.",
+      "imageUrl": "https://images.unsplash.com/photo-1564304535384-93a8e94be0b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxrZXlzfGVufDB8fHx8MTc2NzM3OTIyM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "keys"
     }
   ]
 }
