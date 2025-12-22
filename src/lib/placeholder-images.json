@@ -75,14 +75,14 @@
     {
       "id": "bicycle",
       "description": "A modern bicycle parked against a textured wall.",
-      "imageUrl": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxiaWN5Y2xlfGVufDB8fHx8MTc2NjU3MTY3Nnww&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxiaWN5Y2xlfGVufDB8fHx8MTc2NjU3MTY3Nnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "bicycle"
     },
     {
       "id": "table",
-      "description": "A wooden study table.",
-      "imageUrl": "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzdHVkeSUyMHRhYmxlfGVufDB8fHx8MTc2NjQwNjQ3N3ww&ixlib-rb-4.1.0&q=80&w=1080",
-      "imageHint": "study table"
+      "description": "A steel water bottle on a neutral background.",
+      "imageUrl": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzdGVlbCUyMHdhdGVyJTIwYm90dGxlfGVufDB8fHx8MTc2NjQyNjcxNHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "water bottle"
     },
     {
       "id": "wallet",
@@ -93,7 +93,7 @@
     {
       "id": "keys",
       "description": "A set of keys on a wooden table.",
-      "imageUrl": "https://images.unsplash.com/photo-1604445415362-2a9840bd5ff6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxOHx8a2V5c3xlbnwwfHx8fDE3NjY0MjQ3Mzl8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1604445415362-2a9840bd5ff6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxOHx8a2V5c3xlbnwwfHx8fDE3NjY0MjQ3Mzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "keys"
     }
   ]
