@@ -39,7 +39,7 @@ export interface NavItem {
   label: string;
 }
 
-export type ComputerStatus = 'Available' | 'Occupied' | 'Away';
+export type ComputerStatus = 'Available' | 'Occupied' | 'Away' | 'Under Development';
 
 export interface Computer {
   id: string;

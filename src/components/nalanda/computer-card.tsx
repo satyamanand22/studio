@@ -6,7 +6,7 @@ import type { Computer as ComputerType } from '@/lib/types';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Monitor, Clock, Undo2 } from 'lucide-react';
+import { Monitor, Clock, Undo2, AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ComputerCardProps {
@@ -17,13 +17,15 @@ interface ComputerCardProps {
 const statusStyles = {
     Available: 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900/50 dark:text-green-300 dark:border-green-700',
     Occupied: 'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/50 dark:text-red-300 dark:border-red-700',
-    Away: 'bg-purple-600 text-white border-purple-700 dark:bg-purple-800 dark:text-purple-100 dark:border-purple-600'
+    Away: 'bg-purple-600 text-white border-purple-700 dark:bg-purple-800 dark:text-purple-100 dark:border-purple-600',
+    'Under Development': 'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/50 dark:text-yellow-300 dark:border-yellow-700',
 };
 
 const statusDotStyles = {
     Available: 'bg-green-500',
     Occupied: 'bg-red-500',
-    Away: 'bg-purple-500'
+    Away: 'bg-purple-500',
+    'Under Development': 'bg-yellow-500',
 }
 
 export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
@@ -71,7 +73,7 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
     };
 
     return (
-        <Card className="flex flex-col">
+        <Card className={cn("flex flex-col", computer.status === 'Under Development' && 'opacity-60')}>
             <CardContent className="p-4 flex-1">
                 <div className="flex justify-between items-center mb-2">
                     <p className="font-semibold text-sm">{computer.name}</p>
@@ -105,6 +107,11 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
                             <Undo2 className="mr-2 h-3 w-3" />
                             I'm Back
                         </Button>
+                    )}
+                     {computer.status === 'Under Development' && (
+                        <div className="flex items-center justify-center h-full">
+                            <p className="text-xs font-semibold text-yellow-800 dark:text-yellow-200">MAINTENANCE</p>
+                        </div>
                     )}
                 </div>
             </CardFooter>
