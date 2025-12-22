@@ -92,7 +92,7 @@ export default function OccuFindPage() {
                             }}
                         />
                     </div>
-                    <Button onClick={handleBookSearch} className="bg-purple-600 hover:bg-purple-700">Search</Button>
+                    <Button onClick={handleBookSearch}>Search</Button>
                 </div>
 
                 {searchResult && searchResult.available && (
