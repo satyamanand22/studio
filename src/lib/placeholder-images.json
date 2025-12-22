@@ -33,25 +33,25 @@
     {
       "id": "pastry",
       "description": "A delicious chocolate pastry on a plate.",
-      "imageUrl": "https://images.unsplash.com/photo-1603532648955-039310d9ed75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwYXN0cnl8ZW58MHx8fHwxNzY2MzM0MzYxfDA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1603532648955-039310d9ed75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwYXN0cnl8ZW58MHx8fHwxNzY2MzM0MzYxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "chocolate pastry"
     },
     {
       "id": "aloo-paratha",
       "description": "An aloo paratha with a side of yogurt.",
-      "imageUrl": "https://images.unsplash.com/photo-1683533761804-5fc12be0f684?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhbG9vJTIwcGFyYXRoYXxlbnwwfHx8fDE3NjYzMzQ1MjZ8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1683533761804-5fc12be0f684?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhbG9vJTIwcGFyYXRoYXxlbnwwfHx8fDE3NjYzMzQ1MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "aloo paratha"
     },
     {
       "id": "tea",
       "description": "A cup of hot tea.",
-      "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0ZWF8ZW58MHx8fHwxNzY2MzM0NDExfDA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0ZWF8ZW58MHx8fHwxNzY2MzM0NDExfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "cup tea"
     },
     {
       "id": "thali",
       "description": "A traditional Indian thali with various dishes.",
-      "imageUrl": "https://images.unsplash.com/photo-1567337710282-00832b415979?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNHx8JTIwaW5kaWFuJTIwZm9vZHxlbnwwfHx8fDE3NjYzMzQxODh8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1567337710282-00832b415979?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNHx8JTIwaW5kaWFuJTIwZm9vZHxlbnwwfHx8fDE3NjYzMzQxODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indian thali"
     },
     {
@@ -80,9 +80,9 @@
     },
     {
       "id": "table",
-      "description": "A steel water bottle on a neutral background.",
-      "imageUrl": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzdGVlbCUyMHdhdGVyJTIwYm90dGxlfGVufDB8fHx8MTc2NjQyNjcxNHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "water bottle"
+      "description": "A wooden study table.",
+      "imageUrl": "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzdHVkeSUyMHRhYmxlfGVufDB8fHx8MTc2NjQwNjQ3N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "study table"
     },
     {
       "id": "wallet",
