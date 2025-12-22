@@ -27,6 +27,7 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { CheckCircle, Download, Loader2, Minus, Plus, PlusCircle, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -47,6 +48,7 @@ type OrderItem = MenuItem & { quantity: number };
 
 type GeneralOrderStep = "summary" | "payment" | "processing" | "confirmed";
 
+const PACKAGING_COST_PER_ITEM = 3;
 
 export default function CafeteriaPage() {
   const thaliImage = PlaceHolderImages.find(
@@ -55,6 +57,7 @@ export default function CafeteriaPage() {
   const [isThaliDialogOpen, setIsThaliDialogOpen] = useState(false);
   const [studentName, setStudentName] = useState("");
   const { count, increment, decrement, setCount } = useCounter(1);
+  const [wantsPackaging, setWantsPackaging] = useState(false);
   const [thaliOrderStep, setThaliOrderStep] = useState<"form" | "processing" | "confirmed">("form");
   const { toast } = useToast();
 
@@ -134,10 +137,10 @@ export default function CafeteriaPage() {
     setGeneralOrderStep("confirmed");
   };
 
-  const generateAndDownloadBill = async (orderItems: OrderItem[], name: string, total: number, currentTransactionId?: string) => {
+  const generateAndDownloadBill = async (orderItems: OrderItem[], name: string, total: number, currentTransactionId?: string, packagingCost?: number) => {
     const doc = new jsPDF();
     const gst = total * 0.05; // 5% GST
-    const finalAmount = total + gst;
+    const finalAmount = total + gst + (packagingCost || 0);
     const orderId = Math.floor(10000 + Math.random() * 90000);
 
     doc.setFontSize(20);
@@ -160,10 +163,14 @@ export default function CafeteriaPage() {
       theme: 'grid',
     });
 
-    const finalY = (doc as any).lastAutoTable.finalY || 70;
-
+    let finalY = (doc as any).lastAutoTable.finalY || 70;
+    
     doc.setFontSize(10);
     doc.text(`Subtotal: ₹${total.toFixed(2)}`, 14, finalY + 10);
+    if(packagingCost && packagingCost > 0) {
+      doc.text(`Packaging: ₹${packagingCost.toFixed(2)}`, 14, finalY + 15);
+      finalY += 5;
+    }
     doc.text(`GST (5%): ₹${gst.toFixed(2)}`, 14, finalY + 15);
     doc.setFontSize(12);
     doc.setFont("helvetica", "bold");
@@ -194,6 +201,7 @@ export default function CafeteriaPage() {
   const resetThaliOrderProcess = () => {
     setStudentName("");
     setCount(1);
+    setWantsPackaging(false);
     setThaliOrderStep("form");
     setIsThaliDialogOpen(false);
   }
@@ -207,8 +215,9 @@ export default function CafeteriaPage() {
   }
 
   const thaliSubtotal = swabhimanThali.price * count;
-  const thaliGst = thaliSubtotal * 0.05;
-  const thaliTotal = thaliSubtotal + thaliGst;
+  const thaliPackagingCost = wantsPackaging ? PACKAGING_COST_PER_ITEM * count : 0;
+  const thaliGst = (thaliSubtotal + thaliPackagingCost) * 0.05;
+  const thaliTotal = thaliSubtotal + thaliPackagingCost + thaliGst;
 
   return (
     <div className="container mx-auto">
@@ -284,11 +293,26 @@ export default function CafeteriaPage() {
                                </Button>
                             </div>
                           </div>
+                           <div className="flex items-center space-x-2 justify-center">
+                              <Checkbox id="packaging" checked={wantsPackaging} onCheckedChange={(checked) => setWantsPackaging(checked as boolean)} />
+                              <label
+                                htmlFor="packaging"
+                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                              >
+                                Packaging for food to collect it instantly (+ ₹{PACKAGING_COST_PER_ITEM}/item)
+                              </label>
+                            </div>
                           <div className="space-y-2 rounded-md bg-secondary p-4">
                             <div className="flex justify-between text-sm">
                                 <span className="text-muted-foreground">Subtotal</span>
                                 <span>₹{thaliSubtotal.toFixed(2)}</span>
                             </div>
+                            {wantsPackaging && (
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-muted-foreground">Packaging</span>
+                                    <span>₹{thaliPackagingCost.toFixed(2)}</span>
+                                </div>
+                            )}
                             <div className="flex justify-between text-sm">
                                 <span className="text-muted-foreground">GST (5%)</span>
                                 <span>₹{thaliGst.toFixed(2)}</span>
@@ -317,7 +341,7 @@ export default function CafeteriaPage() {
                             <h3 className="text-xl font-bold">Order Confirmed!</h3>
                             <p className="text-muted-foreground">Thank you, {studentName}.<br/>Your order for {count} thali(s) has been placed.</p>
                             <div className="flex gap-2 mt-4">
-                              <Button onClick={() => generateAndDownloadBill([{...swabhimanThali, quantity: count}], studentName, swabhimanThali.price * count)}>
+                              <Button onClick={() => generateAndDownloadBill([{...swabhimanThali, quantity: count}], studentName, thaliSubtotal, undefined, thaliPackagingCost)}>
                                 <Download className="mr-2 h-4 w-4" />
                                 Download Bill
                               </Button>
@@ -493,3 +517,5 @@ export default function CafeteriaPage() {
     </div>
   );
 }
+
+    
