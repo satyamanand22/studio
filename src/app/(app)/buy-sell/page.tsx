@@ -11,16 +11,18 @@ import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { List, PlusCircle, Search, ShoppingBag, Package, Phone, User, Building } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 interface SellItem {
     id: string;
     itemName: string;
     description: string;
     price: string;
-    image?: string;
+    imageId: string;
     sellerName: string;
     department: string;
     sellerContact: string;
+    image?: string;
 }
 
 const mockSellItems: SellItem[] = [
@@ -29,7 +31,7 @@ const mockSellItems: SellItem[] = [
         itemName: 'Used Engineering Textbook',
         description: 'First year engineering textbook, in good condition with minor highlights.',
         price: '500',
-        image: 'https://picsum.photos/seed/book/400/300',
+        imageId: 'used-textbook',
         sellerName: 'Rohan Sharma',
         department: 'Mechanical',
         sellerContact: '9876543210'
@@ -39,7 +41,7 @@ const mockSellItems: SellItem[] = [
         itemName: 'Drafter/Mini-Drafter',
         description: 'Complete engineering drawing drafter set. Barely used.',
         price: '350',
-        image: 'https://picsum.photos/seed/drafter/400/300',
+        imageId: 'drafter-set',
         sellerName: 'Priya Singh',
         department: 'Civil',
         sellerContact: '8765432109'
@@ -49,7 +51,7 @@ const mockSellItems: SellItem[] = [
         itemName: 'Bicycle',
         description: 'A reliable bicycle perfect for getting around campus. Recently serviced.',
         price: '2500',
-        image: 'https://picsum.photos/seed/bicycle/400/300',
+        imageId: 'bicycle',
         sellerName: 'Amit Patel',
         department: 'CSE',
         sellerContact: '7654321098'
@@ -84,6 +86,7 @@ export default function BuyAndSellPage() {
             description: data.description as string,
             price: data.price as string,
             image: imageUrl,
+            imageId: `item-image-${Date.now()}`, // Temporary fallback
             sellerName: data.sellerName as string,
             department: data.department as string,
             sellerContact: data.sellerContact as string,
@@ -134,40 +137,46 @@ export default function BuyAndSellPage() {
                             </div>
                         ) : (
                             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                                {availableItems.map(item => (
-                                    <Card key={item.id} className="flex flex-col">
-                                        {item.image && (
-                                            <div className="relative h-48 w-full">
-                                                <Image src={item.image} alt={item.itemName} layout="fill" objectFit="cover" className="rounded-t-lg" />
-                                            </div>
-                                        )}
-                                        <CardHeader>
-                                            <CardTitle>{item.itemName}</CardTitle>
-                                            <CardDescription className="line-clamp-2">{item.description}</CardDescription>
-                                        </CardHeader>
-                                        <CardContent className="flex-1 space-y-4">
-                                            <div>
-                                                <p className="text-2xl font-bold">₹{item.price}</p>
-                                            </div>
-                                            <div className="text-sm text-muted-foreground space-y-2">
-                                                <div className="flex items-center gap-2">
-                                                    <User className="h-4 w-4" />
-                                                    <span>{item.sellerName}</span>
+                                {availableItems.map(item => {
+                                    const itemImage = PlaceHolderImages.find(img => img.id === item.imageId);
+                                    const imageUrl = item.image || itemImage?.imageUrl;
+                                    const imageHint = itemImage?.imageHint || 'product';
+
+                                    return (
+                                        <Card key={item.id} className="flex flex-col">
+                                            {imageUrl && (
+                                                <div className="relative h-48 w-full">
+                                                    <Image src={imageUrl} alt={item.itemName} layout="fill" objectFit="cover" className="rounded-t-lg" data-ai-hint={imageHint} />
                                                 </div>
-                                                <div className="flex items-center gap-2">
-                                                    <Building className="h-4 w-4" />
-                                                    <span>{item.department}</span>
+                                            )}
+                                            <CardHeader>
+                                                <CardTitle>{item.itemName}</CardTitle>
+                                                <CardDescription className="line-clamp-2">{item.description}</CardDescription>
+                                            </CardHeader>
+                                            <CardContent className="flex-1 space-y-4">
+                                                <div>
+                                                    <p className="text-2xl font-bold">₹{item.price}</p>
                                                 </div>
-                                            </div>
-                                        </CardContent>
-                                        <CardFooter>
-                                            <Button className="w-full">
-                                                <Phone className="mr-2 h-4 w-4" />
-                                                Contact Seller ({item.sellerContact})
-                                            </Button>
-                                        </CardFooter>
-                                    </Card>
-                                ))}
+                                                <div className="text-sm text-muted-foreground space-y-2">
+                                                    <div className="flex items-center gap-2">
+                                                        <User className="h-4 w-4" />
+                                                        <span>{item.sellerName}</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-2">
+                                                        <Building className="h-4 w-4" />
+                                                        <span>{item.department}</span>
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                            <CardFooter>
+                                                <Button className="w-full">
+                                                    <Phone className="mr-2 h-4 w-4" />
+                                                    Contact Seller ({item.sellerContact})
+                                                </Button>
+                                            </CardFooter>
+                                        </Card>
+                                    )
+                                })}
                             </div>
                         )}
                     </TabsContent>

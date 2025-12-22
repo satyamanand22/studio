@@ -62,20 +62,20 @@
     },
     {
       "id": "used-textbook",
-      "description": "A stack of used textbooks.",
-      "imageUrl": "https://images.unsplash.com/photo-1598306927075-aea230464a2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx1c2VkJTIwdGV4dGJvb2tzfGVufDB8fHx8MTc2NjQwNTkxOHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "used textbooks"
+      "description": "A stack of used textbooks on a wooden table.",
+      "imageUrl": "https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxib29rc3xlbnwwfHx8fDE3NjY1NzE0OTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "used books"
     },
     {
       "id": "drafter-set",
-      "description": "A complete engineering drafter set.",
-      "imageUrl": "https://images.unsplash.com/photo-1688367104852-ad28e41c6137?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxlbmdpbmVlcmluZyUyMGRyYWZ0ZXJ8ZW58MHx8fHwxNzY2NDA1OTE4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "engineering drafter"
+      "description": "An architectural drawing setup with drafting tools.",
+      "imageUrl": "https://images.unsplash.com/photo-1581092916294-ca9383e73238?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmUlMjB0b29sc3xlbnwwfHx8fDE3NjY1NzE2MjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "drafting tools"
     },
     {
       "id": "bicycle",
-      "description": "A well-maintained bicycle for campus commute.",
-      "imageUrl": "https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxiaWN5Y2xlfGVufDB8fHx8MTc2NjQwNTkxOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "A modern bicycle parked against a textured wall.",
+      "imageUrl": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxiaWN5Y2xlfGVufDB8fHx8MTc2NjU3MTY3Nnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "bicycle"
     }
   ]
