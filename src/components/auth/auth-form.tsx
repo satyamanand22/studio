@@ -27,6 +27,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import Link from "next/link";
 
 const formSchema = z.object({
   name: z.string().optional(),
@@ -133,7 +134,17 @@ export function AuthForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <div className="flex items-center">
+                  <FormLabel>Password</FormLabel>
+                  {!isSignUp && (
+                    <Link
+                      href="#"
+                      className="ml-auto inline-block text-sm underline"
+                    >
+                      Forgot your password?
+                    </Link>
+                  )}
+                </div>
                 <FormControl>
                   <Input type="password" {...field} />
                 </FormControl>
