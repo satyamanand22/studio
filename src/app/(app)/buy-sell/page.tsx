@@ -28,10 +28,10 @@ interface SellItem {
 const mockSellItems: SellItem[] = [
     {
         id: 'sell-1',
-        itemName: 'Used Engineering Textbook',
-        description: 'First year engineering textbook, in good condition with minor highlights.',
-        price: '500',
-        imageId: 'used-textbook',
+        itemName: 'Table',
+        description: 'A sturdy wooden table, good for studying.',
+        price: '800',
+        imageId: 'table',
         sellerName: 'Rohan Sharma',
         department: 'Mechanical',
         sellerContact: '9876543210'
@@ -250,4 +250,6 @@ export default function BuyAndSellPage() {
 
     
 }
+    
+
     
