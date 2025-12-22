@@ -39,19 +39,19 @@
     {
       "id": "aloo-paratha",
       "description": "An aloo paratha with a side of yogurt.",
-      "imageUrl": "https://images.unsplash.com/photo-1683533761804-5fc12be0f684?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhbG9vJTIwcGFyYXRoYXxlbnwwfHx8fDE3NjYzMzQ1MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1683533761804-5fc12be0f684?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhbG9vJTIwcGFyYXRoYXxlbnwwfHx8fDE3NjYzMzQ1MjZ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "aloo paratha"
     },
     {
       "id": "tea",
       "description": "A cup of hot tea.",
-      "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0ZWF8ZW58MHx8fHwxNzY2MzM0NDExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0ZWF8ZW58MHx8fHwxNzY2MzM0NDExfDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "cup tea"
     },
     {
       "id": "thali",
       "description": "A traditional Indian thali with various dishes.",
-      "imageUrl": "https://images.unsplash.com/photo-1567337710282-00832b415979?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNHx8JTIwaW5kaWFuJTIwZm9vZHxlbnwwfHx8fDE3NjYzMzQxODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1567337710282-00832b415979?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNHx8JTIwaW5kaWFuJTIwZm9vZHxlbnwwfHx8fDE3NjYzMzQxODh8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "indian thali"
     },
     {
@@ -63,7 +63,7 @@
     {
       "id": "used-textbook",
       "description": "A stack of used textbooks on a wooden table.",
-      "imageUrl": "https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxib29rc3xlbnwwfHx8fDE3NjY1NzE0OTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxib29rc3xlbnwwfHx8fDE3NjY1NzE0OTF8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "used books"
     },
     {
@@ -75,25 +75,25 @@
     {
       "id": "bicycle",
       "description": "A modern bicycle parked against a textured wall.",
-      "imageUrl": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxiaWN5Y2xlfGVufDB8fHx8MTc2NjU3MTY3Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxiaWN5Y2xlfGVufDB8fHx8MTc2NjU3MTY3Nnww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "bicycle"
     },
     {
       "id": "table",
       "description": "A wooden study table.",
-      "imageUrl": "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzdHVkeSUyMHRhYmxlfGVufDB8fHx8MTc2NjQwNjQ3N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzdHVkeSUyMHRhYmxlfGVufDB8fHx8MTc2NjQwNjQ3N3ww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "study table"
     },
     {
       "id": "wallet",
       "description": "A brown leather wallet on a wooden surface.",
-      "imageUrl": "https://images.unsplash.com/photo-1627123424574-724758594e93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsZWF0aGVyJTIwd2FsbGV0fGVufDB8fHx8MTc2NjQyNDE5MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1627123424574-724758594e93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsZWF0aGVyJTIwd2FsbGV0fGVufDB8fHx8MTc2NjQyNDE5MXww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "leather wallet"
     },
     {
       "id": "keys",
       "description": "A set of keys on a wooden table.",
-      "imageUrl": "https://images.unsplash.com/photo-1564304535384-93a8e94be0b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxrZXlzfGVufDB8fHx8MTc2NzM3OTIyM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1604445415362-2a9840bd5ff6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxOHx8a2V5c3xlbnwwfHx8fDE3NjY0MjQ3Mzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "keys"
     }
   ]
