@@ -100,7 +100,7 @@ const mockFoundItems: ReportItem[] = [
         reportType: 'found',
         name: 'Sunita Devi',
         branch: 'Hostel Staff',
-        itemName: 'Wooden Study Table',
+        itemName: 'physics practical copy',
         imageId: 'table',
         contactNo: '6665554443',
         contactPlace: 'Girls Hostel B',
