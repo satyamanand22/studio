@@ -100,11 +100,11 @@ const mockFoundItems: ReportItem[] = [
         reportType: 'found',
         name: 'Sunita Devi',
         branch: 'Hostel Staff',
-        itemName: 'physics practical copy',
+        itemName: 'steel water bottle',
         imageId: 'table',
         contactNo: '6665554443',
         contactPlace: 'Girls Hostel B',
-        remarks: 'A study table was left in the common area.'
+        remarks: 'A steel water bottle was left in the common area.'
     }
 ];
 
