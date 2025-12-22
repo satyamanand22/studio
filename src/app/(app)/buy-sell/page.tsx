@@ -171,7 +171,7 @@ export default function BuyAndSellPage() {
                                             <CardFooter>
                                                 <Button className="w-full">
                                                     <Phone className="mr-2 h-4 w-4" />
-                                                    Contact Seller ({item.sellerContact})
+                                                    Contact Seller
                                                 </Button>
                                             </CardFooter>
                                         </Card>
@@ -248,4 +248,6 @@ export default function BuyAndSellPage() {
 
     
 
+    
+}
     
