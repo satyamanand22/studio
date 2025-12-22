@@ -38,8 +38,8 @@ const mockSellItems: SellItem[] = [
     },
     {
         id: 'sell-2',
-        itemName: 'Drafter/Mini-Drafter',
-        description: 'Complete engineering drawing drafter set. Barely used.',
+        itemName: 'Watch',
+        description: 'A stylish and reliable watch. Barely used.',
         price: '350',
         imageId: 'drafter-set',
         sellerName: 'Priya Singh',
@@ -245,5 +245,7 @@ export default function BuyAndSellPage() {
         </Card>
     </div>
   );
+
+    
 
     
