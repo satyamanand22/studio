@@ -72,10 +72,46 @@ const mockLostItems: ReportItem[] = [
     }
 ]
 
+const mockFoundItems: ReportItem[] = [
+    {
+        id: 'found-item-1',
+        reportType: 'found',
+        name: 'Priya Sharma',
+        branch: 'IT',
+        itemName: 'Hero Bicycle',
+        imageId: 'bicycle',
+        contactNo: '8887776665',
+        contactPlace: 'Admin Block',
+        remarks: 'Found near the main gate. Please collect from the admin office.'
+    },
+    {
+        id: 'found-item-2',
+        reportType: 'found',
+        name: 'Rajesh Kumar',
+        branch: 'Civil',
+        itemName: 'Physics Textbook',
+        imageId: 'used-textbook',
+        contactNo: '7776665554',
+        contactPlace: 'Nalanda Library',
+        remarks: 'Book is in good condition. Contact me to collect it.'
+    },
+    {
+        id: 'found-item-3',
+        reportType: 'found',
+        name: 'Sunita Devi',
+        branch: 'Hostel Staff',
+        itemName: 'Wooden Study Table',
+        imageId: 'table',
+        contactNo: '6665554443',
+        contactPlace: 'Girls Hostel B',
+        remarks: 'A study table was left in the common area.'
+    }
+];
+
 export default function MapPage() {
     const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
     const [lostItems, setLostItems] = useState<ReportItem[]>(mockLostItems);
-    const [foundItems, setFoundItems] = useState<ReportItem[]>([]);
+    const [foundItems, setFoundItems] = useState<ReportItem[]>(mockFoundItems);
     const [formSubmitted, setFormSubmitted] = useState(false);
     const { toast } = useToast();
 
@@ -302,28 +338,34 @@ export default function MapPage() {
                             </div>
                         ) : (
                              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                                {foundItems.map(item => (
-                                    <Card key={item.id}>
-                                        {item.image && (
-                                            <div className="relative h-40 w-full">
-                                                <Image src={item.image} alt={item.itemName} layout="fill" objectFit="cover" className="rounded-t-lg" />
-                                            </div>
-                                        )}
-                                        <CardHeader>
-                                            <CardTitle>{item.itemName}</CardTitle>
-                                        </CardHeader>
-                                        <CardContent className="text-sm space-y-2">
-                                            <p><span className="font-semibold">Found by:</span> {item.name}</p>
-                                            <p><span className="font-semibold">Branch:</span> {item.branch}</p>
-                                            {item.remarks && <p><span className="font-semibold">Remarks:</span> {item.remarks}</p>}
-                                        </CardContent>
-                                         <CardFooter className="flex-col items-start text-sm">
-                                            <p className="font-semibold">Contact Details:</p>
-                                            <p>Number: {item.contactNo}</p>
-                                            <p>Place: {item.contactPlace}</p>
-                                        </CardFooter>
-                                    </Card>
-                                ))}
+                                {foundItems.map(item => {
+                                    const itemImage = PlaceHolderImages.find(img => img.id === item.imageId);
+                                    const imageUrl = item.image || itemImage?.imageUrl;
+                                    const imageHint = itemImage?.imageHint || 'item';
+
+                                    return (
+                                        <Card key={item.id}>
+                                            {imageUrl && (
+                                                <div className="relative h-40 w-full">
+                                                    <Image src={imageUrl} alt={item.itemName} layout="fill" objectFit="cover" className="rounded-t-lg" data-ai-hint={imageHint} />
+                                                </div>
+                                            )}
+                                            <CardHeader>
+                                                <CardTitle>{item.itemName}</CardTitle>
+                                            </CardHeader>
+                                            <CardContent className="text-sm space-y-2">
+                                                <p><span className="font-semibold">Found by:</span> {item.name}</p>
+                                                <p><span className="font-semibold">Branch:</span> {item.branch}</p>
+                                                {item.remarks && <p><span className="font-semibold">Remarks:</span> {item.remarks}</p>}
+                                            </CardContent>
+                                             <CardFooter className="flex-col items-start text-sm">
+                                                <p className="font-semibold">Contact Details:</p>
+                                                <p>Number: {item.contactNo}</p>
+                                                <p>Place: {item.contactPlace}</p>
+                                            </CardFooter>
+                                        </Card>
+                                    )
+                                })}
                             </div>
                         )}
                     </TabsContent>
@@ -333,8 +375,3 @@ export default function MapPage() {
     </div>
   );
 }
-
-    
-
-    
-
