@@ -47,6 +47,28 @@ const mockLostItems: ReportItem[] = [
         contactNo: '9876543210',
         contactPlace: 'Cafeteria',
         remarks: 'Lost it near the counter. It has my ID card inside.'
+    },
+    {
+        id: 'lost-item-2',
+        reportType: 'lost',
+        name: 'Anjali Sharma',
+        branch: 'CSE',
+        itemName: 'Analog Watch',
+        imageId: 'drafter-set',
+        contactNo: '8765432109',
+        contactPlace: 'Library',
+        remarks: 'It has a silver strap. I think I left it on the second floor reading table.'
+    },
+    {
+        id: 'lost-item-3',
+        reportType: 'lost',
+        name: 'Rahul Kumar',
+        branch: 'Mechanical',
+        itemName: 'Physics Textbook',
+        imageId: 'used-textbook',
+        contactNo: '7654321098',
+        contactPlace: 'Admin Block',
+        remarks: 'Book name is "Concepts of Physics" by H.C. Verma.'
     }
 ]
 
@@ -311,5 +333,7 @@ export default function MapPage() {
     </div>
   );
 }
+
+    
 
     
