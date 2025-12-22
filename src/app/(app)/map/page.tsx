@@ -95,17 +95,6 @@ const mockFoundItems: ReportItem[] = [
         contactPlace: 'Nalanda Library',
         remarks: 'Book is in good condition. Contact me to collect it.'
     },
-    {
-        id: 'found-item-3',
-        reportType: 'found',
-        name: 'Sunita Devi',
-        branch: 'Hostel Staff',
-        itemName: 'steel water bottle',
-        imageId: 'table',
-        contactNo: '6665554443',
-        contactPlace: 'Girls Hostel B',
-        remarks: 'A steel water bottle was left in the common area.'
-    }
 ];
 
 export default function MapPage() {
