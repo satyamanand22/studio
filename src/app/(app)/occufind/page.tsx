@@ -6,19 +6,31 @@ import { ComputerAvailabilityGrid } from '@/components/nalanda/computer-availabi
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { BookCheck, BookX, Copy, Library, Search, ChevronDown, Trophy, Play, BarChart } from 'lucide-react';
+import { BookCheck, BookX, Copy, Library, Search, ChevronDown, Trophy, Play, BarChart, Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 
 export default function OccuFindPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState<{ available: boolean; rack?: number; floor?: number, copies?: number } | null>(null);
   const { toast } = useToast();
   const [isComputerGridOpen, setIsComputerGridOpen] = useState(false);
+  const [isLeagueDialogOpen, setIsLeagueDialogOpen] = useState(false);
+  const [leagueFormSubmitted, setLeagueFormSubmitted] = useState(false);
 
   const handleBookSearch = () => {
     if (!searchTerm.trim()) {
@@ -42,6 +54,23 @@ export default function OccuFindPage() {
         setSearchResult({ available: false });
     }
   };
+
+  const handleLeagueSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLeagueFormSubmitted(true);
+    // In a real app, you would handle form submission here
+    toast({
+        title: "Registration Successful!",
+        description: "You are now part of the Library Champions League."
+    });
+  }
+
+  const resetLeagueForm = () => {
+    setIsLeagueDialogOpen(false);
+    setTimeout(() => {
+       setLeagueFormSubmitted(false);
+    }, 300); // Delay to allow dialog to close smoothly
+  }
 
 
   return (
@@ -151,10 +180,61 @@ export default function OccuFindPage() {
                 </div>
             </CardHeader>
             <CardContent className="flex flex-col sm:flex-row gap-4">
-                <Button className="w-full" onClick={() => toast({ title: "Registration Open!", description: "You can now register for the Library Champions League."})}>
-                    <Play className="mr-2" />
-                    Participate Now
-                </Button>
+                 <Dialog open={isLeagueDialogOpen} onOpenChange={(open) => {
+                    setIsLeagueDialogOpen(open);
+                    if (!open) {
+                        setTimeout(() => setLeagueFormSubmitted(false), 300);
+                    }
+                 }}>
+                    <DialogTrigger asChild>
+                        <Button className="w-full">
+                            <Play className="mr-2" />
+                            Participate Now
+                        </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                        {!leagueFormSubmitted ? (
+                             <form onSubmit={handleLeagueSubmit}>
+                                <DialogHeader>
+                                    <DialogTitle>Register for Library Champions League</DialogTitle>
+                                    <DialogDescription>Fill in your details to participate.</DialogDescription>
+                                </DialogHeader>
+                                <div className="grid gap-4 py-4 max-h-[60vh] overflow-y-auto pr-6">
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="league-name" className="text-right">Name</Label>
+                                        <Input id="league-name" name="name" className="col-span-3" required />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="league-department" className="text-right">Department</Label>
+                                        <Input id="league-department" name="department" className="col-span-3" required />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="league-branch" className="text-right">Branch</Label>
+                                        <Input id="league-branch" name="branch" className="col-span-3" required />
+                                    </div>
+                                     <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="league-enrollment" className="text-right">Enrollment No.</Label>
+                                        <Input id="league-enrollment" name="enrollmentNo" className="col-span-3" required />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="league-card" className="text-right">Library Card No.</Label>
+                                        <Input id="league-card" name="libraryCardNo" className="col-span-3" required />
+                                    </div>
+                                </div>
+                                <DialogFooter>
+                                    <Button type="submit">Submit Registration</Button>
+                                </DialogFooter>
+                            </form>
+                        ) : (
+                             <div className="flex flex-col items-center justify-center gap-4 py-10 text-center">
+                                <Check className="h-12 w-12 text-green-500" />
+                                <h3 className="text-xl font-bold">Registration Submitted!</h3>
+                                <p className="text-muted-foreground">Thank you for participating. Best of luck!</p>
+                                <Button onClick={resetLeagueForm} className="mt-4">Close</Button>
+                            </div>
+                        )}
+                    </DialogContent>
+                 </Dialog>
                 <Button variant="secondary" className="w-full" onClick={() => toast({ title: "Results Soon!", description: "Results for the previous league will be announced shortly."})}>
                     <BarChart className="mr-2" />
                     Check Results
