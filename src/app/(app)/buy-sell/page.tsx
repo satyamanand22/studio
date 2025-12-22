@@ -38,16 +38,6 @@ const mockSellItems: SellItem[] = [
         sellerContact: '9876543210'
     },
     {
-        id: 'sell-2',
-        itemName: 'Watch',
-        description: 'A stylish and reliable watch. Barely used.',
-        price: '350',
-        imageId: 'drafter-set',
-        sellerName: 'Priya Singh',
-        department: 'Civil',
-        sellerContact: '8765432109'
-    },
-    {
         id: 'sell-3',
         itemName: 'Bicycle',
         description: 'A reliable bicycle perfect for getting around campus. Recently serviced.',
