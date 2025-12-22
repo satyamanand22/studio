@@ -26,6 +26,7 @@ interface RegistrationData {
     branch: string;
     enrollmentNo: string;
     libraryCardNo: string;
+    mobileNo: string;
 }
 
 export function LibraryChampionsLeagueDialog() {
@@ -46,7 +47,8 @@ export function LibraryChampionsLeagueDialog() {
     const qrData = {
         id: generatedId,
         name: data.name,
-        enrollmentNo: data.enrollmentNo
+        enrollmentNo: data.enrollmentNo,
+        mobileNo: data.mobileNo
     };
 
     try {
@@ -116,6 +118,22 @@ export function LibraryChampionsLeagueDialog() {
                         <div className="grid grid-cols-4 items-center gap-4">
                             <Label htmlFor="league-card" className="text-right">Library Card No.</Label>
                             <Input id="league-card" name="libraryCardNo" className="col-span-3" required />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="league-mobile" className="text-right">Mobile No.</Label>
+                            <Input 
+                                id="league-mobile" 
+                                name="mobileNo" 
+                                className="col-span-3" 
+                                required 
+                                type="tel"
+                                pattern="[0-9]{10}"
+                                maxLength={10}
+                                onInput={(e) => {
+                                    const target = e.target as HTMLInputElement;
+                                    target.value = target.value.replace(/[^0-9]/g, '');
+                                }}
+                            />
                         </div>
                     </div>
                     <DialogFooter>
