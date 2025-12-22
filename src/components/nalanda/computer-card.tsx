@@ -82,7 +82,7 @@ export function ComputerCard({ computer, onUpdate }: ComputerCardProps) {
                          <span className={cn(
                             "h-2 w-2 rounded-full mr-2", 
                             statusDotStyles[computer.status],
-                            computer.status !== 'Away' && 'animate-pulse'
+                            computer.status === 'Available' && 'animate-pulse'
                          )}></span>
                         {computer.status}
                     </Badge>
