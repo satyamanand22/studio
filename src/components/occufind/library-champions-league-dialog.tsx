@@ -15,10 +15,11 @@ import {
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Check, Trophy, Play } from 'lucide-react';
+import { Check, Trophy, Play, Download } from 'lucide-react';
 import Image from 'next/image';
 import QRCode from 'qrcode';
 import { Card } from '@/components/ui/card';
+import jsPDF from 'jspdf';
 
 interface RegistrationData {
     name: string;
@@ -34,12 +35,14 @@ export function LibraryChampionsLeagueDialog() {
   const [leagueFormSubmitted, setLeagueFormSubmitted] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState('');
   const [uniqueId, setUniqueId] = useState('');
+  const [registrationData, setRegistrationData] = useState<RegistrationData | null>(null);
   const { toast } = useToast();
 
   const handleLeagueSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData.entries()) as unknown as RegistrationData;
+    setRegistrationData(data);
     
     const generatedId = `LCL-${Date.now()}`;
     setUniqueId(generatedId);
@@ -69,12 +72,39 @@ export function LibraryChampionsLeagueDialog() {
     }
   }
 
+  const generateAndDownloadConfirmation = async () => {
+    if (!registrationData || !uniqueId || !qrCodeUrl) return;
+
+    const doc = new jsPDF();
+
+    doc.setFontSize(20);
+    doc.text("Library Champions League - Confirmation", 14, 22);
+    doc.setFontSize(12);
+    doc.text(`Name: ${registrationData.name}`, 14, 32);
+    doc.text(`Enrollment No: ${registrationData.enrollmentNo}`, 14, 39);
+    doc.text(`Unique ID: ${uniqueId}`, 14, 46);
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, 53);
+
+    doc.addImage(qrCodeUrl, 'PNG', 14, 65, 60, 60);
+
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "bold");
+    doc.text("Instructions:", 14, 135);
+    doc.setFont("helvetica", "normal");
+    doc.text("1. You have to show this QR code at the main entrance hall.", 14, 142);
+    doc.text("2. Your entry and exit time will be noted.", 14, 149);
+    doc.text("3. Monthly winners will be announced on the last working day of every month.", 14, 156);
+
+    doc.save(`lcl-confirmation-${registrationData.name.replace(/\s+/g, "-").toLowerCase()}.pdf`);
+  };
+
   const resetLeagueForm = () => {
     setIsLeagueDialogOpen(false);
     setTimeout(() => {
        setLeagueFormSubmitted(false);
        setQrCodeUrl('');
        setUniqueId('');
+       setRegistrationData(null);
     }, 300); // Delay to allow dialog to close smoothly
   }
 
@@ -164,10 +194,16 @@ export function LibraryChampionsLeagueDialog() {
                         <p>3. Monthly winners will be announced on the last working day of every month.</p>
                     </div>
 
-                    <Button onClick={resetLeagueForm} className="mt-6 w-full">
-                        <Check className="mr-2 h-4 w-4" />
-                        Done
-                    </Button>
+                    <div className="w-full flex flex-col gap-2 mt-6">
+                        <Button onClick={generateAndDownloadConfirmation}>
+                            <Download className="mr-2 h-4 w-4" />
+                            Download Confirmation
+                        </Button>
+                        <Button onClick={resetLeagueForm} variant="secondary">
+                            <Check className="mr-2 h-4 w-4" />
+                            Done
+                        </Button>
+                    </div>
                 </div>
             )}
         </DialogContent>
