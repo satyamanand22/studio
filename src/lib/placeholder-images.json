@@ -57,8 +57,26 @@
     {
       "id": "library-floor-plan",
       "description": "A floor plan of a library, showing different sections.",
-      "imageUrl": "https://images.unsplash.com/photo-1656684697418-524a6fef3844?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsaWJyYXJ5JTIwZmxvb3JwbGFufGVufDB8fHx8MTc2NjMxNTcwMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1656684697418-524a6fef3844?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsaWJyYXJ5JTIwZmxvb3JwbGFufGVufDB8fHx8MTc2NjMxNTcwMXww&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "library floorplan"
+    },
+    {
+      "id": "used-textbook",
+      "description": "A stack of used textbooks.",
+      "imageUrl": "https://images.unsplash.com/photo-1598306927075-aea230464a2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx1c2VkJTIwdGV4dGJvb2tzfGVufDB8fHx8MTc2NjQwNTkxOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "used textbooks"
+    },
+    {
+      "id": "drafter-set",
+      "description": "A complete engineering drafter set.",
+      "imageUrl": "https://images.unsplash.com/photo-1688367104852-ad28e41c6137?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxlbmdpbmVlcmluZyUyMGRyYWZ0ZXJ8ZW58MHx8fHwxNzY2NDA1OTE4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "engineering drafter"
+    },
+    {
+      "id": "bicycle",
+      "description": "A well-maintained bicycle for campus commute.",
+      "imageUrl": "https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxiaWN5Y2xlfGVufDB8fHx8MTc2NjQwNTkxOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "bicycle"
     }
   ]
 }

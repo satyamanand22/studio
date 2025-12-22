@@ -23,8 +23,41 @@ interface SellItem {
     sellerContact: string;
 }
 
+const mockSellItems: SellItem[] = [
+    {
+        id: 'sell-1',
+        itemName: 'Used Engineering Textbook',
+        description: 'First year engineering textbook, in good condition with minor highlights.',
+        price: '500',
+        image: 'https://picsum.photos/seed/book/400/300',
+        sellerName: 'Rohan Sharma',
+        department: 'Mechanical',
+        sellerContact: '9876543210'
+    },
+    {
+        id: 'sell-2',
+        itemName: 'Drafter/Mini-Drafter',
+        description: 'Complete engineering drawing drafter set. Barely used.',
+        price: '350',
+        image: 'https://picsum.photos/seed/drafter/400/300',
+        sellerName: 'Priya Singh',
+        department: 'Civil',
+        sellerContact: '8765432109'
+    },
+    {
+        id: 'sell-3',
+        itemName: 'Bicycle',
+        description: 'A reliable bicycle perfect for getting around campus. Recently serviced.',
+        price: '2500',
+        image: 'https://picsum.photos/seed/bicycle/400/300',
+        sellerName: 'Amit Patel',
+        department: 'CSE',
+        sellerContact: '7654321098'
+    },
+];
+
 export default function BuyAndSellPage() {
-    const [availableItems, setAvailableItems] = useState<SellItem[]>([]);
+    const [availableItems, setAvailableItems] = useState<SellItem[]>(mockSellItems);
     const [activeTab, setActiveTab] = useState('available');
     const { toast } = useToast();
 
