@@ -11,6 +11,8 @@ import { GgvLogo } from "@/components/icons/ggv-logo";
 import { useAuth } from "@/hooks/use-auth";
 import { Loader2 } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 const MOCK_OTP = "123456";
 
 export default function VerifyOtpPage() {
