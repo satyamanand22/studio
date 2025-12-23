@@ -6,14 +6,18 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { AuthForm } from "@/components/auth/auth-form";
 import { useAuth } from "@/hooks/use-auth";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { PlaceHolderImages, type ImagePlaceholder } from "@/lib/placeholder-images";
 import { Loader2 } from "lucide-react";
 import { GgvLogo } from "@/components/icons/ggv-logo";
 
 export default function LoginPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const [authImage] = useState(PlaceHolderImages.find(img => img.id === 'auth-image'));
+  const [authImage, setAuthImage] = useState<ImagePlaceholder | undefined>();
+
+  useEffect(() => {
+    setAuthImage(PlaceHolderImages.find(img => img.id === 'auth-image'));
+  }, []);
 
   useEffect(() => {
     if (!loading && user) {
