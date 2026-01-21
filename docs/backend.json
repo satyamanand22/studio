@@ -6,48 +6,60 @@
       "type": "object",
       "description": "Represents a report of a lost item.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the Lost Item Report."
-        },
         "reporterId": {
           "type": "string",
-          "description": "Reference to the User who reported the lost item. (Relationship: User 1:N LostItemReport)"
+          "description": "The UID of the user who reported the lost item."
         },
-        "itemDescription": {
+        "reporterName": {
           "type": "string",
-          "description": "Description of the lost item."
+          "description": "The name of the person who lost the item."
         },
-        "locationLost": {
+        "reporterBranch": {
           "type": "string",
-          "description": "Location where the item was lost."
+          "description": "The branch/department of the reporter."
         },
-        "dateLost": {
+        "itemName": {
           "type": "string",
-          "description": "Date when the item was lost.",
-          "format": "date-time"
+          "description": "A brief name or description of the lost item."
         },
-        "contactInformation": {
+        "location": {
           "type": "string",
-          "description": "Contact information for the reporter."
+          "description": "The location where the item was lost."
         },
-        "status": {
+        "contactNumber": {
           "type": "string",
-          "description": "The status of the lost item report (e.g., 'Open', 'Closed', 'Resolved')."
+          "description": "The contact number of the reporter."
+        },
+        "remarks": {
+          "type": "string",
+          "description": "Any additional remarks about the lost item."
         },
         "imageURL": {
           "type": "string",
-          "description": "URL of the image associated with the lost item. (Optional field, allow null)",
+          "description": "URL of an uploaded image of the lost item.",
           "format": "uri"
+        },
+        "dateReported": {
+          "type": "object",
+          "description": "The server timestamp when the item was reported."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the report.",
+          "enum": [
+            "open",
+            "resolved"
+          ]
         }
       },
       "required": [
-        "id",
         "reporterId",
-        "itemDescription",
-        "locationLost",
-        "dateLost",
-        "contactInformation",
+        "reporterName",
+        "reporterBranch",
+        "itemName",
+        "location",
+        "contactNumber",
+        "dateReported",
         "status"
       ]
     },
@@ -57,48 +69,60 @@
       "type": "object",
       "description": "Represents a report of a found item.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the Found Item Report."
-        },
         "finderId": {
           "type": "string",
-          "description": "Reference to the User who found the item. (Relationship: User 1:N FoundItemReport)"
+          "description": "The UID of the user who found the item."
         },
-        "itemDescription": {
+        "finderName": {
           "type": "string",
-          "description": "Description of the found item."
+          "description": "The name of the person who found the item."
         },
-        "locationFound": {
+        "finderBranch": {
           "type": "string",
-          "description": "Location where the item was found."
+          "description": "The branch/department of the finder."
         },
-        "dateFound": {
+        "itemName": {
           "type": "string",
-          "description": "Date when the item was found.",
-          "format": "date-time"
+          "description": "A brief name or description of the found item."
         },
-        "contactInformation": {
+        "location": {
           "type": "string",
-          "description": "Contact information for the finder."
+          "description": "The location where the item was found."
         },
-        "status": {
+        "contactNumber": {
           "type": "string",
-          "description": "The status of the found item report (e.g., 'Open', 'Closed', 'Claimed')."
+          "description": "The contact number of the finder."
+        },
+        "remarks": {
+          "type": "string",
+          "description": "Any additional remarks about the found item."
         },
         "imageURL": {
           "type": "string",
-          "description": "URL of the image associated with the found item. (Optional field, allow null)",
+          "description": "URL of an uploaded image of the found item.",
           "format": "uri"
+        },
+        "dateReported": {
+          "type": "object",
+          "description": "The server timestamp when the item was reported."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the report.",
+          "enum": [
+            "open",
+            "claimed"
+          ]
         }
       },
       "required": [
-        "id",
         "finderId",
-        "itemDescription",
-        "locationFound",
-        "dateFound",
-        "contactInformation",
+        "finderName",
+        "finderBranch",
+        "itemName",
+        "location",
+        "contactNumber",
+        "dateReported",
         "status"
       ]
     }
@@ -118,7 +142,7 @@
           "schema": {
             "$ref": "#/backend/entities/LostItemReport"
           },
-          "description": "Collection of lost item reports. Each document represents a lost item reported by a user. Uses document ID as id.",
+          "description": "Collection of lost item reports. Each document represents a lost item reported by a user.",
           "params": [
             {
               "name": "reportId",
@@ -134,7 +158,7 @@
           "schema": {
             "$ref": "#/backend/entities/FoundItemReport"
           },
-          "description": "Collection of found item reports. Each document represents a found item reported by a user. Uses document ID as id.",
+          "description": "Collection of found item reports. Each document represents a found item reported by a user.",
           "params": [
             {
               "name": "reportId",
@@ -144,6 +168,6 @@
         }
       }
     ],
-    "reasoning": "The Firestore structure is designed to ensure authorization independence, clarity, and scalability, aligning with the specified principles. Each top-level collection represents a distinct entity (lost items, found items). Path-based ownership is used for user-generated content. The structure facilitates listing operations (QAPs) by keeping similar documents within the same collection and using path-based ownership.\n\nAuthorization Independence: Denormalization isn't needed in this case, but it may be needed later on, depending on access control needs. Right now, rules would be based on the `reporterId` and `finderId`, which is the user making the request.\n\nQAPs: The segregation of data into separate collections (`lost_item_reports`, `found_item_reports`) ensures that listing operations can be securely performed without exposing data that the user should not have access to. Rules will be designed so that a user can only access and list their own lost or found item reports."
+    "reasoning": "The Firestore structure is designed to ensure authorization independence, clarity, and scalability. Each top-level collection represents a distinct entity (lost items, found items). Ownership is enforced via a user ID field in each document, allowing for secure path-based ownership rules. This structure facilitates secure listing operations by keeping similar documents within the same collection."
   }
 }

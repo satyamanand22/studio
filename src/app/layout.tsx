@@ -4,6 +4,7 @@ import "./globals.css";
 import { AuthProvider } from "@/lib/auth-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
+import { FirebaseClientProvider } from "@/firebase/client-provider";
 
 const fontBody = Inter({
   subsets: ["latin"],
@@ -35,7 +36,9 @@ export default function RootLayout({
       </head>
       <body className={cn("font-body antialiased", fontBody.variable, fontHeadline.variable)}>
             <AuthProvider>
-            {children}
+              <FirebaseClientProvider>
+                {children}
+              </FirebaseClientProvider>
             <Toaster />
             </AuthProvider>
       </body>

@@ -23,50 +23,28 @@ service cloud.firestore {
      *   Ownership is determined by the `reporterId` or `finderId` field within the document.
      * - Immutable Ownership: The `reporterId` and `finderId` fields cannot be changed
      *   after a report has been created, preventing ownership transfer.
-     *
-     * Denormalization for Authorization: Security is achieved by denormalizing the owner's
-     * user ID (`reporterId` or `finderId`) directly onto each report document. This allows
-     * for fast, efficient, and non-billable ownership checks without needing extra `get`
-     * calls to other documents.
      */
 
     // -------------------------------------------------------------------------
     // Helper Functions
     // -------------------------------------------------------------------------
 
-    /**
-     * Checks if the user is authenticated.
-     */
     function isSignedIn() {
       return request.auth != null;
     }
 
-    /**
-     * Checks if the authenticated user's UID matches the provided userId.
-     */
     function isOwner(userId) {
       return isSignedIn() && request.auth.uid == userId;
     }
-
-    /**
-     * Checks if the document exists and if the user is the owner.
-     * Used for safe update and delete operations.
-     */
+    
     function isExistingOwner(userId) {
       return isOwner(userId) && resource != null;
     }
 
-    /**
-     * Validates that the owner ID in the incoming data matches the creator's ID.
-     * Used on create to establish the ownership link.
-     */
     function incomingDataHasCorrectOwner(key) {
       return isSignedIn() && request.resource.data[key] == request.auth.uid;
     }
 
-    /**
-     * Ensures an ownership field is immutable on update.
-     */
     function ownerIsUnchanged(key) {
       return request.resource.data[key] == resource.data[key];
     }
@@ -75,16 +53,6 @@ service cloud.firestore {
     // Collection Rules: /lost_item_reports
     // -------------------------------------------------------------------------
 
-    /**
-     * @description Controls access to lost item reports. Allows public read access for all
-     *              reports but restricts write operations to the original reporter.
-     * @path /lost_item_reports/{reportId}
-     * @allow (get) Any user, signed in or not, can read a specific lost item report.
-     * @allow (create) An authenticated user can create a new report for themselves.
-     * @deny (update) An authenticated user cannot update a report they did not create.
-     * @principle Implements a "Public Read, Owner Write" model. Ownership is enforced
-     *            via the `reporterId` field in the document data.
-     */
     match /lost_item_reports/{reportId} {
       allow get: if true;
       allow list: if true;
@@ -97,16 +65,6 @@ service cloud.firestore {
     // Collection Rules: /found_item_reports
     // -------------------------------------------------------------------------
 
-    /**
-     * @description Controls access to found item reports. Allows public read access for all
-     *              reports but restricts write operations to the original finder.
-     * @path /found_item_reports/{reportId}
-     * @allow (list) Any user, signed in or not, can list all found item reports.
-     * @allow (create) An authenticated user can create a new report for an item they found.
-     * @deny (delete) A user cannot delete a found item report created by someone else.
-     * @principle Implements a "Public Read, Owner Write" model. Ownership is enforced
-     *            via the `finderId` field in the document data.
-     */
     match /found_item_reports/{reportId} {
       allow get: if true;
       allow list: if true;
