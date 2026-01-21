@@ -1,0 +1,118 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * Core Philosophy: This ruleset establishes a "Public Read, Owner Write" security model.
+     * The primary purpose of a lost and found application is to allow the public to browse
+     * all reports to find matches. Therefore, all reports are publicly readable. However,
+     * only the authenticated user who created a report can modify or delete it, ensuring
+     * data integrity and preventing unauthorized tampering.
+     *
+     * Data Structure: The data is organized into two distinct top-level collections:
+     * - /lost_item_reports: Contains all reports for items that have been lost.
+     * - /found_item_reports: Contains all reports for items that have been found.
+     * This separation simplifies querying and security rule logic.
+     *
+     * Key Security Decisions:
+     * - Public Read Access: Both collections are world-readable to allow anyone (including
+     *   anonymous users) to browse reports, which is essential for the app's function.
+     * - Authenticated Writes: All write operations (create, update, delete) require the
+     *   user to be signed in.
+     * - Strict Ownership: A user can only create, update, or delete a report they own.
+     *   Ownership is determined by the `reporterId` or `finderId` field within the document.
+     * - Immutable Ownership: The `reporterId` and `finderId` fields cannot be changed
+     *   after a report has been created, preventing ownership transfer.
+     *
+     * Denormalization for Authorization: Security is achieved by denormalizing the owner's
+     * user ID (`reporterId` or `finderId`) directly onto each report document. This allows
+     * for fast, efficient, and non-billable ownership checks without needing extra `get`
+     * calls to other documents.
+     */
+
+    // -------------------------------------------------------------------------
+    // Helper Functions
+    // -------------------------------------------------------------------------
+
+    /**
+     * Checks if the user is authenticated.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Checks if the authenticated user's UID matches the provided userId.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /**
+     * Checks if the document exists and if the user is the owner.
+     * Used for safe update and delete operations.
+     */
+    function isExistingOwner(userId) {
+      return isOwner(userId) && resource != null;
+    }
+
+    /**
+     * Validates that the owner ID in the incoming data matches the creator's ID.
+     * Used on create to establish the ownership link.
+     */
+    function incomingDataHasCorrectOwner(key) {
+      return isSignedIn() && request.resource.data[key] == request.auth.uid;
+    }
+
+    /**
+     * Ensures an ownership field is immutable on update.
+     */
+    function ownerIsUnchanged(key) {
+      return request.resource.data[key] == resource.data[key];
+    }
+
+    // -------------------------------------------------------------------------
+    // Collection Rules: /lost_item_reports
+    // -------------------------------------------------------------------------
+
+    /**
+     * @description Controls access to lost item reports. Allows public read access for all
+     *              reports but restricts write operations to the original reporter.
+     * @path /lost_item_reports/{reportId}
+     * @allow (get) Any user, signed in or not, can read a specific lost item report.
+     * @allow (create) An authenticated user can create a new report for themselves.
+     * @deny (update) An authenticated user cannot update a report they did not create.
+     * @principle Implements a "Public Read, Owner Write" model. Ownership is enforced
+     *            via the `reporterId` field in the document data.
+     */
+    match /lost_item_reports/{reportId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if incomingDataHasCorrectOwner('reporterId');
+      allow update: if isExistingOwner(resource.data.reporterId) && ownerIsUnchanged('reporterId');
+      allow delete: if isExistingOwner(resource.data.reporterId);
+    }
+
+    // -------------------------------------------------------------------------
+    // Collection Rules: /found_item_reports
+    // -------------------------------------------------------------------------
+
+    /**
+     * @description Controls access to found item reports. Allows public read access for all
+     *              reports but restricts write operations to the original finder.
+     * @path /found_item_reports/{reportId}
+     * @allow (list) Any user, signed in or not, can list all found item reports.
+     * @allow (create) An authenticated user can create a new report for an item they found.
+     * @deny (delete) A user cannot delete a found item report created by someone else.
+     * @principle Implements a "Public Read, Owner Write" model. Ownership is enforced
+     *            via the `finderId` field in the document data.
+     */
+    match /found_item_reports/{reportId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if incomingDataHasCorrectOwner('finderId');
+      allow update: if isExistingOwner(resource.data.finderId) && ownerIsUnchanged('finderId');
+      allow delete: if isExistingOwner(resource.data.finderId);
+    }
+  }
+}

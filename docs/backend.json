@@ -1,0 +1,149 @@
+{
+  "entities": {
+    "LostItemReport": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "LostItemReport",
+      "type": "object",
+      "description": "Represents a report of a lost item.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Lost Item Report."
+        },
+        "reporterId": {
+          "type": "string",
+          "description": "Reference to the User who reported the lost item. (Relationship: User 1:N LostItemReport)"
+        },
+        "itemDescription": {
+          "type": "string",
+          "description": "Description of the lost item."
+        },
+        "locationLost": {
+          "type": "string",
+          "description": "Location where the item was lost."
+        },
+        "dateLost": {
+          "type": "string",
+          "description": "Date when the item was lost.",
+          "format": "date-time"
+        },
+        "contactInformation": {
+          "type": "string",
+          "description": "Contact information for the reporter."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the lost item report (e.g., 'Open', 'Closed', 'Resolved')."
+        },
+        "imageURL": {
+          "type": "string",
+          "description": "URL of the image associated with the lost item. (Optional field, allow null)",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "reporterId",
+        "itemDescription",
+        "locationLost",
+        "dateLost",
+        "contactInformation",
+        "status"
+      ]
+    },
+    "FoundItemReport": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "FoundItemReport",
+      "type": "object",
+      "description": "Represents a report of a found item.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Found Item Report."
+        },
+        "finderId": {
+          "type": "string",
+          "description": "Reference to the User who found the item. (Relationship: User 1:N FoundItemReport)"
+        },
+        "itemDescription": {
+          "type": "string",
+          "description": "Description of the found item."
+        },
+        "locationFound": {
+          "type": "string",
+          "description": "Location where the item was found."
+        },
+        "dateFound": {
+          "type": "string",
+          "description": "Date when the item was found.",
+          "format": "date-time"
+        },
+        "contactInformation": {
+          "type": "string",
+          "description": "Contact information for the finder."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the found item report (e.g., 'Open', 'Closed', 'Claimed')."
+        },
+        "imageURL": {
+          "type": "string",
+          "description": "URL of the image associated with the found item. (Optional field, allow null)",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "finderId",
+        "itemDescription",
+        "locationFound",
+        "dateFound",
+        "contactInformation",
+        "status"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/lost_item_reports/{reportId}",
+        "definition": {
+          "entityName": "LostItemReport",
+          "schema": {
+            "$ref": "#/backend/entities/LostItemReport"
+          },
+          "description": "Collection of lost item reports. Each document represents a lost item reported by a user. Uses document ID as id.",
+          "params": [
+            {
+              "name": "reportId",
+              "description": "The unique identifier for the lost item report."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/found_item_reports/{reportId}",
+        "definition": {
+          "entityName": "FoundItemReport",
+          "schema": {
+            "$ref": "#/backend/entities/FoundItemReport"
+          },
+          "description": "Collection of found item reports. Each document represents a found item reported by a user. Uses document ID as id.",
+          "params": [
+            {
+              "name": "reportId",
+              "description": "The unique identifier for the found item report."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to ensure authorization independence, clarity, and scalability, aligning with the specified principles. Each top-level collection represents a distinct entity (lost items, found items). Path-based ownership is used for user-generated content. The structure facilitates listing operations (QAPs) by keeping similar documents within the same collection and using path-based ownership.\n\nAuthorization Independence: Denormalization isn't needed in this case, but it may be needed later on, depending on access control needs. Right now, rules would be based on the `reporterId` and `finderId`, which is the user making the request.\n\nQAPs: The segregation of data into separate collections (`lost_item_reports`, `found_item_reports`) ensures that listing operations can be securely performed without exposing data that the user should not have access to. Rules will be designed so that a user can only access and list their own lost or found item reports."
+  }
+}
